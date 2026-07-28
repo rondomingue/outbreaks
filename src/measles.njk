@@ -1,0 +1,183 @@
+---
+layout: layouts/base.njk
+title: "Measles · The American Resurgence — Outbreak Intelligence"
+description: "How measles came back to the United States: the post-elimination rise, the 2025 outbreak map, and the vaccination gap driving it."
+active: measles
+permalink: /measles.html
+pageCss: /assets/css/measles.css
+pageJs: /assets/js/measles.js
+headScripts:
+  - "<script src=\"https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js\"></script>"
+---
+<!-- ════ TOP NAV ════════════════════════════════════════════════════════════ -->
+<main>
+
+  <!-- ════ HERO ════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="eyebrow">United States · Vaccine-Preventable Disease · 2000–2026</div>
+    <h1>Measles, <em>back</em> in America.</h1>
+    <div class="kicker">
+      <span><span class="dot"></span>Eliminated in 2000</span>
+      <span><span class="dot"></span>Resurgent in 2025</span>
+      <span><span class="dot"></span>Elimination status at risk</span>
+    </div>
+    <p class="lede">
+      For a generation, measles was a disease the United States had beaten. The country declared it
+      <strong>eliminated in 2000</strong> — no continuous, home-grown transmission. Twenty-five years later
+      it is spreading again. In <strong>2025 the U.S. logged 2,289 confirmed cases</strong>, the most in any
+      year since 1992, and its first measles deaths in a decade. The virus did not change. Our defenses did:
+      childhood vaccination has slipped below the level needed to keep measles from catching.
+    </p>
+
+    <!-- ════ STAT STRIP ════ -->
+    <div class="stats">
+      <div class="stat"><div class="val red" data-count="2289">2,289</div><div class="lab">Confirmed U.S. cases · 2025<br>highest since 1992</div></div>
+      <div class="stat"><div class="val red">3</div><div class="lab">Confirmed U.S. deaths · 2025<br>first in a decade</div></div>
+      <div class="stat"><div class="val">48</div><div class="lab">Separate outbreaks<br>reported in 2025</div></div>
+      <div class="stat"><div class="val amber">92.5<span class="unit">%</span></div><div class="lab">Kindergarten MMR coverage<br>2024–25 · below target</div></div>
+      <div class="stat"><div class="val">95<span class="unit">%</span></div><div class="lab">Coverage needed to<br>stop transmission</div></div>
+    </div>
+
+    <!-- ════ LIVE STRIP · fetched from CDC NNDSS at runtime ════ -->
+    <div class="live-strip" id="live-strip" style="display:none">
+      <div class="lv-badge"><span class="lv-dot"></span>Live · CDC NNDSS</div>
+      <div class="lv-fig">
+        <span class="lv-num" id="lv-num">—</span>
+        <span class="lv-lab" id="lv-lab">provisional cases · current year to date</span>
+      </div>
+      <div class="lv-note">
+        Pulled live from CDC's NNDSS weekly surveillance feed <span id="lv-stamp"></span>. These are
+        <b>provisional notifiable-disease counts</b> and run well below the confirmed case totals above — a
+        separate, slower-settling stream, shown here for freshness. <a href="https://data.cdc.gov/resource/x9gk-5huc" target="_blank" rel="noopener">source ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ THE RISE ════════════════════════════════════════════════════════ -->
+  <section id="rise">
+    <div class="eyebrow">The trend line</div>
+    <h2 class="sec-title">A quarter-century of <em>near-zero</em> — then a wall.</h2>
+    <p class="lede">
+      After elimination, the U.S. averaged roughly <strong>180 cases a year</strong>, almost all imported by
+      unvaccinated travelers and quickly contained. Import sparks that once fizzled now find kindling:
+      pockets of under-vaccinated communities where one case becomes hundreds. The 2014 and 2019 spikes were
+      warnings. <strong>2025 broke the scale.</strong>
+    </p>
+    <div class="card">
+      <div class="card-head">
+        <span class="t">Confirmed measles cases · United States · 2000–2025</span>
+        <span class="s">Source · CDC</span>
+      </div>
+      <div id="rise-chart" class="chart"></div>
+      <div class="cap">
+        Post-elimination baseline (2000–2013) hovered near <b>180/yr</b>. Outbreak years — <b>2014 (667)</b>,
+        <b>2019 (1,274)</b> — grew larger and closer together, before <b>2025 (2,289)</b>. Hover any year for detail.
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ THE MAP ═════════════════════════════════════════════════════════ -->
+  <section id="map">
+    <div class="eyebrow">Where it spread</div>
+    <h2 class="sec-title">One county lit the <em>match</em>.</h2>
+    <p class="lede">
+      The 2025 resurgence had an epicenter: <strong>Gaines County, Texas</strong>, an under-vaccinated rural
+      community where the outbreak began in late January and grew to hundreds of cases — the large majority of
+      the year's national total. From there it jumped to <strong>New Mexico, Kansas, Oklahoma and Ohio</strong>,
+      and single cases surfaced in more than 30 states as travelers carried it across the country.
+    </p>
+    <div class="map-wrap">
+      <div id="us-map" aria-label="Tile-grid map of U.S. states by 2025 measles reporting"></div>
+      <div class="map-side">
+        <div class="legend">
+          <div class="lt">2025 Reporting · relative intensity</div>
+          <div class="leg-row"><span class="leg-sw" style="background:#ef4130;box-shadow:0 0 14px rgba(239,65,48,.7)"></span><span class="leg-tx"><b>Epicenter</b> — Texas (Gaines Co. cluster)</span></div>
+          <div class="leg-row"><span class="leg-sw" style="background:#c0382e"></span><span class="leg-tx"><b>Active outbreak</b> — linked clusters</span></div>
+          <div class="leg-row"><span class="leg-sw" style="background:#743331"></span><span class="leg-tx"><b>Cases reported</b> — one or more</span></div>
+          <div class="leg-row"><span class="leg-sw" style="background:#161c25;border:1px solid rgba(180,200,255,.1)"></span><span class="leg-tx">No reported outbreak</span></div>
+        </div>
+        <div class="legend">
+          <div class="lt">The through-line</div>
+          <p class="leg-tx" style="line-height:1.65">Nearly every 2025 cluster traced back to the same root: <b>communities where MMR coverage had fallen below the 95% herd-immunity threshold.</b> Where vaccination held, imported cases stopped at one or two.</p>
+        </div>
+      </div>
+    </div>
+    <p class="cap" style="padding-left:0">
+      Tile-grid map — each square is one state, positioned geographically, shaded by reporting tier during the
+      2025 outbreak period (not exact case counts). Reporting evolved through the year; consult
+      <b>CDC / state health departments</b> for current figures.
+    </p>
+  </section>
+
+  <!-- ════ THE VACCINATION GAP ═════════════════════════════════════════════ -->
+  <section id="vaccines">
+    <div class="eyebrow">The cause</div>
+    <h2 class="sec-title">This is a <em>vaccination</em> story.</h2>
+    <p class="lede">
+      Measles is among the most contagious diseases known — one case can infect up to 18 others. That is why the
+      bar for community protection is so high: <strong>about 95% of people must be immune</strong> to stop it
+      spreading. Two MMR doses are ~97% effective. But kindergarten MMR coverage has fallen every year since the
+      pandemic, dipping to <strong>92.5% in 2024–25</strong>, while vaccine exemptions hit a record high. The gap
+      between 95% and where we are is exactly the room measles needs.
+    </p>
+    <div class="gap-grid">
+      <div class="card">
+        <div class="card-head">
+          <span class="t">Kindergarten MMR coverage vs. 95% target</span>
+          <span class="s">Source · CDC SchoolVaxView</span>
+        </div>
+        <div id="cov-chart" class="chart short"></div>
+        <div class="cap">National MMR coverage among kindergartners has sat <b>below the 95% target every year since 2019–20</b>. Small national dips hide sharp local shortfalls.</div>
+      </div>
+      <div class="gap-cards">
+        <div class="mini"><div class="mv red">~93%</div><div class="ml">of 2025 cases were in people <b>unvaccinated or of unknown status</b></div></div>
+        <div class="mini"><div class="mv amber">3.6%</div><div class="ml">Kindergarten exemption rate — a <b>record high</b>, up from 3.3%</div></div>
+        <div class="mini"><div class="mv">39</div><div class="ml">States below the <b>95% target</b> in 2024–25 (up from 28)</div></div>
+        <div class="mini"><div class="mv">~286K</div><div class="ml">Kindergartners <b>unprotected</b> against measles nationwide</div></div>
+      </div>
+    </div>
+    <div class="callout">
+      <p>Of every 100 measles cases in 2025, roughly <b>93 were people who were not vaccinated</b> — or didn't know if they were. Measles isn't back because it got stronger. It's back because immunity got thinner.</p>
+    </div>
+  </section>
+
+  <!-- ════ 2025 TIMELINE ═══════════════════════════════════════════════════ -->
+  <section id="timeline">
+    <div class="eyebrow">How 2025 unfolded</div>
+    <h2 class="sec-title">From a single county to a <em>national</em> alarm.</h2>
+    <div class="timeline">
+      <div class="tl"><div class="when">Late January 2025</div><div class="what">An outbreak begins in <b>Gaines County, West Texas</b>, a rural community with low vaccination uptake. It spreads through unvaccinated children and families.</div></div>
+      <div class="tl"><div class="when">February–March 2025</div><div class="what">The cluster crosses into <b>New Mexico</b>, then <b>Kansas</b> and <b>Oklahoma</b>. The U.S. records its <b>first measles deaths in a decade</b> — two unvaccinated children in Texas and an unvaccinated adult in New Mexico.</div></div>
+      <div class="tl"><div class="when">Spring 2025</div><div class="what">By mid-April, <b>27+ states</b> report at least one case; new outbreaks flare in <b>Ohio</b>. Most cases are travel-linked sparks landing in under-vaccinated pockets.</div></div>
+      <div class="tl"><div class="when">Mid-2025</div><div class="what">National cases pass <b>1,000</b>, then keep climbing — the worst year since the 1990s and a direct threat to the <b>elimination status</b> the U.S. has held since 2000.</div></div>
+      <div class="tl"><div class="when">Year-end 2025</div><div class="what"><b>2,289 confirmed cases across 48 outbreaks.</b> The West Texas outbreak is declared over, but the pattern is set — and 2026 opens with new clusters already reported.</div></div>
+    </div>
+  </section>
+
+  <!-- ════ SOURCES ═════════════════════════════════════════════════════════ -->
+  <section id="sources">
+    <div class="eyebrow">Sources &amp; further reading</div>
+    <h2 class="sec-title">The <em>record</em>.</h2>
+    <div class="sources">
+      <a href="https://www.cdc.gov/measles/data-research/index.html" target="_blank" rel="noopener"><span class="n">01</span>CDC — Measles Cases and Outbreaks</a>
+      <a href="https://www.cdc.gov/schoolvaxview/data/index.html" target="_blank" rel="noopener"><span class="n">02</span>CDC SchoolVaxView — Kindergarten coverage &amp; exemptions</a>
+      <a href="https://www.cdc.gov/mmwr/volumes/74/wr/mm7414a1.htm" target="_blank" rel="noopener"><span class="n">03</span>MMWR — Measles Update, U.S., Jan–Apr 2025</a>
+      <a href="https://www.cdc.gov/han/php/notices/han00522.html" target="_blank" rel="noopener"><span class="n">04</span>CDC HAN — Expanding Measles Outbreak</a>
+      <a href="https://www.dshs.texas.gov/news-alerts/measles-outbreak-2025" target="_blank" rel="noopener"><span class="n">05</span>Texas DSHS — 2025 Measles Outbreak</a>
+      <a href="https://www.who.int/emergencies/disease-outbreak-news/item/2025-DON561" target="_blank" rel="noopener"><span class="n">06</span>WHO — Measles, United States (Outbreak News)</a>
+      <a href="https://www.kff.org/medicaid/kindergarten-routine-vaccination-rates-continue-to-decline/" target="_blank" rel="noopener"><span class="n">07</span>KFF — Kindergarten vaccination rates decline</a>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12825560/" target="_blank" rel="noopener"><span class="n">08</span>PMC — Measles resurgence in the U.S., 2025</a>
+    </div>
+    <p class="disclaimer">
+      Figures are drawn from CDC, state health departments and WHO reporting for 2000–2025 and reflect the
+      sources above as compiled in 2026. Annual and per-state counts are provisional and revised over time;
+      the tile map uses reporting tiers rather than exact counts. For live, authoritative numbers, always refer
+      to the CDC measles page. This page is an independent public-health visualization, not medical advice.
+    </p>
+  </section>
+
+  
+
+</main>
+
+<div id="tip"></div>

@@ -1,0 +1,243 @@
+---
+layout: layouts/base.njk
+title: "Pathogen Chronicle — Filoviridae History · Outbreak Intelligence"
+active: chronicle
+permalink: /pathogen-history.html
+pageCss: /assets/css/pathogen-history.css
+pageJs: /assets/js/pathogen-history.js
+---
+<!-- ── MASTHEAD ──────────────────────────────────────────────────────────── -->
+
+
+<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="eyebrow">Pathogen Chronicle</span>
+      <span class="eyebrow" style="color:var(--faint)">·</span>
+      <span class="eyebrow" style="color:var(--faint)">Family Filoviridae</span>
+    </div>
+    <h1>The history of the world's<br>most lethal <em>hemorrhagic fevers</em></h1>
+    <p class="hero-sub">Ebola and Marburg viruses share a family, a transmission pattern, and a half-century of spillovers from the forests of Central Africa. Neither has a broadly available treatment. Together they account for thousands of deaths across more than 60 recorded outbreaks — most of which the world outside the affected region never heard about.</p>
+    <div class="hero-stats">
+      <div class="hs"><div class="v tnum">60+</div><div class="k">Recorded outbreaks · 1967–2026</div></div>
+      <div class="hs"><div class="v tnum">~16,000</div><div class="k">Deaths · filovirus outbreaks total</div></div>
+      <div class="hs"><div class="v tnum">12</div><div class="k">Countries with confirmed Marburg</div></div>
+      <div class="hs"><div class="v tnum">0</div><div class="k">Broad-spectrum filovirus treatments</div></div>
+    </div>
+
+    <!-- TAB TOGGLE -->
+    <div class="tab-strip" role="tablist" aria-label="Select pathogen">
+      <button class="tab-btn ebola-tab active" role="tab" aria-selected="true" aria-controls="panel-ebola" data-tab="ebola">
+        Ebola · <em style="font-family:'Fraunces',serif;font-style:italic;font-size:11px">Orthoebolavirus</em>
+      </button>
+      <button class="tab-btn marburg-tab" role="tab" aria-selected="false" aria-controls="panel-marburg" data-tab="marburg">
+        Marburg · <em style="font-family:'Fraunces',serif;font-style:italic;font-size:11px">Orthomarburgvirus</em>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     EBOLA TAB
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="panel-ebola" class="tab-panel active" role="tabpanel">
+
+  <!-- SPREAD MAP -->
+  <section class="map-section">
+    <div class="wrap">
+      <div class="map-hd">
+        <div>
+          <div class="t disp">Geographic spread of <em>Orthoebolavirus</em> outbreaks</div>
+          <div class="sub" style="margin-top:4px">13 major events · 1976–2026 · Africa</div>
+        </div>
+        <div class="map-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--severe)"></div>Ebola (EBOV/Zaire)</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--watch)"></div>Sudan (SUDV)</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--contained)"></div>Bundibugyo (BDBV)</div>
+          <div class="leg-item"><div class="leg-ring" style="border-color:rgba(233,229,217,.2)"></div>Spread vector</div>
+        </div>
+      </div>
+      <div class="mapwrap map-crop">
+        <svg id="ebola-map" viewBox="96 72 610 608" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map of Africa showing Ebola outbreak locations and spread vectors 1976-2026"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIES / TAXONOMY -->
+  <section class="taxonomy-section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">Six species — one family</div>
+        <span class="eyebrow">Genus Orthoebolavirus</span>
+      </div>
+      <div class="taxon-grid">
+        <div class="taxon" style="border-top:2px solid var(--severe)">
+          <div class="sp">Orthoebolavirus zairense</div>
+          <div class="abbr">EBOV · Zaire</div>
+          <div class="meta">The original and most-studied species. Caused the 2014–16 West Africa catastrophe and the 2018–20 Kivu outbreak — the two largest in history. The only Ebola with a licensed vaccine (Ervebo) and approved treatments (mAb114, REGN-EB3).</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:75%;background:var(--severe)"></div></div>
+          <div class="cfr-val">CFR range ~60–90% · untreated</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--watch)">
+          <div class="sp">Orthoebolavirus sudanense</div>
+          <div class="abbr">SUDV · Sudan</div>
+          <div class="meta">First detected simultaneously with Zaire virus in 1976 but in Sudan, 850 km away. Lower CFR but recurs in Uganda. No licensed vaccine. The 2022 Mubende outbreak — no Ervebo, no mAb treatment — reminded the field how vulnerable SUDV leaves patients.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:53%;background:var(--watch)"></div></div>
+          <div class="cfr-val">CFR range ~41–65% · untreated</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--contained)">
+          <div class="sp">Orthoebolavirus bundibugyoense</div>
+          <div class="abbr">BDBV · Bundibugyo</div>
+          <div class="meta">Identified in 2007 during an outbreak in western Uganda's Bundibugyo District. Causes the active 2025–26 PHEIC in DRC and Uganda. Lower CFR than Zaire historically, but no vaccine, no targeted treatment. Current outbreak is only the third known event.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:31%;background:var(--contained)"></div></div>
+          <div class="cfr-val">CFR ~25–31% · historical range</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--faint)">
+          <div class="sp">Orthoebolavirus taiense</div>
+          <div class="abbr">TAFV · Taï Forest</div>
+          <div class="meta">A single confirmed human case in 1994 — a scientist who performed a necropsy on an infected chimpanzee in Côte d'Ivoire and survived. No known subsequent human infections. Studied for its phylogenetic relationship to the other species.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:0%;background:var(--faint)"></div></div>
+          <div class="cfr-val">1 case · 0 deaths · isolated event</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--faint)">
+          <div class="sp">Orthoebolavirus restonense</div>
+          <div class="abbr">RESTV · Reston</div>
+          <div class="meta">First detected in macaques imported to Reston, Virginia from the Philippines in 1989. Several humans seroconverted but none became ill. Not considered pathogenic to humans. Its presence in Philippine pigs raised questions about an expanded host range.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:0%;background:var(--faint)"></div></div>
+          <div class="cfr-val">0 human deaths · not pathogenic</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--faint)">
+          <div class="sp">Orthoebolavirus bombaliense</div>
+          <div class="abbr">BOMV · Bombali</div>
+          <div class="meta">Discovered in Sierra Leone in 2018 in two species of free-tailed bats. No confirmed human infections have ever been documented. Its characterization is ongoing and it remains the least understood of the six species — a reminder that the known range of filovirus diversity may be incomplete.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:0%;background:var(--faint)"></div></div>
+          <div class="cfr-val">No confirmed human cases · bat reservoir</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTBREAK CARDS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">Major outbreaks, 1976–2026</div>
+        <span class="eyebrow">Confirmed cases · deaths · CFR</span>
+      </div>
+      <div class="cards-grid" id="ebola-cards"></div>
+    </div>
+  </section>
+
+  <!-- FULL TIMELINE -->
+  <section class="timeline-section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">Chronology</div>
+        <span class="eyebrow">All 13 major events in sequence</span>
+      </div>
+      <div class="tl-grid">
+        <div class="tl" id="ebola-tl-a"></div>
+        <div class="tl" id="ebola-tl-b"></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-ebola -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     MARBURG TAB
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="panel-marburg" class="tab-panel" role="tabpanel">
+
+  <!-- SPREAD MAP -->
+  <section class="map-section">
+    <div class="wrap">
+      <div class="map-hd">
+        <div>
+          <div class="t disp">Geographic spread of <em>Orthomarburgvirus</em> outbreaks</div>
+          <div class="sub" style="margin-top:4px">12 major events · 1967–2026 · Africa (primary)</div>
+        </div>
+        <div class="map-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--marburg-col)"></div>Marburg virus</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--faint)"></div>Ravn virus</div>
+          <div class="leg-item" style="font-size:9px">🦇</div><div class="leg-item" style="margin-left:-14px">Confirmed bat reservoir site</div>
+          <div class="leg-item"><div class="leg-ring" style="border-color:rgba(194,129,58,.3)"></div>Spread / import</div>
+        </div>
+      </div>
+      <div class="mapwrap map-crop">
+        <svg id="marburg-map" viewBox="96 72 610 608" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map of Africa showing Marburg outbreak locations and spread vectors 1967-2026"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVOIR BOX -->
+  <section class="taxonomy-section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">The confirmed reservoir and the candidate treatment pipeline</div>
+        <span class="eyebrow">Genus Orthomarburgvirus · 2 known species</span>
+      </div>
+      <div class="taxon-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">
+        <div class="taxon" style="border-top:2px solid var(--marburg-col)">
+          <div class="sp">Orthomarburgvirus marburgense</div>
+          <div class="abbr">MARV · Marburg virus</div>
+          <div class="meta">Responsible for the overwhelming majority of outbreaks. The 2004–05 Angola outbreak remains the deadliest at 88% CFR and 374 cases. The 2024 Rwanda outbreak, with 23% CFR, showed that earlier treatment and better infection control can shift outcomes dramatically.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:60%;background:var(--marburg-col)"></div></div>
+          <div class="cfr-val">Typical CFR range 24–88%</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--faint)">
+          <div class="sp">Orthomarburgvirus ravnense</div>
+          <div class="abbr">RAVV · Ravn virus</div>
+          <div class="meta">Originally isolated from a single case in Kenya in 1987 (the "Ravn" case), Ravn was reclassified as a distinct species in 2011. It was also identified in the 1998–2000 Durba, DRC outbreak. Phylogenetically distinct from MARV; its specific epidemiology remains incompletely characterized.</div>
+          <div class="cfr-bar"><div class="cfr-fill" style="width:40%;background:var(--faint)"></div></div>
+          <div class="cfr-val">Limited data · few confirmed events</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--contained)">
+          <div class="sp">Reservoir host</div>
+          <div class="abbr">Rousettus aegyptiacus</div>
+          <div class="meta">The Egyptian fruit bat is the confirmed reservoir for Marburg virus — the only filovirus with a definitively identified natural host. Fruit bats show no illness. They roost in large colonies in caves and abandoned mines across sub-Saharan Africa and into the Middle East, creating predictable spillover risk at cave-entry sites.</div>
+          <div class="cfr-bar" style="display:none"></div>
+          <div class="cfr-val" style="color:var(--contained)">Confirmed · PCR and serology evidence</div>
+        </div>
+        <div class="taxon" style="border-top:2px solid var(--contained)">
+          <div class="sp">Vaccine pipeline</div>
+          <div class="abbr">rVSV-MARV · ChAd3-MARV · mRNA</div>
+          <div class="meta">Unlike Ebola, no Marburg vaccine has cleared full approval. Several candidates using the same viral-vector platform as Ervebo (VSV-based) are in Phase I/II trials, with accelerated studies triggered by the 2023–24 outbreaks. WHO has listed Marburg as a priority pathogen for emergency-use assessment.</div>
+          <div class="cfr-bar" style="display:none"></div>
+          <div class="cfr-val" style="color:var(--watch)">No approved vaccine as of 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTBREAK CARDS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">Major outbreaks, 1967–2026</div>
+        <span class="eyebrow">Confirmed cases · deaths · CFR · bat cave links where known</span>
+      </div>
+      <div class="cards-grid" id="marburg-cards"></div>
+    </div>
+  </section>
+
+  <!-- FULL TIMELINE -->
+  <section class="timeline-section">
+    <div class="wrap">
+      <div class="section-hd">
+        <div class="t disp">Chronology</div>
+        <span class="eyebrow">12 major events from Marburg, Germany to Jinka, Ethiopia</span>
+      </div>
+      <div class="tl-grid">
+        <div class="tl" id="marburg-tl-a"></div>
+        <div class="tl" id="marburg-tl-b"></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-marburg -->
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
