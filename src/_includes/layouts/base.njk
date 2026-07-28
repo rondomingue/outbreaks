@@ -28,9 +28,12 @@
           <img class="site-brand__logo" src="/assets/img/outbreaks-logo.png?v={{ assetVersion }}" alt="Outbreaks">
           <span class="site-brand__menu" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
-        <nav class="site-topnav" aria-label="Primary navigation">
+        <nav class="site-topnav" aria-label="Primary navigation" data-site-topnav>
+          <span class="site-topnav__ind" data-site-topnav-ind aria-hidden="true"></span>
           {% for item in navigation %}
-            <a href="{{ item.href }}"{% if active == item.key %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>
+            {% if item.key != 'dashboard' %}
+              <a href="{{ item.href }}"{% if active == item.key %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>
+            {% endif %}
           {% endfor %}
         </nav>
         <div class="site-header__tools">

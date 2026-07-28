@@ -39,15 +39,6 @@ headScripts:
         <h2 class="disp">Mosquito Empire</h2>
         <p>Malaria, yellow fever, dengue, chikungunya, and Zika follow warm water, dense settlement, ports, and expanding urban edges.</p>
       </div>
-      <div class="control-block atlas-legend">
-        <span class="control-label">Reading the map</span>
-        <ul class="legend-list">
-          <li><span class="lg-mark lg-dot"></span>Field site — a known reservoir or outbreak locus</li>
-          <li><span class="lg-mark lg-arc"></span>Corridor — a documented transmission route</li>
-          <li><span class="lg-mark lg-swatch"></span>Colour — the active vector system</li>
-        </ul>
-        <p class="legend-note">Drag the globe to rotate. Era chips reveal how corridors accumulate over time. Click a site for detail.</p>
-      </div>
     </aside>
 
     <div class="atlas-map-shell">
@@ -60,19 +51,26 @@ headScripts:
         <span id="atlasStatus">Mosquito layer · surveillance lens</span>
         <span>Drag to rotate · click a site</span>
       </div>
+      <div class="atlas-key" aria-label="Map legend">
+        <ul class="legend-list">
+          <li><span class="lg-mark lg-dot"></span>Field site</li>
+          <li><span class="lg-mark lg-arc"></span>Transmission corridor</li>
+          <li><span class="lg-mark lg-swatch"></span>Active vector colour</li>
+        </ul>
+        <p class="legend-note">Drag to rotate · hover a layer to preview · era chips accumulate corridors over time.</p>
+      </div>
+      <div class="atlas-notes">
+        <article>
+          <span class="eyebrow">Reading the map</span>
+          <h2 class="disp">Vectors are not footnotes. They are infrastructure.</h2>
+          <p>Every outbreak has a setting — bodies of water, grain stores, slaughter corridors, migration routes, or clinics at the edge of a forest. The atlas treats vectors as a geographic system, not a single organism.</p>
+        </article>
+        <article>
+          <span class="eyebrow">Use</span>
+          <h2 class="disp">Switch layers. Follow routes. Compare eras.</h2>
+          <p>Each layer changes map colour, active range, field sites, and connecting routes. The era chips shift the frame from antiquity to modern surveillance.</p>
+        </article>
+      </div>
     </div>
-  </section>
-
-  <section class="atlas-notes">
-    <article>
-      <span class="eyebrow">Reading the map</span>
-      <h2 class="disp">Vectors are not footnotes. They are infrastructure.</h2>
-      <p>Every outbreak has a setting. Some settings are bodies of water, grain stores, slaughter corridors, migration routes, or clinics at the edge of a forest. The atlas treats vectors as a geographic system, not a single organism.</p>
-    </article>
-    <article>
-      <span class="eyebrow">Use</span>
-      <h2 class="disp">Switch layers. Follow routes. Compare eras.</h2>
-      <p>The page is built for editorial exploration: each layer changes map color, active range, field sites, and connecting routes. The era chips shift the frame from antiquity to modern surveillance.</p>
-    </article>
   </section>
 </main>

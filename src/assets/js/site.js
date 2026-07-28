@@ -113,6 +113,32 @@
   // If the viewport grows to desktop while the drawer is open, close it cleanly.
   desktopNav.addEventListener("change", e => { if (e.matches) close(); });
 
+  // Sliding highlight in the desktop nav — glides between items on hover,
+  // settles on the active page, with a small press on click (Instagram-style).
+  const topnav = document.querySelector("[data-site-topnav]");
+  const indicator = topnav && topnav.querySelector("[data-site-topnav-ind]");
+  if (topnav && indicator) {
+    const links = Array.from(topnav.querySelectorAll("a"));
+    const activeLink = topnav.querySelector("a.is-active");
+
+    function moveTo(link) {
+      if (!link) { topnav.classList.remove("is-ready"); return; }
+      topnav.style.setProperty("--ind-x", link.offsetLeft + "px");
+      topnav.style.setProperty("--ind-w", link.offsetWidth + "px");
+      topnav.classList.add("is-ready");
+    }
+    function settle() { activeLink ? moveTo(activeLink) : topnav.classList.remove("is-ready"); }
+
+    requestAnimationFrame(settle);
+    links.forEach(link => {
+      link.addEventListener("mouseenter", () => moveTo(link));
+      link.addEventListener("mousedown", () => topnav.classList.add("is-pressed"));
+    });
+    topnav.addEventListener("mouseleave", () => { topnav.classList.remove("is-pressed"); settle(); });
+    ["mouseup", "blur"].forEach(ev => topnav.addEventListener(ev, () => topnav.classList.remove("is-pressed"), true));
+    window.addEventListener("resize", settle);
+  }
+
   scrim.addEventListener("click", close);
 
   sidenav.addEventListener("click", event => {

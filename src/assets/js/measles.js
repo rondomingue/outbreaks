@@ -142,6 +142,7 @@ function animateCount(el, target, opts){
   var yrs = ['2017–18','2018–19','2019–20','2020–21','2021–22','2022–23','2023–24','2024–25'];
   var cov = [94.3,94.7,95.2,93.9,93.5,93.1,92.7,92.5];
   chart.setOption({
+    animation:false,
     grid:{ left:44, right:20, top:34, bottom:40 },
     tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(228,87,46,.35)', borderWidth:1,
       textStyle:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:11 },
@@ -151,7 +152,7 @@ function animateCount(el, target, opts){
     yAxis:{ type:'value', min:90, max:96, interval:1,
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9, formatter:'{value}%' }, splitLine:gridSplit },
     series:[{
-      type:'bar', data:cov, barWidth:'46%',
+      type:'bar', data:cov.map(function(){ return 90; }), barWidth:'46%',
       itemStyle:{ color:function(p){ return p.value>=95 ? '#33a58a' : (p.value>=93 ? '#e3b23c' : '#e4572e'); }, borderRadius:[2,2,0,0] },
       markLine:{ silent:true, symbol:'none',
         lineStyle:{ color:'#33a58a', type:'dashed', width:1.2 },
@@ -160,6 +161,19 @@ function animateCount(el, target, opts){
     }]
   });
   new ResizeObserver(function(){ chart.resize(); }).observe(el);
+
+  // Grow the bars from the baseline only when the chart scrolls into view
+  var started = false;
+  function grow(){
+    if(started) return; started = true;
+    chart.setOption({ animation:true, animationDuration:800, animationEasing:'cubicOut', series:[{ data:cov }] });
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ grow(); io.disconnect(); } });
+    }, { threshold:0, rootMargin:'0px 0px -12% 0px' });
+    io.observe(el);
+  } else { grow(); }
 })();
 
 /* ═══ US TILE-GRID MAP ═══ */

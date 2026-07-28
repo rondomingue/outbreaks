@@ -35,7 +35,10 @@ const VECTORS = [
       { name: 'Amazon Basin', place: 'Malaria frontier', pathogen: 'Plasmodium', coord: [-62, -4], note: 'Forest-edge settlement and river mobility keep malaria transmission persistent.' },
       { name: 'West African Coast', place: 'Yellow fever belt', pathogen: 'Yellow fever virus', coord: [-1, 7], note: 'Ports, mosquitoes, and unvaccinated populations shaped repeated urban outbreaks.' },
       { name: 'Southeast Asia', place: 'Dengue urban range', pathogen: 'Dengue virus', coord: [103, 14], note: 'Dense cities and Aedes mosquitoes sustain repeated dengue cycles.' },
-      { name: 'Caribbean ports', place: 'Yellow fever corridor', pathogen: 'Yellow fever virus', coord: [-75, 19], note: 'Shipping and Aedes aegypti carried yellow fever through Atlantic port networks.' }
+      { name: 'Caribbean ports', place: 'Yellow fever corridor', pathogen: 'Yellow fever virus', coord: [-75, 19], note: 'Shipping and Aedes aegypti carried yellow fever through Atlantic port networks.' },
+      { name: 'Indian subcontinent', place: 'Dengue burden', pathogen: 'Dengue virus', coord: [78, 21], note: 'Monsoon cycles and dense cities sustain the world’s largest dengue load.' },
+      { name: 'US Gulf Coast', place: 'Aedes re-emergence', pathogen: 'Dengue / Zika', coord: [-90, 29], note: 'Warming and travel reintroduce local Aedes transmission to the Gulf.' },
+      { name: 'Sahel fringe', place: 'Malaria frontier', pathogen: 'Plasmodium', coord: [10, 13], note: 'Seasonal rains push Anopheles ranges north into the Sahel.' }
     ],
     routes: [
       { name: 'Atlantic yellow fever circuit', from: [-75, 19], to: [-1, 7] },
@@ -57,7 +60,9 @@ const VECTORS = [
       { name: 'Tien Shan', place: 'Plague origin signal', pathogen: 'Y. pestis', coord: [76, 42], note: 'Genomic work points toward Central Asian plague diversity and medieval spread.' },
       { name: 'Black Sea ports', place: 'Second pandemic route', pathogen: 'Y. pestis', coord: [35, 45], note: 'Maritime trade helped carry plague into Mediterranean and European cities.' },
       { name: 'Madagascar highlands', place: 'Modern endemic focus', pathogen: 'Y. pestis', coord: [47, -19], note: 'Seasonal plague persists through rodent and flea cycles.' },
-      { name: 'American Southwest', place: 'Sylvatic plague', pathogen: 'Y. pestis', coord: [-107, 35], note: 'Prairie dog and wild rodent systems maintain enzootic plague.' }
+      { name: 'American Southwest', place: 'Sylvatic plague', pathogen: 'Y. pestis', coord: [-107, 35], note: 'Prairie dog and wild rodent systems maintain enzootic plague.' },
+      { name: 'Yunnan reservoir', place: 'Enzootic focus', pathogen: 'Y. pestis', coord: [101, 25], note: 'Rodent plague reservoirs persist across southwest China.' },
+      { name: 'Ituri / Congo Basin', place: 'Endemic plague', pathogen: 'Y. pestis', coord: [29, 1], note: 'Neighbouring highland zones report recurring human plague.' }
     ],
     routes: [
       { name: 'Silk Road plague corridor', from: [76, 42], to: [35, 45] },
@@ -79,7 +84,10 @@ const VECTORS = [
       { name: 'Albertine Rift', place: 'Ebola / Marburg edge', pathogen: 'Filoviruses', coord: [30, 0], note: 'Mines, forests, and cross-border travel shape filovirus response geography.' },
       { name: 'Kitum Cave', place: 'Marburg exposure', pathogen: 'Marburg virus', coord: [35, 0.4], note: 'Historic Marburg cases linked to cave exposure around Mount Elgon.' },
       { name: 'Nipah belt', place: 'Fruit bat interface', pathogen: 'Nipah virus', coord: [90, 23], note: 'Fruit bats, date-palm sap, pigs, and farms form different transmission pathways.' },
-      { name: 'West African forest zone', place: 'Ebola emergence', pathogen: 'Ebola virus', coord: [-10, 8], note: 'Forest disturbance and clinical amplification shaped Ebola history.' }
+      { name: 'West African forest zone', place: 'Ebola emergence', pathogen: 'Ebola virus', coord: [-10, 8], note: 'Forest disturbance and clinical amplification shaped Ebola history.' },
+      { name: 'Yunnan caves', place: 'SARS-related CoVs', pathogen: 'Sarbecoviruses', coord: [103, 24], note: 'Horseshoe-bat caves harbour close relatives of SARS coronaviruses.' },
+      { name: 'Queensland', place: 'Hendra interface', pathogen: 'Hendra virus', coord: [147, -20], note: 'Flying-fox to horse to human spillover along Australia’s east coast.' },
+      { name: 'Amazon roosts', place: 'Rabies / novel CoVs', pathogen: 'Rabies / CoVs', coord: [-60, -3], note: 'Vampire and fruit bats sustain rabies and surveillance interest.' }
     ],
     routes: [
       { name: 'Rift Valley filovirus corridor', from: [30, 0], to: [35, 0.4] },
@@ -101,7 +109,9 @@ const VECTORS = [
       { name: 'Lassa belt', place: 'Mastomys reservoir', pathogen: 'Lassa virus', coord: [7, 9], note: 'West African rodent-human contact drives persistent Lassa risk.' },
       { name: 'Four Corners', place: 'Hantavirus ecology', pathogen: 'Sin Nombre virus', coord: [-109, 36], note: 'Rainfall and deer-mouse population pulses preceded known hantavirus clusters.' },
       { name: 'Pampas', place: 'Arenavirus range', pathogen: 'Junín virus', coord: [-61, -34], note: 'Agricultural landscapes overlap with rodent-borne hemorrhagic fever risk.' },
-      { name: 'Sahel grain belt', place: 'Food storage interface', pathogen: 'Arenaviruses', coord: [1, 14], note: 'Storage, housing, and seasonal rodent movement shape exposure.' }
+      { name: 'Sahel grain belt', place: 'Food storage interface', pathogen: 'Arenaviruses', coord: [1, 14], note: 'Storage, housing, and seasonal rodent movement shape exposure.' },
+      { name: 'Fennoscandia', place: 'Puumala hantavirus', pathogen: 'Puumala virus', coord: [20, 61], note: 'Bank-vole population cycles drive northern European hantavirus disease.' },
+      { name: 'East African highlands', place: 'Rodent contact zone', pathogen: 'Rodent-borne', coord: [37, -1], note: 'Highland agriculture and housing raise rodent-human contact.' }
     ],
     routes: [
       { name: 'Lassa regional belt', from: [-12, 8], to: [10, 10] },
@@ -123,7 +133,9 @@ const VECTORS = [
       { name: 'Arabian Peninsula', place: 'MERS camel interface', pathogen: 'MERS-CoV', coord: [45, 24], note: 'Camel contact and healthcare amplification shaped MERS geography.' },
       { name: 'Nile Valley', place: 'Rift Valley fever', pathogen: 'RVF virus', coord: [31, 26], note: 'Livestock, floodwater mosquitoes, and markets create outbreak windows.' },
       { name: 'Mekong poultry belt', place: 'Avian influenza', pathogen: 'H5N1', coord: [105, 16], note: 'Live-bird markets and dense poultry production sustain monitoring risk.' },
-      { name: 'Sahel pastoral routes', place: 'Herd mobility', pathogen: 'Brucella / RVF', coord: [17, 15], note: 'Seasonal herd movement can link animal and human health signals.' }
+      { name: 'Sahel pastoral routes', place: 'Herd mobility', pathogen: 'Brucella / RVF', coord: [17, 15], note: 'Seasonal herd movement can link animal and human health signals.' },
+      { name: 'Horn of Africa', place: 'Rift Valley fever', pathogen: 'RVF virus', coord: [45, 6], note: 'Floodwater mosquitoes and herds trigger periodic RVF epizootics.' },
+      { name: 'European farm belt', place: 'Avian & swine flu', pathogen: 'Influenza A', coord: [8, 50], note: 'Intensive poultry and pig farming create influenza reassortment risk.' }
     ],
     routes: [
       { name: 'Camel trade and care corridor', from: [45, 24], to: [39, 21] },
@@ -145,7 +157,9 @@ const VECTORS = [
       { name: 'Global air hubs', place: 'Respiratory spread', pathogen: 'Influenza / SARS-CoV-2', coord: [0, 51], note: 'Dense air networks compress travel time for influenza, COVID-19, and measles sparks.' },
       { name: 'Hajj routes', place: 'Mass gathering health', pathogen: 'N. meningitidis', coord: [39.8, 21.4], note: 'Pilgrimage health systems manage meningitis, respiratory infection, and heat risk.' },
       { name: 'Mediterranean displacement', place: 'Interrupted care', pathogen: 'Measles / VPDs', coord: [20, 36], note: 'Displacement changes vaccine access, surveillance, and outbreak response.' },
-      { name: 'Pacific air bridge', place: 'Measles importation', pathogen: 'Measles virus', coord: [-157, 21], note: 'Travel-linked measles sparks reveal local immunity gaps.' }
+      { name: 'Pacific air bridge', place: 'Measles importation', pathogen: 'Measles virus', coord: [-157, 21], note: 'Travel-linked measles sparks reveal local immunity gaps.' },
+      { name: 'North American hubs', place: 'Measles importation', pathogen: 'Measles virus', coord: [-95, 40], note: 'Under-vaccinated pockets turn imported sparks into outbreaks.' },
+      { name: 'South Asian corridors', place: 'Labour migration', pathogen: 'Multiple', coord: [77, 28], note: 'Migration and mega-cities move respiratory pathogens rapidly.' }
     ],
     routes: [
       { name: 'Transatlantic air route', from: [-74, 40], to: [0, 51] },

@@ -203,7 +203,12 @@ const DATA_FONT = "'DIN Condensed', 'DIN Alternate', Bahnschrift, 'Aptos Narrow'
 const DATA_FONT_LIGHT = "'DIN Condensed Light', 'DIN Alternate Light', Bahnschrift Light, 'Aptos Narrow', 'Roboto Condensed', 'Arial Narrow', sans-serif";
 let activeData = DATA_COLORED;
 
+// Below this the baked-in labels collide; hide them and reveal on hover/tap instead.
+function isCompact() { return chart.getWidth() < 860; }
+let lastCompact = null;
+
 function buildOption(data) {
+  const compact = isCompact();
   return {
     backgroundColor: 'transparent',
     tooltip: {
@@ -259,7 +264,7 @@ function buildOption(data) {
         { // Disease ring
           r0:'37%', r:'61%',
           label:{
-            show:true,
+            show:!compact,
             rotate:'radial',
             fontSize:10,
             fontFamily:DATA_FONT_LIGHT,
@@ -284,7 +289,7 @@ function buildOption(data) {
         { // Era ring — transparent fill, year labels pushed inside the ring
           r0:'61%', r:'82%',
           label:{
-            show:true,
+            show:!compact,
             position:'inside',
             rotate:'radial',
             fontSize:8,
@@ -693,14 +698,28 @@ function buildDecorGraphics() {
     });
   }
 
-  chart.setOption({graphic: els});
+  // On compact screens drop the far-out text labels (class/cluster/leaf names);
+  // the concentric rings, spokes, and center medallion stay for the aesthetic,
+  // and names are revealed on hover/tap via emphasis + the info panel.
+  let out = els;
+  if (isCompact()) {
+    out = els.filter(e => !(e.type === 'text'
+      && Math.hypot((e.style.x || cx) - cx, (e.style.y || cy) - cy) > base * 0.4));
+  }
+  chart.setOption({graphic: out});
 }
 
 requestAnimationFrame(() => {
+  lastCompact = isCompact();
   buildDecorGraphics();
 });
 window.addEventListener('resize',()=>{
   chart.resize();
+  const nowCompact = isCompact();
+  if (nowCompact !== lastCompact) {
+    lastCompact = nowCompact;
+    chart.setOption(buildOption(activeData));   // toggle ring labels across the breakpoint
+  }
   requestAnimationFrame(() => {
     buildDecorGraphics();
   });
