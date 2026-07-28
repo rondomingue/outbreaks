@@ -383,6 +383,12 @@ function sparkPath(vals,w,h,pad){ const mx=Math.max(...vals),mn=Math.min(...vals
   svg.innerHTML=s; })();
 
 (function(){ const ov=document.getElementById('quote-overlay');
+  if(!ov) return;
+  const key='outbreaksQuoteSeen';
+  let seen=false;
+  try{ seen=sessionStorage.getItem(key)==='1'; }catch(e){}
+  if(seen){ ov.remove(); return; }
+  try{ sessionStorage.setItem(key,'1'); }catch(e){}
   const dismiss=()=>{ ov.classList.add('hide'); setTimeout(()=>ov.remove(),500); };
   ov.addEventListener('click',dismiss);
   setTimeout(dismiss,6000); })();

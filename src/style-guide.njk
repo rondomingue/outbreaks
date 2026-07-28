@@ -1,0 +1,142 @@
+---
+layout: layouts/base.njk
+title: "Appendix - Outbreaks Style Guide"
+description: "The Outbreaks visual system: typography, color, interface components, charts, maps, motion, and sound."
+active: style-guide
+permalink: /style-guide.html
+pageCss: /assets/css/style-guide.css
+---
+<main class="guide">
+  <section class="guide-hero">
+    <div>
+      <span class="eyebrow">Appendix</span>
+      <h1 class="disp">Outbreaks style guide</h1>
+      <p class="lede">A working reference for the editorial system: museum field desk, natural-history archive, epidemiology dashboard, and public-health signal room.</p>
+    </div>
+    <div class="guide-principles">
+      <div><span class="n">01</span><span class="k">Documentary, not decorative</span></div>
+      <div><span class="n">02</span><span class="k">Data first, atmosphere second</span></div>
+      <div><span class="n">03</span><span class="k">Every glow implies signal</span></div>
+    </div>
+  </section>
+
+  <section class="guide-section">
+    <div class="section-head">
+      <span class="eyebrow">Color</span>
+      <h2 class="disp">Field palette</h2>
+    </div>
+    <div class="swatch-grid">
+      <article class="swatch ink"><span>#080b0a</span><b>Ink</b><small>primary background</small></article>
+      <article class="swatch bone"><span>#e9e5d9</span><b>Bone</b><small>editorial text</small></article>
+      <article class="swatch red"><span>#e4572e</span><b>Emergency red</b><small>active outbreak / alarm</small></article>
+      <article class="swatch teal"><span>#33a58a</span><b>Containment teal</b><small>surveillance / live</small></article>
+      <article class="swatch gold"><span>#e3b23c</span><b>Watch gold</b><small>risk and history</small></article>
+      <article class="swatch purple"><span>#7565bd</span><b>Archive violet</b><small>secondary taxonomy</small></article>
+    </div>
+  </section>
+
+  <section class="guide-section type-grid">
+    <div class="section-head">
+      <span class="eyebrow">Typography</span>
+      <h2 class="disp">Archive voice</h2>
+    </div>
+    <article class="type-spec display">
+      <span class="eyebrow">Display serif</span>
+      <p class="disp">Virulent diseases of the last 2,000 years</p>
+      <small>Fraunces for titles, editorial statements, and historical language.</small>
+    </article>
+    <article class="type-spec sans">
+      <span class="eyebrow">Interface sans</span>
+      <p>Current outbreak intelligence and surveillance signals.</p>
+      <small>Archivo for dense reading, captions, body text, and operational UI.</small>
+    </article>
+    <article class="type-spec mono">
+      <span class="eyebrow">Monospace labels</span>
+      <p>LIVE WHO DON · 90 DAYS · CONFIRMED CASES</p>
+      <small>Space Mono for labels, source lines, timestamps, keys, and modes.</small>
+    </article>
+    <article class="type-spec numbers">
+      <span class="eyebrow">Serif numerals</span>
+      <p>2,289&nbsp;&nbsp;30.9%&nbsp;&nbsp;1,274</p>
+      <small>Libre Baskerville for numeric moments that need weight and dignity.</small>
+    </article>
+  </section>
+
+  <section class="guide-section">
+    <div class="section-head">
+      <span class="eyebrow">Interface</span>
+      <h2 class="disp">Controls and panels</h2>
+    </div>
+    <div class="component-grid">
+      <article class="component-panel">
+        <button class="guide-button" type="button"><span class="dot red-dot"></span>Vector layer<span class="count">4 sites</span></button>
+        <button class="guide-button active" type="button"><span class="dot teal-dot"></span>Surveillance<span class="count">2000-today</span></button>
+        <p>Buttons are compact, bordered, and signal-bearing. The shared click sound is quiet and mechanical.</p>
+      </article>
+      <article class="component-panel selected">
+        <span class="eyebrow">Selected system</span>
+        <h3 class="disp">Mosquito systems</h3>
+        <p>Panels use a translucent field surface, a fine border, and just enough blur to separate data from the map below.</p>
+      </article>
+      <article class="component-panel nav-sample">
+        <img src="/assets/img/outbreaks-logo.png" alt="Outbreaks">
+        <span class="hamb"><i></i><i></i><i></i></span>
+        <p>The logo is the navigation control. The sidebar drops from it like an instrument drawer.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="guide-section">
+    <div class="section-head">
+      <span class="eyebrow">Data surfaces</span>
+      <h2 class="disp">Maps, charts, and cards</h2>
+    </div>
+    <div class="surface-grid">
+      <article class="map-surface">
+        <svg viewBox="0 0 640 320" role="img" aria-label="Example outbreak map treatment">
+          <defs>
+            <radialGradient id="hot" cx="58%" cy="45%" r="42%"><stop offset="0" stop-color="rgba(228,87,46,.42)"/><stop offset="1" stop-color="rgba(228,87,46,0)"/></radialGradient>
+          </defs>
+          <rect width="640" height="320" fill="rgba(7,11,10,.96)"/>
+          <path d="M70 232 C150 145 231 154 312 196 S478 244 570 119" fill="none" stroke="rgba(233,229,217,.11)" stroke-width="1"/>
+          <path d="M108 242 C192 186 278 185 364 220 S504 216 572 146" fill="none" stroke="var(--teal)" stroke-width="2" stroke-dasharray="6 8" opacity=".75"/>
+          <circle cx="364" cy="220" r="72" fill="url(#hot)"/>
+          <circle cx="364" cy="220" r="9" fill="var(--red)" stroke="var(--bone)" stroke-width="1"/>
+          <circle cx="108" cy="242" r="7" fill="var(--teal)" stroke="var(--bone)" stroke-width="1"/>
+          <circle cx="572" cy="146" r="7" fill="var(--gold)" stroke="var(--bone)" stroke-width="1"/>
+        </svg>
+        <p>Maps carry dark geography, quiet labels, and active points with modest glow.</p>
+      </article>
+      <article class="chart-surface">
+        <svg viewBox="0 0 640 320" role="img" aria-label="Example trend chart treatment">
+          <rect width="640" height="320" fill="rgba(7,11,10,.72)"/>
+          <g stroke="rgba(180,200,255,.07)"><path d="M44 64H604"/><path d="M44 128H604"/><path d="M44 192H604"/><path d="M44 256H604"/></g>
+          <path d="M44 255 L148 246 L252 236 L356 206 L460 140 L604 46 L604 256 L44 256Z" fill="rgba(228,87,46,.14)"/>
+          <path d="M44 255 L148 246 L252 236 L356 206 L460 140 L604 46" fill="none" stroke="var(--red)" stroke-width="3"/>
+          <text x="604" y="34" text-anchor="end">2,289</text>
+        </svg>
+        <p>Charts reveal by motion: counts rise, lines draw, and labels arrive after the signal.</p>
+      </article>
+      <article class="card-surface">
+        <span class="eyebrow">Live feed</span>
+        <h3 class="disp">Ebola disease caused by Bundibugyo virus</h3>
+        <p>Cards should feel like archival drawers: compact, bordered, information-dense, and sourced.</p>
+        <small>WHO DON · Democratic Republic of the Congo & Uganda</small>
+      </article>
+    </div>
+  </section>
+
+  <section class="guide-section rules">
+    <div class="section-head">
+      <span class="eyebrow">Rules</span>
+      <h2 class="disp">Keep the system honest</h2>
+    </div>
+    <ol>
+      <li>Use red only for urgent signal, active outbreaks, or the final point in a trend.</li>
+      <li>Use mono labels to explain source, timeframe, and mode, not to decorate.</li>
+      <li>Prefer tight rows, thin borders, and restrained glow over large cards.</li>
+      <li>Let maps and charts carry the drama. Text should clarify, not compete.</li>
+      <li>Motion should reveal data: rise, draw, count, slide, or pulse.</li>
+    </ol>
+  </section>
+</main>

@@ -34,5 +34,11 @@ module.exports = [
     label: "Measles",
     href: "/measles.html",
     deck: "The American resurgence, vaccination gaps, and outbreak pattern."
+  },
+  {
+    key: "style-guide",
+    label: "Appendix",
+    href: "/style-guide.html",
+    deck: "Visual system, interface rules, typography, color, motion, and sound."
   }
 ];
