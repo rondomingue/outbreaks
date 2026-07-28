@@ -5,6 +5,7 @@
     --contained:#33a58a; --watch:#e3b23c; --severe:#e4572e;
     --severe-soft:rgba(228,87,46,.16); --watch-soft:rgba(227,178,60,.14); --contained-soft:rgba(51,165,138,.14);
     --maxw:1360px;
+    --number-serif:'Libre Baskerville',Georgia,serif;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -71,14 +72,14 @@
   .mod{padding:0 0 20px}
   .mod + .mod{padding-top:20px; border-top:1px solid var(--line-2)}
   .mod .lab{display:block; margin-bottom:9px}
-  .lead .big{font-family:'Archivo',sans-serif; font-weight:200; font-size:clamp(46px,5.6vw,64px); line-height:.92; letter-spacing:-.02em}
+  .lead .big{font-family:var(--number-serif); font-weight:400; font-size:clamp(42px,5.1vw,58px); line-height:1; letter-spacing:-.03em}
   .lead .sub{margin-top:8px; font-size:13px; color:var(--bone-dim); line-height:1.45}
   .lead .delta{margin-top:10px; display:inline-flex; align-items:center; gap:7px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--severe)}
   .lead .delta::before{content:"▲"; font-size:8px}
   .metrows{display:flex; gap:0}
   .metrows .m{flex:1; padding-right:14px}
   .metrows .m + .m{border-left:1px solid var(--line-2); padding-left:14px; padding-right:0}
-  .metrows .v{font-family:'Archivo',sans-serif; font-weight:300; font-size:26px; letter-spacing:-.01em}
+  .metrows .v{font-family:var(--number-serif); font-weight:400; font-size:25px; letter-spacing:-.02em}
   .metrows .k{margin-top:4px; font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); line-height:1.4}
 
   .barlist{display:flex; flex-direction:column; gap:9px}
@@ -108,16 +109,16 @@
   .eth{display:grid; grid-template-columns:minmax(0,1fr) 264px; gap:0; border:1px solid var(--line); border-radius:2px}
   .eth .ethmap{padding:14px 16px}
   .eth svg.detail{width:100%; height:auto; display:block; overflow:visible}
-  .eth .side{border-left:1px solid var(--line); padding:20px 22px; display:flex; flex-direction:column; gap:0}
+  .eth .side{grid-column:2; grid-row:1 / span 2; border-left:1px solid var(--line); padding:20px 22px; display:flex; flex-direction:column; gap:0}
   .eth .side .blk2{padding:16px 0}
   .eth .side .blk2:first-child{padding-top:0}
   .eth .side .blk2 + .blk2{border-top:1px solid var(--line-2)}
   .eth .side .lab{display:block; margin-bottom:10px}
-  .eth .side .big{font-family:'Archivo',sans-serif; font-weight:200; font-size:44px; line-height:.9; letter-spacing:-.02em}
+  .eth .side .big{font-family:var(--number-serif); font-weight:400; font-size:39px; line-height:1; letter-spacing:-.03em}
   .eth .side .big .u{font-size:13px; color:var(--muted); margin-left:8px; letter-spacing:0}
   .eth .side .duo{display:flex; gap:0}
   .eth .side .duo .m{flex:1} .eth .side .duo .m + .m{border-left:1px solid var(--line-2); padding-left:14px} .eth .side .duo .m{padding-right:14px}
-  .eth .side .duo .v{font-family:'Archivo',sans-serif; font-weight:300; font-size:24px}
+  .eth .side .duo .v{font-family:var(--number-serif); font-weight:400; font-size:23px; letter-spacing:-.02em}
   .eth .side .duo .k{font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:4px}
   .tl{display:flex; flex-direction:column; gap:0; margin-top:2px}
   .tl .ev{display:grid; grid-template-columns:16px 1fr; gap:10px; padding:7px 0; position:relative}
@@ -128,6 +129,11 @@
   .tl .ev .t{font-size:12px; color:var(--muted); margin-top:1px}
   .eth .note{font-size:12px; color:var(--muted); line-height:1.5}
   .eth .note b{color:var(--bone-dim); font-weight:500}
+  .field-photo{grid-column:1; margin:0; border:0; border-top:1px solid var(--line); border-radius:0; overflow:hidden; background:var(--ink-1)}
+  .field-photo img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; filter:saturate(.78) contrast(1.04) brightness(.82)}
+  .field-photo figcaption{display:grid; gap:5px; padding:12px 14px 14px; border-top:1px solid var(--line-2)}
+  .field-photo .pt{font-family:'Fraunces',Georgia,serif; font-size:15px; line-height:1.18; color:var(--bone-dim)}
+  .field-photo .pc{font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:.08em; line-height:1.55; text-transform:uppercase; color:var(--faint)}
 
   /* ── Navigation ───────────────────────────────────────── */
   .nav-links{display:flex; gap:22px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; align-items:center}
@@ -140,7 +146,7 @@
   .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
   .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-  @media (max-width:1080px){ .eth{grid-template-columns:1fr} .eth .side{border-left:0; border-top:1px solid var(--line)} }
+  @media (max-width:1080px){ .eth{grid-template-columns:1fr} .eth .side{grid-column:1; grid-row:auto; border-left:0; border-top:1px solid var(--line)} .field-photo{grid-column:1} }
   svg.map{width:100%; height:auto; display:block; overflow:visible}
   .land{fill:#151d1a; stroke:rgba(233,229,217,.09); stroke-width:.5}
   .grat{fill:none; stroke:rgba(233,229,217,.045); stroke-width:.5}
@@ -225,7 +231,7 @@
   .card .fam{margin-bottom:12px}
   .card .cn{font-family:'Fraunces',serif; font-weight:500; font-size:19px; line-height:1.1; margin-bottom:3px}
   .card .loc{font-size:12.5px; color:var(--muted); margin-bottom:16px; min-height:2.6em}
-  .card .stat .n{font-family:'Archivo',sans-serif; font-weight:200; font-size:40px; line-height:1; letter-spacing:-.02em}
+  .card .stat .n{font-family:var(--number-serif); font-weight:400; font-size:36px; line-height:1; letter-spacing:-.03em}
   .card .stat .cap{font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-top:5px}
   .card .subs{display:flex; gap:18px; margin:14px 0 16px}
   .card .subs .s .sv{font-family:'Space Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums}
@@ -243,7 +249,7 @@
   .fc .plot{padding:20px 22px}
   .fc .side{border-left:1px solid var(--line); padding:20px 22px; display:flex; flex-direction:column; gap:18px}
   svg.fchart{width:100%; height:auto; display:block; overflow:visible}
-  .fc .side .row .v{font-family:'Archivo',sans-serif; font-weight:200; font-size:30px; line-height:1; letter-spacing:-.01em}
+  .fc .side .row .v{font-family:var(--number-serif); font-weight:400; font-size:28px; line-height:1; letter-spacing:-.02em}
   .fc .side .row .k{font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:5px}
   .fc .side .note{font-size:12px; color:var(--muted); line-height:1.5; border-top:1px solid var(--line-2); padding-top:14px}
   .ax{font-family:'Space Mono',monospace; font-size:9px; fill:var(--faint); letter-spacing:.06em}

@@ -7,7 +7,7 @@
     {% if description %}<meta name="description" content="{{ description }}">{% endif %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Libre+Baskerville:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CMETG9RBQ"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-9CMETG9RBQ');</script>
     {% for item in headLinks %}
@@ -23,9 +23,10 @@
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" data-site-header>
       <div class="site-header__inner">
-        <a class="site-brand" href="/" aria-label="Outbreaks home">
+        <button class="site-brand" type="button" data-site-menu-trigger aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-sidenav">
           <img class="site-brand__logo" src="/assets/img/outbreaks-logo.png" alt="Outbreaks">
-        </a>
+          <span class="site-brand__menu" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
         <div class="site-header__tools">
           {% if pageActions == "recordModes" %}
             <div class="site-mode-toggle" aria-label="Record display mode">
@@ -33,19 +34,12 @@
               <button class="mode-btn" id="btn-equal" title="Equal area for each disease">Equal</button>
             </div>
           {% endif %}
-          <button class="site-menu-toggle" type="button" data-site-menu-toggle aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-sidenav">
-            <span></span><span></span><span></span>
-          </button>
         </div>
       </div>
     </header>
 
     <div class="site-scrim" data-site-scrim hidden></div>
     <aside class="site-sidenav" id="site-sidenav" data-site-sidenav aria-hidden="true">
-      <div class="site-sidenav__top">
-        <p class="site-kicker">Editorial atlas</p>
-        <button class="site-close" type="button" data-site-menu-close aria-label="Close navigation">Close</button>
-      </div>
       <nav class="site-nav" aria-label="Primary navigation">
         {% for item in navigation %}
           <a href="{{ item.href }}" class="{% if active == item.key %}is-active{% endif %}">
@@ -54,9 +48,6 @@
           </a>
         {% endfor %}
       </nav>
-      <div class="site-sidenav__note">
-        <p>Designed as if museum editors and field epidemiologists shared the same map table: current signals, historical context, and sourced visual evidence.</p>
-      </div>
     </aside>
 
     <main class="site-main" id="content">

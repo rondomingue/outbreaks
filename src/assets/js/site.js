@@ -1,17 +1,20 @@
 (function() {
   const body = document.body;
-  const toggle = document.querySelector("[data-site-menu-toggle]");
+  const triggers = Array.from(document.querySelectorAll("[data-site-menu-trigger]"));
   const sidenav = document.querySelector("[data-site-sidenav]");
   const scrim = document.querySelector("[data-site-scrim]");
-  const closeButton = document.querySelector("[data-site-menu-close]");
 
-  if (!toggle || !sidenav || !scrim) return;
+  if (!triggers.length || !sidenav || !scrim) return;
+
+  function setExpanded(value) {
+    triggers.forEach(trigger => trigger.setAttribute("aria-expanded", String(value)));
+  }
 
   function open() {
     body.classList.add("site-menu-open");
     sidenav.classList.add("is-open");
     sidenav.setAttribute("aria-hidden", "false");
-    toggle.setAttribute("aria-expanded", "true");
+    setExpanded(true);
     scrim.hidden = false;
   }
 
@@ -19,16 +22,17 @@
     body.classList.remove("site-menu-open");
     sidenav.classList.remove("is-open");
     sidenav.setAttribute("aria-hidden", "true");
-    toggle.setAttribute("aria-expanded", "false");
+    setExpanded(false);
     scrim.hidden = true;
   }
 
-  toggle.addEventListener("click", () => {
-    sidenav.classList.contains("is-open") ? close() : open();
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", () => {
+      sidenav.classList.contains("is-open") ? close() : open();
+    });
   });
 
   scrim.addEventListener("click", close);
-  if (closeButton) closeButton.addEventListener("click", close);
 
   sidenav.addEventListener("click", event => {
     if (event.target.closest("a")) close();

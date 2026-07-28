@@ -1,0 +1,70 @@
+---
+layout: layouts/base.njk
+title: "Vector Atlas - Outbreak Intelligence"
+description: "A geographic atlas of disease vectors, ecological ranges, and transmission corridors."
+active: vectors
+permalink: /vector-atlas.html
+pageCss: /assets/css/vector-atlas.css
+pageJs: /assets/js/vector-atlas.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="atlas">
+  <section class="atlas-hero">
+    <div>
+      <span class="eyebrow">Ecology of contagion</span>
+      <h1 class="disp">Vector Atlas</h1>
+      <p class="lede">A map of carriers and corridors: mosquitoes, fleas, bats, rodents, livestock, and human travel routes that turn local infections into regional histories.</p>
+    </div>
+    <div class="atlas-stats" aria-label="Atlas summary">
+      <div><span class="n">6</span><span class="k">vector systems</span></div>
+      <div><span class="n">19</span><span class="k">mapped signals</span></div>
+      <div><span class="n">5</span><span class="k">eras</span></div>
+    </div>
+  </section>
+
+  <section class="atlas-deck" aria-label="Interactive vector atlas">
+    <aside class="atlas-controls">
+      <div class="control-block">
+        <span class="control-label">Vector layer</span>
+        <div class="vector-buttons" id="vectorButtons"></div>
+      </div>
+      <div class="control-block">
+        <span class="control-label">Historical lens</span>
+        <div class="era-buttons" id="eraButtons"></div>
+      </div>
+      <div class="control-block selected-card" id="selectedCard">
+        <span class="control-label">Selected system</span>
+        <h2 class="disp">Mosquito Empire</h2>
+        <p>Malaria, yellow fever, dengue, chikungunya, and Zika follow warm water, dense settlement, ports, and expanding urban edges.</p>
+      </div>
+    </aside>
+
+    <div class="atlas-map-shell">
+      <div id="vectorMap" aria-label="Interactive Mapbox map of disease vector systems"></div>
+      <div id="vectorFallback" class="vector-fallback" hidden>
+        <span class="eyebrow">Map unavailable</span>
+        <p>The atlas data is still available through the controls. Reconnect Mapbox to restore the globe.</p>
+      </div>
+      <div class="map-caption">
+        <span id="atlasStatus">Mosquito layer · contemporary range</span>
+        <span>Click a point or route for detail</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="atlas-notes">
+    <article>
+      <span class="eyebrow">Reading the map</span>
+      <h2 class="disp">Vectors are not footnotes. They are infrastructure.</h2>
+      <p>Every outbreak has a setting. Some settings are bodies of water, grain stores, slaughter corridors, migration routes, or clinics at the edge of a forest. The atlas treats vectors as a geographic system, not a single organism.</p>
+    </article>
+    <article>
+      <span class="eyebrow">Use</span>
+      <h2 class="disp">Switch layers. Follow routes. Compare eras.</h2>
+      <p>The page is built for editorial exploration: each layer changes map color, active range, field sites, and connecting routes. The era chips shift the frame from antiquity to modern surveillance.</p>
+    </article>
+  </section>
+</main>

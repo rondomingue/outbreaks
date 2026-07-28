@@ -24,6 +24,12 @@ module.exports = [
     deck: "Two millennia of virulent disease rendered as a radial archive."
   },
   {
+    key: "vectors",
+    label: "Vector Atlas",
+    href: "/vector-atlas.html",
+    deck: "Disease carriers, ecological ranges, and corridors of transmission."
+  },
+  {
     key: "measles",
     label: "Measles",
     href: "/measles.html",

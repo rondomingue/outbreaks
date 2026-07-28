@@ -10,6 +10,24 @@
 /* ═══ SHARED ECHARTS THEME BITS ═══ */
 var AX = { color:'#4a5468', font:"'Space Mono', monospace" };
 var gridSplit = { lineStyle:{ color:'rgba(180,200,255,.05)' } };
+function animateCount(el, target, opts){
+  opts = opts || {};
+  var duration = opts.duration || 950;
+  var decimals = opts.decimals || 0;
+  var suffix = opts.suffix || '';
+  var t0 = performance.now();
+  (function step(now){
+    var p = Math.min((now - t0) / duration, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    var value = decimals ? target * eased : Math.round(target * eased);
+    var text = value.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+    el.innerHTML = text + suffix;
+    if(p < 1) requestAnimationFrame(step);
+  })(t0);
+}
 
 /* ═══ RISE CHART — cases by year 2000–2025 ═══ */
 (function(){
@@ -132,24 +150,38 @@ var gridSplit = { lineStyle:{ color:'rgba(180,200,255,.05)' } };
   });
 })();
 
-/* ═══ COUNT-UP on hero headline stat ═══ */
+/* ═══ COUNT-UP on hero stats ═══ */
 (function(){
-  var el = document.querySelector('.stat .val[data-count]');
-  if(!el) return;
-  var target = +el.getAttribute('data-count'), started=false;
+  var els = Array.prototype.slice.call(document.querySelectorAll('.stat .val[data-count]'));
+  if(!els.length) return;
+  var started=false;
+  function render(el, value){
+    var decimals = +(el.getAttribute('data-decimals') || 0);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var text = value.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+    el.innerHTML = text + (suffix ? '<span class="unit">' + suffix + '</span>' : '');
+  }
   var io = new IntersectionObserver(function(en){
     en.forEach(function(e){
       if(e.isIntersecting && !started){
         started=true; var t0=performance.now();
         (function step(now){
-          var p=Math.min((now-t0)/900,1), v=Math.round(target*(1-Math.pow(1-p,3)));
-          el.textContent = v.toLocaleString();
+          var p=Math.min((now-t0)/950,1), eased=1-Math.pow(1-p,3);
+          els.forEach(function(el){
+            var target = +(el.getAttribute('data-count') || 0);
+            var decimals = +(el.getAttribute('data-decimals') || 0);
+            var current = decimals ? target * eased : Math.round(target * eased);
+            render(el, current);
+          });
           if(p<1) requestAnimationFrame(step);
         })(t0);
       }
     });
   },{ threshold:.6 });
-  io.observe(el);
+  io.observe(els[0].closest('.stats') || els[0]);
 })();
 
 /* ═══ LIVE · CDC NNDSS weekly surveillance (provisional) ═══
@@ -175,10 +207,11 @@ var gridSplit = { lineStyle:{ color:'rgba(180,200,255,.05)' } };
   }
   function get(yr){ return fetch(url(yr)).then(function(r){ return r.ok?r.json():Promise.reject(); }); }
   function render(yr,res){
-    numEl.textContent=res.total.toLocaleString();
+    numEl.textContent='0';
     labEl.textContent='provisional cases · '+yr+' · through MMWR week '+res.week;
     stampEl.textContent='(checked '+new Date().toISOString().slice(0,10)+')';
     strip.style.display='';
+    animateCount(numEl, res.total);
   }
   var yr=new Date().getUTCFullYear();
   get(yr).then(function(rows){
