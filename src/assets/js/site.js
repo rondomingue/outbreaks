@@ -3,6 +3,76 @@
   const triggers = Array.from(document.querySelectorAll("[data-site-menu-trigger]"));
   const sidenav = document.querySelector("[data-site-sidenav]");
   const scrim = document.querySelector("[data-site-scrim]");
+  let audioCtx = null;
+  let noiseBuffer = null;
+  let lastUiTick = 0;
+
+  function getAudioContext() {
+    const AudioCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtor) return null;
+    if (!audioCtx) audioCtx = new AudioCtor();
+    return audioCtx;
+  }
+
+  function unlockAudio() {
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === "suspended") ctx.resume().catch(() => {});
+  }
+
+  function getNoiseBuffer(ctx) {
+    if (noiseBuffer) return noiseBuffer;
+    const len = Math.floor(ctx.sampleRate * 0.08);
+    const buffer = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < len; i += 1) data[i] = Math.random() * 2 - 1;
+    noiseBuffer = buffer;
+    return noiseBuffer;
+  }
+
+  function playUiTick() {
+    const now = Date.now();
+    if (now - lastUiTick < 45) return;
+    lastUiTick = now;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      unlockAudio();
+
+      const t = ctx.currentTime;
+      const source = ctx.createBufferSource();
+      const highpass = ctx.createBiquadFilter();
+      const bandpass = ctx.createBiquadFilter();
+      const gain = ctx.createGain();
+
+      source.buffer = getNoiseBuffer(ctx);
+      highpass.type = "highpass";
+      highpass.frequency.value = 1800;
+      bandpass.type = "bandpass";
+      bandpass.frequency.value = 3200;
+      bandpass.Q.value = 0.9;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.028, t + 0.003);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.034);
+
+      source.connect(highpass);
+      highpass.connect(bandpass);
+      bandpass.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(t);
+      source.stop(t + 0.045);
+    } catch (error) {}
+  }
+
+  ["pointerdown", "touchstart", "keydown"].forEach(type => {
+    window.addEventListener(type, unlockAudio, { once: true, passive: true });
+  });
+
+  document.addEventListener("click", event => {
+    const control = event.target.closest("button, a, [role='button'], .clickable, .vector-btn, .era-btn");
+    if (!control || control.matches("[disabled], [aria-disabled='true']")) return;
+    playUiTick();
+  }, true);
 
   if (!triggers.length || !sidenav || !scrim) return;
 
