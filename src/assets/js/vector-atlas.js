@@ -128,6 +128,7 @@ const VECTORS = [
 let activeVector = VECTORS[0];
 let activeEra = ERAS[4];
 let map;
+let mapboxWaits = 0;
 
 function arcLine(from, to) {
   const steps = 48;
@@ -228,10 +229,23 @@ function popupHTML(props) {
   `;
 }
 
-function initMap() {
+function showFallback() {
   const fallback = document.getElementById('vectorFallback');
-  if (typeof mapboxgl === 'undefined' || !/^pk\./.test(VECTOR_MAPBOX_TOKEN)) {
-    fallback.hidden = false;
+  if (fallback) fallback.hidden = false;
+}
+
+function initMap() {
+  if (typeof mapboxgl === 'undefined') {
+    mapboxWaits += 1;
+    if (mapboxWaits < 16) {
+      window.setTimeout(initMap, 250);
+      return;
+    }
+    showFallback();
+    return;
+  }
+  if (!/^pk\./.test(VECTOR_MAPBOX_TOKEN)) {
+    showFallback();
     return;
   }
 
@@ -247,6 +261,9 @@ function initMap() {
     attributionControl: true
   });
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right');
+  map.on('error', () => {
+    if (!document.querySelector('#vectorMap canvas')) showFallback();
+  });
 
   map.on('style.load', () => {
     try {

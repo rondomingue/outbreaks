@@ -225,7 +225,14 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
-  background: #0b0f0e;
+  background:
+    radial-gradient(circle at 58% 44%, rgba(240, 82, 43, .18), transparent 24%),
+    radial-gradient(circle at 30% 68%, rgba(51, 165, 138, .2), transparent 22%),
+    radial-gradient(circle at 72% 26%, rgba(217, 178, 62, .12), transparent 18%),
+    linear-gradient(rgba(116, 137, 152, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 137, 152, .06) 1px, transparent 1px),
+    #070b0a;
+  background-size: auto, auto, auto, 78px 78px, 78px 78px, auto;
 }
 
 .vector-fallback {
@@ -236,8 +243,13 @@ body {
   gap: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(8, 11, 10, .9);
+  background:
+    radial-gradient(circle at 22% 62%, rgba(51, 165, 138, .18), transparent 20%),
+    radial-gradient(circle at 68% 34%, rgba(240, 82, 43, .16), transparent 21%),
+    repeating-linear-gradient(23deg, transparent 0 44px, rgba(229, 225, 210, .045) 45px 46px),
+    rgba(8, 11, 10, .82);
   text-align: center;
+  backdrop-filter: blur(3px);
 }
 
 .vector-fallback p {
