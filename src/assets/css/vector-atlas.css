@@ -252,6 +252,10 @@ body {
   backdrop-filter: blur(3px);
 }
 
+.vector-fallback[hidden] {
+  display: none;
+}
+
 .vector-fallback p {
   max-width: 36ch;
   margin: 0 auto;
