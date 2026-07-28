@@ -36,7 +36,12 @@ function animateCount(el, target, opts){
   var chart = echarts.init(el, null, { renderer:'canvas' });
   var years = ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
   var cases = [86,116,44,56,37,66,55,43,140,71,63,220,55,187,667,188,86,120,375,1274,13,49,121,59,285,2289];
-  chart.setOption({
+  function riseOption(seriesData, showLabels) {
+    return {
+    animation:true,
+    animationDuration:900,
+    animationDurationUpdate:1900,
+    animationEasingUpdate:'cubicOut',
     grid:{ left:56, right:24, top:28, bottom:46 },
     tooltip:{ trigger:'axis', backgroundColor:'rgba(6,9,13,.96)', borderColor:'rgba(200,64,56,.35)', borderWidth:1,
       textStyle:{ color:'#d0d8ee', fontFamily:AX.font, fontSize:11 },
@@ -49,7 +54,7 @@ function animateCount(el, target, opts){
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9 },
       splitLine:gridSplit },
     series:[{
-      type:'line', data:cases, smooth:false, symbol:'circle', symbolSize:5,
+      type:'line', data:seriesData, smooth:false, symbol:'circle', symbolSize:5,
       itemStyle:{ color:'#ef4130' },
       lineStyle:{ color:'#ef4130', width:2, shadowColor:'rgba(239,65,48,.5)', shadowBlur:12 },
       areaStyle:{ color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(239,65,48,.42)'},{offset:1,color:'rgba(239,65,48,0)'}]) },
@@ -57,13 +62,37 @@ function animateCount(el, target, opts){
         lineStyle:{ color:'rgba(46,138,110,.5)', type:'dashed', width:1 },
         data:[{ xAxis:'2000', label:{ show:true, formatter:'ELIMINATED 2000', color:'#2e8a6e', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:1 } }] },
       markPoint:{ symbol:'pin', symbolSize:0, label:{ color:'#d0d8ee', fontFamily:AX.font, fontSize:9, fontWeight:700 },
-        data:[
+        data:showLabels ? [
           { coord:['2014',667], value:'667', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
           { coord:['2019',1274], value:'1,274', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
           { coord:['2025',2289], value:'2,289', itemStyle:{color:'transparent'}, label:{ position:'top', color:'#ef4130', offset:[0,-2] } }
-        ] }
+        ] : [] }
     }]
-  });
+    };
+  }
+  chart.setOption(riseOption(cases.map(function(){ return 0; }), false));
+  var started = false;
+  function startRise() {
+    if(started) return;
+    started = true;
+    chart.setOption(riseOption(cases, false));
+    window.setTimeout(function(){
+      chart.setOption({ series:[{ markPoint: riseOption(cases, true).series[0].markPoint }] });
+    }, 1700);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          startRise();
+          io.disconnect();
+        }
+      });
+    }, { threshold:.32 });
+    io.observe(el);
+  } else {
+    window.setTimeout(startRise, 160);
+  }
   new ResizeObserver(function(){ chart.resize(); }).observe(el);
 })();
 
