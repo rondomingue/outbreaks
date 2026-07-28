@@ -71,12 +71,12 @@ if(pgrid) pgrid.innerHTML=pandemics.map((p,i)=>`
 
 /* ── GREAT PLAGUES TIMELINE ─────────────────────────────────────────── */
 const tlEl=document.getElementById('big-tl');
-if(tlEl && otherPlagues) tlEl.innerHTML=otherPlagues.map(p=>{
+if(tlEl && otherPlagues) tlEl.innerHTML=otherPlagues.map((p,i)=>{
   const isPlague=p.agent.toLowerCase().includes('yersinia');
   const isBio=p.note&&p.note.includes('founded')||p.note&&p.note.includes('identified');
   const isMajor=p.deaths&&p.deaths.includes('million')&&!p.deaths.startsWith('~5')&&!p.deaths.startsWith('~1 ');
   const cls=isPlague?`plague${isMajor?' major':''}`:isBio?'bio':'other';
-  return `<div class="bt-ev ${cls}">
+  return `<div class="bt-ev ${cls}" style="--i:${i}">
     <div class="yr">${p.year}</div>
     <div class="spine"></div>
     <div class="content">
@@ -87,6 +87,17 @@ if(tlEl && otherPlagues) tlEl.innerHTML=otherPlagues.map(p=>{
     </div>
   </div>`;
 }).join('');
+
+/* Wave reveal: plague events slide in from the right, one at a time, on scroll */
+(function(){
+  if(!tlEl) return;
+  const reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){ tlEl.classList.add('revealed'); return; }
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -10% 0px' });
+  io.observe(tlEl);
+})();
 
 (function(){
   const toggle = document.querySelector('[data-menu-toggle]');

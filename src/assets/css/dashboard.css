@@ -1,6 +1,6 @@
 :root{
-    --ink:#0a0d0c; --ink-1:#0d1110; --ink-2:#111815; --panel:#0f1513;
-    --bone:#e9e5d9; --bone-dim:#b6b6ab; --muted:#727b74; --faint:#4a534d;
+    --ink:#080b0a; --ink-1:#0d1110; --ink-2:#111815; --panel:#0f1513;
+    --bone:#e9e5d9; --bone-dim:#b9b29d; --muted:#746f61; --faint:#4a534d;
     --line:rgba(233,229,217,.10); --line-2:rgba(233,229,217,.06);
     --contained:#33a58a; --watch:#e3b23c; --severe:#e4572e;
     --severe-soft:rgba(228,87,46,.16); --watch-soft:rgba(227,178,60,.14); --contained-soft:rgba(51,165,138,.14);
@@ -10,7 +10,12 @@
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    margin:0; background:var(--ink); color:var(--bone);
+    margin:0; color:var(--bone);
+    background:
+      radial-gradient(900px 540px at 82% 2%, rgba(51,165,138,.06), transparent 62%),
+      radial-gradient(860px 500px at 14% 94%, rgba(228,87,46,.05), transparent 60%),
+      var(--ink);
+    background-attachment: fixed;
     font-family:'Archivo',system-ui,sans-serif; font-weight:400;
     font-size:15px; line-height:1.5; letter-spacing:.005em;
     -webkit-font-smoothing:antialiased;
@@ -65,7 +70,7 @@
   .hero-line h1 .n{font-variant-numeric:tabular-nums; font-weight:400}
 
   /* ── Spread grid ──────────────────────────── */
-  .spread{display:grid; grid-template-columns:minmax(0,306px) minmax(0,1fr); gap:0; border-top:1px solid var(--line)}
+  .spread{display:grid; grid-template-columns:minmax(0,306px) minmax(0,1fr); gap:0}
   .rail{border-right:1px solid var(--line); padding:22px 26px 26px 0}
   .stage{padding:22px 0 26px 30px; min-width:0}
 

@@ -96,11 +96,22 @@
     scrim.hidden = true;
   }
 
+  const desktopNav = window.matchMedia("(min-width: 1180px)");
+
   triggers.forEach(trigger => {
     trigger.addEventListener("click", () => {
+      // On desktop the expanded nav is visible and the drawer is disregarded —
+      // the logo just returns home instead of toggling the menu.
+      if (desktopNav.matches && trigger.classList.contains("site-brand")) {
+        window.location.href = "/";
+        return;
+      }
       sidenav.classList.contains("is-open") ? close() : open();
     });
   });
+
+  // If the viewport grows to desktop while the drawer is open, close it cleanly.
+  desktopNav.addEventListener("change", e => { if (e.matches) close(); });
 
   scrim.addEventListener("click", close);
 

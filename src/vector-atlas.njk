@@ -6,10 +6,9 @@ active: vectors
 permalink: /vector-atlas.html
 pageCss: /assets/css/vector-atlas.css
 pageJs: /assets/js/vector-atlas.js
-headLinks:
-  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
 headScripts:
-  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+  - "<script src=\"https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js\"></script>"
+  - "<script src=\"https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js\"></script>"
 ---
 <main class="atlas">
   <section class="atlas-hero">
@@ -40,18 +39,26 @@ headScripts:
         <h2 class="disp">Mosquito Empire</h2>
         <p>Malaria, yellow fever, dengue, chikungunya, and Zika follow warm water, dense settlement, ports, and expanding urban edges.</p>
       </div>
+      <div class="control-block atlas-legend">
+        <span class="control-label">Reading the map</span>
+        <ul class="legend-list">
+          <li><span class="lg-mark lg-dot"></span>Field site — a known reservoir or outbreak locus</li>
+          <li><span class="lg-mark lg-arc"></span>Corridor — a documented transmission route</li>
+          <li><span class="lg-mark lg-swatch"></span>Colour — the active vector system</li>
+        </ul>
+        <p class="legend-note">Drag the globe to rotate. Era chips reveal how corridors accumulate over time. Click a site for detail.</p>
+      </div>
     </aside>
 
     <div class="atlas-map-shell">
-      <div id="vectorMap" aria-label="Interactive Mapbox map of disease vector systems"></div>
-      <div id="vectorOverlay" class="vector-overlay" aria-hidden="true"></div>
+      <svg id="vectorGlobe" class="globe-svg" role="img" aria-label="Rotatable globe of disease-vector systems and transmission corridors"></svg>
       <div id="vectorFallback" class="vector-fallback" hidden>
         <span class="eyebrow">Vector field</span>
-        <p>Transmission corridors, reservoir zones, and carrier ranges remain explorable through the controls.</p>
+        <p>The globe could not load. Transmission corridors, reservoir zones, and carrier ranges remain described in the panel and notes.</p>
       </div>
       <div class="map-caption">
-        <span id="atlasStatus">Mosquito layer · contemporary range</span>
-        <span>Click a point or route for detail</span>
+        <span id="atlasStatus">Mosquito layer · surveillance lens</span>
+        <span>Drag to rotate · click a site</span>
       </div>
     </div>
   </section>

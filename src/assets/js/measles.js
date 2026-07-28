@@ -8,13 +8,14 @@
 })();
 
 /* ═══ SHARED ECHARTS THEME BITS ═══ */
-var AX = { color:'#4a5468', font:"'Space Mono', monospace" };
-var gridSplit = { lineStyle:{ color:'rgba(180,200,255,.05)' } };
+var AX = { color:'#746f61', font:"'Space Mono', monospace" };
+var gridSplit = { lineStyle:{ color:'rgba(233,229,217,.05)' } };
 function animateCount(el, target, opts){
   opts = opts || {};
   var duration = opts.duration || 950;
   var decimals = opts.decimals || 0;
   var suffix = opts.suffix || '';
+  var prefix = opts.prefix || '';
   var t0 = performance.now();
   (function step(now){
     var p = Math.min((now - t0) / duration, 1);
@@ -24,10 +25,47 @@ function animateCount(el, target, opts){
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals
     });
-    el.innerHTML = text + suffix;
+    el.innerHTML = prefix + text + suffix;
     if(p < 1) requestAnimationFrame(step);
   })(t0);
 }
+
+/* ═══ SCROLL-TRIGGERED COUNT-UP FOR STAT CARDS ═══ */
+(function(){
+  var nodes = document.querySelectorAll('.gap-cards .mv');
+  if(!nodes.length) return;
+  function parse(raw){
+    var m = raw.match(/^([^\d.\-]*)([\d,]+(?:\.\d+)?)(.*)$/);
+    if(!m) return null;
+    var numStr = m[2].replace(/,/g, '');
+    var dot = numStr.indexOf('.');
+    return {
+      prefix: m[1],
+      suffix: m[3],
+      target: parseFloat(numStr),
+      decimals: dot === -1 ? 0 : numStr.length - dot - 1
+    };
+  }
+  nodes.forEach(function(el){
+    var spec = parse(el.textContent.trim());
+    if(!spec){ return; }
+    el.dataset.final = el.textContent.trim();
+    el.innerHTML = spec.prefix + (spec.decimals ? (0).toFixed(spec.decimals) : '0') + spec.suffix;
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCount(el, spec.target, { prefix: spec.prefix, suffix: spec.suffix, decimals: spec.decimals, duration: 1050 });
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -18% 0px' });
+      io.observe(el);
+    } else {
+      el.innerHTML = el.dataset.final;
+    }
+  });
+})();
 
 /* ═══ RISE CHART — cases by year 2000–2025 ═══ */
 (function(){
@@ -39,38 +77,38 @@ function animateCount(el, target, opts){
   function riseOption(seriesData, showLabels) {
     return {
     animation:true,
-    animationDuration:900,
-    animationDurationUpdate:1900,
+    animationDuration:700,
+    animationDurationUpdate:1050,
     animationEasingUpdate:'cubicOut',
     grid:{ left:56, right:24, top:28, bottom:46 },
-    tooltip:{ trigger:'axis', backgroundColor:'rgba(6,9,13,.96)', borderColor:'rgba(200,64,56,.35)', borderWidth:1,
-      textStyle:{ color:'#d0d8ee', fontFamily:AX.font, fontSize:11 },
-      formatter:function(p){ var d=p[0]; return '<span style="color:#4a5468;font-size:9px;letter-spacing:1px">YEAR '+d.name+'</span><br><b style="font-size:15px">'+d.value.toLocaleString()+'</b> confirmed cases'; } },
+    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(228,87,46,.35)', borderWidth:1,
+      textStyle:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:11 },
+      formatter:function(p){ var d=p[0]; return '<span style="color:#746f61;font-size:9px;letter-spacing:1px">YEAR '+d.name+'</span><br><b style="font-size:15px">'+d.value.toLocaleString()+'</b> confirmed cases'; } },
     xAxis:{ type:'category', data:years, boundaryGap:false,
-      axisLine:{ lineStyle:{ color:'rgba(180,200,255,.14)' } },
+      axisLine:{ lineStyle:{ color:'rgba(233,229,217,.14)' } },
       axisTick:{ show:false },
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9, interval:function(i){ return i%5===0 || i===25; } } },
-    yAxis:{ type:'value', name:'CASES', nameTextStyle:{ color:'#4a5468', fontFamily:AX.font, fontSize:8, letterSpacing:1, padding:[0,0,6,-38] },
+    yAxis:{ type:'value', name:'CASES', nameTextStyle:{ color:'#746f61', fontFamily:AX.font, fontSize:8, letterSpacing:1, padding:[0,0,6,-38] },
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9 },
       splitLine:gridSplit },
     series:[{
       type:'line', data:seriesData, smooth:false, symbol:'circle', symbolSize:5,
-      itemStyle:{ color:'#ef4130' },
-      lineStyle:{ color:'#ef4130', width:2, shadowColor:'rgba(239,65,48,.5)', shadowBlur:12 },
-      areaStyle:{ color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(239,65,48,.42)'},{offset:1,color:'rgba(239,65,48,0)'}]) },
+      itemStyle:{ color:'#e4572e' },
+      lineStyle:{ color:'#e4572e', width:2, shadowColor:'rgba(228,87,46,.5)', shadowBlur:12 },
+      areaStyle:{ color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(228,87,46,.42)'},{offset:1,color:'rgba(228,87,46,0)'}]) },
       markLine:{ silent:true, symbol:'none', label:{ show:false },
-        lineStyle:{ color:'rgba(46,138,110,.5)', type:'dashed', width:1 },
-        data:[{ xAxis:'2000', label:{ show:true, formatter:'ELIMINATED 2000', color:'#2e8a6e', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:1 } }] },
-      markPoint:{ symbol:'pin', symbolSize:0, label:{ color:'#d0d8ee', fontFamily:AX.font, fontSize:9, fontWeight:700 },
+        lineStyle:{ color:'rgba(51,165,138,.5)', type:'dashed', width:1 },
+        data:[{ xAxis:'2000', label:{ show:true, formatter:'ELIMINATED 2000', color:'#33a58a', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:1 } }] },
+      markPoint:{ symbol:'pin', symbolSize:0, label:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:9, fontWeight:700 },
         data:showLabels ? [
           { coord:['2014',667], value:'667', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
           { coord:['2019',1274], value:'1,274', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
-          { coord:['2025',2289], value:'2,289', itemStyle:{color:'transparent'}, label:{ position:'top', color:'#ef4130', offset:[0,-2] } }
+          { coord:['2025',2289], value:'2,289', itemStyle:{color:'transparent'}, label:{ position:'top', color:'#e4572e', offset:[0,-2] } }
         ] : [] }
     }]
     };
   }
-  chart.setOption(riseOption(cases.map(function(){ return 0; }), false));
+  chart.setOption(Object.assign(riseOption(cases.map(function(){ return 0; }), false), { animation: false }));
   var started = false;
   function startRise() {
     if(started) return;
@@ -78,7 +116,7 @@ function animateCount(el, target, opts){
     chart.setOption(riseOption(cases, false));
     window.setTimeout(function(){
       chart.setOption({ series:[{ markPoint: riseOption(cases, true).series[0].markPoint }] });
-    }, 1700);
+    }, 1050);
   }
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
@@ -88,7 +126,7 @@ function animateCount(el, target, opts){
           io.disconnect();
         }
       });
-    }, { threshold:.32 });
+    }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
     io.observe(el);
   } else {
     window.setTimeout(startRise, 160);
@@ -105,19 +143,19 @@ function animateCount(el, target, opts){
   var cov = [94.3,94.7,95.2,93.9,93.5,93.1,92.7,92.5];
   chart.setOption({
     grid:{ left:44, right:20, top:34, bottom:40 },
-    tooltip:{ trigger:'axis', backgroundColor:'rgba(6,9,13,.96)', borderColor:'rgba(200,64,56,.35)', borderWidth:1,
-      textStyle:{ color:'#d0d8ee', fontFamily:AX.font, fontSize:11 },
-      formatter:function(p){ var d=p[0]; return '<span style="color:#4a5468;font-size:9px">'+d.name+'</span><br><b style="font-size:15px">'+d.value+'%</b> MMR coverage'; } },
-    xAxis:{ type:'category', data:yrs, axisLine:{ lineStyle:{ color:'rgba(180,200,255,.14)' } }, axisTick:{ show:false },
+    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(228,87,46,.35)', borderWidth:1,
+      textStyle:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:11 },
+      formatter:function(p){ var d=p[0]; return '<span style="color:#746f61;font-size:9px">'+d.name+'</span><br><b style="font-size:15px">'+d.value+'%</b> MMR coverage'; } },
+    xAxis:{ type:'category', data:yrs, axisLine:{ lineStyle:{ color:'rgba(233,229,217,.14)' } }, axisTick:{ show:false },
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:8, interval:1 } },
     yAxis:{ type:'value', min:90, max:96, interval:1,
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9, formatter:'{value}%' }, splitLine:gridSplit },
     series:[{
       type:'bar', data:cov, barWidth:'46%',
-      itemStyle:{ color:function(p){ return p.value>=95 ? '#2e8a6e' : (p.value>=93 ? '#b8781a' : '#c0382e'); }, borderRadius:[2,2,0,0] },
+      itemStyle:{ color:function(p){ return p.value>=95 ? '#33a58a' : (p.value>=93 ? '#e3b23c' : '#e4572e'); }, borderRadius:[2,2,0,0] },
       markLine:{ silent:true, symbol:'none',
-        lineStyle:{ color:'#2e8a6e', type:'dashed', width:1.2 },
-        label:{ show:true, formatter:'95% HERD-IMMUNITY TARGET', color:'#2e8a6e', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:.5 },
+        lineStyle:{ color:'#33a58a', type:'dashed', width:1.2 },
+        label:{ show:true, formatter:'95% HERD-IMMUNITY TARGET', color:'#33a58a', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:.5 },
         data:[{ yAxis:95 }] }
     }]
   });
@@ -140,7 +178,7 @@ function animateCount(el, target, opts){
     TX:[3,7,'epi'], FL:[8,7,'rep']
   };
   var NAMES = { AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'District of Columbia',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming' };
-  var FILL = { epi:'#ef4130', out:'#c0382e', rep:'#743331', none:'#161c25' };
+  var FILL = { epi:'#e4572e', out:'#e4572e', rep:'#7a3a24', none:'#111815' };
   var TIERLBL = { epi:'Epicenter — largest 2025 outbreak', out:'Active outbreak cluster', rep:'Cases reported in 2025', none:'No reported outbreak' };
   var CELL=48, GAP=5, PAD=4;
   var cols=11, rows=8;
@@ -148,9 +186,9 @@ function animateCount(el, target, opts){
   var svg = '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img">';
   Object.keys(S).forEach(function(ab){
     var d=S[ab], x=PAD+d[0]*CELL, y=PAD+d[1]*CELL, tier=d[2], f=FILL[tier];
-    var glow = tier==='epi' ? ' filter="drop-shadow(0 0 8px rgba(239,65,48,.85))"' : '';
-    var stroke = tier==='none' ? 'rgba(180,200,255,.1)' : 'rgba(0,0,0,.35)';
-    var tx = tier==='none' ? 'rgba(180,200,255,.35)' : 'rgba(240,244,252,.9)';
+    var glow = tier==='epi' ? ' filter="drop-shadow(0 0 8px rgba(228,87,46,.85))"' : '';
+    var stroke = tier==='none' ? 'rgba(233,229,217,.1)' : 'rgba(0,0,0,.35)';
+    var tx = tier==='none' ? 'rgba(233,229,217,.35)' : 'rgba(233,229,217,.9)';
     svg += '<g class="tile" data-ab="'+ab+'" data-tier="'+tier+'" tabindex="0">'
       +'<rect x="'+x+'" y="'+y+'" width="'+(CELL-GAP)+'" height="'+(CELL-GAP)+'" rx="4" fill="'+f+'" stroke="'+stroke+'" stroke-width="1"'+glow+'/>'
       +'<text x="'+(x+(CELL-GAP)/2)+'" y="'+(y+(CELL-GAP)/2+4)+'" text-anchor="middle" fill="'+tx+'">'+ab+'</text>'
