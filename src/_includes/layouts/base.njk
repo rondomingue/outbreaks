@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  {% set assetVersion = "20260728-1309" %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,15 +17,15 @@
     {% for item in headScripts %}
       {{ item | safe }}
     {% endfor %}
-    {% if pageCss %}<link rel="stylesheet" href="{{ pageCss }}">{% endif %}
-    <link rel="stylesheet" href="/assets/css/site.css">
+    {% if pageCss %}<link rel="stylesheet" href="{{ pageCss }}?v={{ assetVersion }}">{% endif %}
+    <link rel="stylesheet" href="/assets/css/site.css?v={{ assetVersion }}">
   </head>
   <body class="site-shell site-shell-{{ active | default('dashboard') }}{% if bodyClass %} {{ bodyClass }}{% endif %}">
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" data-site-header>
       <div class="site-header__inner">
         <button class="site-brand" type="button" data-site-menu-trigger aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-sidenav">
-          <img class="site-brand__logo" src="/assets/img/outbreaks-logo.png" alt="Outbreaks">
+          <img class="site-brand__logo" src="/assets/img/outbreaks-logo.png?v={{ assetVersion }}" alt="Outbreaks">
           <span class="site-brand__menu" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
         <div class="site-header__tools">
@@ -69,7 +70,7 @@
       </div>
     </footer>
 
-    <script src="/assets/js/site.js"></script>
-    {% if pageJs %}<script src="{{ pageJs }}"></script>{% endif %}
+    <script src="/assets/js/site.js?v={{ assetVersion }}"></script>
+    {% if pageJs %}<script src="{{ pageJs }}?v={{ assetVersion }}"></script>{% endif %}
   </body>
 </html>
