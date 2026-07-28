@@ -146,6 +146,48 @@ pageCss: /assets/css/style-guide.css
       <p>2,289&nbsp;&nbsp;30.9%&nbsp;&nbsp;1,274</p>
       <small>Libre Baskerville for numeric moments that need weight and dignity.</small>
     </article>
+    <div class="type-rules">
+      <article>
+        <span class="rule-k">Hero H1</span>
+        <b class="disp">Fraunces 52-124</b>
+        <small>Line-height .84-.96 · weight 300-400 · tight tracking only on large editorial headlines.</small>
+      </article>
+      <article>
+        <span class="rule-k">Section H2</span>
+        <b class="disp">Fraunces 30-54</b>
+        <small>Use sentence case. Keep section heads short and let the following panel carry detail.</small>
+      </article>
+      <article>
+        <span class="rule-k">Panel title</span>
+        <b class="disp">Fraunces 24-32</b>
+        <small>Used in cards, selected states, live feed titles, modal headings, and map callouts.</small>
+      </article>
+      <article>
+        <span class="rule-k">Body</span>
+        <b>Archivo 13-16</b>
+        <small>Line-height 1.5-1.65. Use bone-dim for support copy and bone for primary claims.</small>
+      </article>
+      <article>
+        <span class="rule-k">Labels</span>
+        <b class="mono">Space Mono 8-11</b>
+        <small>Uppercase, .12-.22em tracking. Use for source, mode, timeframe, axis, and state labels.</small>
+      </article>
+      <article>
+        <span class="rule-k">Numbers</span>
+        <b class="number-face">Libre Baskerville</b>
+        <small>Use for hero stats, outbreaks, deaths, percentages, and emphasized years. Avoid condensed sans numerals.</small>
+      </article>
+      <article>
+        <span class="rule-k">Emphasis</span>
+        <b><em>Italic sparingly</em></b>
+        <small>Reserve italics for editorial contrast, disease names in prose, and historical phrasing.</small>
+      </article>
+      <article>
+        <span class="rule-k">Casing</span>
+        <b>Sentence + mono caps</b>
+        <small>Titles use sentence case. Operational labels use uppercase mono. Do not title-case every UI element.</small>
+      </article>
+    </div>
   </section>
 
   <section class="guide-section">
@@ -158,17 +200,29 @@ pageCss: /assets/css/style-guide.css
         <span class="eyebrow">Button stack</span>
         <button class="guide-button" type="button"><span class="dot red-dot"></span>Vector layer<span class="count">4 sites</span></button>
         <button class="guide-button active" type="button"><span class="dot teal-dot"></span>Surveillance<span class="count">2000-today</span></button>
-        <p>Buttons are compact, bordered, and signal-bearing. The shared click sound is quiet and mechanical.</p>
+        <dl class="dense-list">
+          <div><dt>Height</dt><dd>38-48px</dd></div>
+          <div><dt>Radius</dt><dd>6-10px</dd></div>
+          <div><dt>Sound</dt><dd>subtle synthesized tick</dd></div>
+        </dl>
       </article>
       <article class="component-panel selected">
         <span class="eyebrow">Selected system</span>
         <h3 class="disp">Mosquito systems</h3>
-        <p>Panels use a translucent field surface, a fine border, and just enough blur to separate data from the map below.</p>
+        <p>Translucent field surface, fine border, restrained blur, no nested cards.</p>
+        <dl class="dense-list">
+          <div><dt>Surface</dt><dd>rgba ink + top light</dd></div>
+          <div><dt>Border</dt><dd>10-18% bone</dd></div>
+        </dl>
       </article>
       <article class="component-panel nav-sample">
         <img src="/assets/img/outbreaks-logo.png" alt="Outbreaks">
         <span class="hamb"><i></i><i></i><i></i></span>
         <p>The logo is the navigation control. The sidebar drops from it like an instrument drawer.</p>
+        <dl class="dense-list">
+          <div><dt>Open</dt><dd>hamburger morphs to X</dd></div>
+          <div><dt>Position</dt><dd>same rail as sidebar</dd></div>
+        </dl>
       </article>
     </div>
   </section>
