@@ -8,16 +8,54 @@ pageCss: /assets/css/style-guide.css
 ---
 <main class="guide">
   <section class="guide-hero">
-    <div>
+    <div class="hero-copy">
       <span class="eyebrow">Appendix</span>
       <h1 class="disp">Outbreaks style guide</h1>
       <p class="lede">A working reference for the editorial system: museum field desk, natural-history archive, epidemiology dashboard, and public-health signal room.</p>
+      <div class="hero-tags" aria-label="Visual principles">
+        <span>low light</span>
+        <span>field evidence</span>
+        <span>live signal</span>
+        <span>historical gravity</span>
+      </div>
     </div>
-    <div class="guide-principles">
-      <div><span class="n">01</span><span class="k">Documentary, not decorative</span></div>
-      <div><span class="n">02</span><span class="k">Data first, atmosphere second</span></div>
-      <div><span class="n">03</span><span class="k">Every glow implies signal</span></div>
+    <div class="hero-plate" aria-label="Outbreaks visual sample">
+      <div class="plate-top">
+        <span class="eyebrow">System specimen</span>
+        <span class="mono">LIVE · 90 DAYS</span>
+      </div>
+      <div class="plate-map">
+        <svg viewBox="0 0 520 280" role="img" aria-label="Editorial map and signal sample">
+          <defs>
+            <radialGradient id="heroHot" cx="66%" cy="38%" r="44%"><stop offset="0" stop-color="rgba(228,87,46,.58)"/><stop offset="1" stop-color="rgba(228,87,46,0)"/></radialGradient>
+            <radialGradient id="heroTeal" cx="28%" cy="76%" r="38%"><stop offset="0" stop-color="rgba(51,165,138,.4)"/><stop offset="1" stop-color="rgba(51,165,138,0)"/></radialGradient>
+          </defs>
+          <rect width="520" height="280" fill="rgba(5,8,7,.72)"/>
+          <path class="grid" d="M0 70H520M0 140H520M0 210H520M104 0V280M208 0V280M312 0V280M416 0V280"/>
+          <path class="coast" d="M92 204 C134 124 203 111 245 152 C278 184 317 185 358 139 C403 90 448 91 482 129"/>
+          <path class="route" d="M72 230 C182 150 282 190 362 104 S468 98 492 55"/>
+          <circle cx="362" cy="104" r="92" fill="url(#heroHot)"/>
+          <circle cx="104" cy="222" r="82" fill="url(#heroTeal)"/>
+          <circle class="pt red" cx="362" cy="104" r="8"/>
+          <circle class="pt teal" cx="104" cy="222" r="6"/>
+          <circle class="pt gold" cx="492" cy="55" r="6"/>
+          <text x="380" y="90">ITURI / DRC</text>
+          <text x="88" y="208" text-anchor="end">VECTOR EDGE</text>
+        </svg>
+      </div>
+      <div class="plate-metrics">
+        <div><span class="n">452</span><span class="k">deaths</span></div>
+        <div><span class="n">30.9%</span><span class="k">case fatality</span></div>
+        <div><span class="n">36</span><span class="k">health zones</span></div>
+      </div>
     </div>
+  </section>
+
+  <section class="guide-strip" aria-label="Core design principles">
+    <div><span class="n">01</span><span class="k">Documentary, not decorative</span></div>
+    <div><span class="n">02</span><span class="k">Data first, atmosphere second</span></div>
+    <div><span class="n">03</span><span class="k">Every glow implies signal</span></div>
+    <div><span class="n">04</span><span class="k">No sterile dashboards</span></div>
   </section>
 
   <section class="guide-section">
@@ -26,8 +64,8 @@ pageCss: /assets/css/style-guide.css
       <h2 class="disp">Field palette</h2>
     </div>
     <div class="swatch-grid">
-      <article class="swatch ink"><span>#080b0a</span><b>Ink</b><small>primary background</small></article>
-      <article class="swatch bone"><span>#e9e5d9</span><b>Bone</b><small>editorial text</small></article>
+      <article class="swatch ink"><i></i><span>#080b0a</span><b>Ink</b><small>primary background</small></article>
+      <article class="swatch bone"><i></i><span>#e9e5d9</span><b>Bone</b><small>editorial text</small></article>
       <article class="swatch red"><span>#e4572e</span><b>Emergency red</b><small>active outbreak / alarm</small></article>
       <article class="swatch teal"><span>#33a58a</span><b>Containment teal</b><small>surveillance / live</small></article>
       <article class="swatch gold"><span>#e3b23c</span><b>Watch gold</b><small>risk and history</small></article>
@@ -69,6 +107,7 @@ pageCss: /assets/css/style-guide.css
     </div>
     <div class="component-grid">
       <article class="component-panel">
+        <span class="eyebrow">Button stack</span>
         <button class="guide-button" type="button"><span class="dot red-dot"></span>Vector layer<span class="count">4 sites</span></button>
         <button class="guide-button active" type="button"><span class="dot teal-dot"></span>Surveillance<span class="count">2000-today</span></button>
         <p>Buttons are compact, bordered, and signal-bearing. The shared click sound is quiet and mechanical.</p>
