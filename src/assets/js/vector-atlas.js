@@ -156,6 +156,54 @@ function featuresFor(vector) {
   return { points, routes };
 }
 
+function projectCoord(coord) {
+  const lng = coord[0];
+  const lat = coord[1];
+  const x = ((lng + 180) / 360) * 1000;
+  const y = ((82 - lat) / 144) * 560;
+  return [Math.max(24, Math.min(976, x)), Math.max(24, Math.min(536, y))];
+}
+
+function routePath(route) {
+  const [x1, y1] = projectCoord(route.from);
+  const [x2, y2] = projectCoord(route.to);
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const curve = Math.max(32, Math.min(110, Math.abs(dx) * .18 + Math.abs(dy) * .08));
+  const cx = x1 + dx / 2;
+  const cy = y1 + dy / 2 - curve;
+  return `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+}
+
+function renderOverlay() {
+  const host = document.getElementById('vectorOverlay');
+  if (!host) return;
+  const siteNodes = activeVector.sites.map((site, index) => {
+    const [x, y] = projectCoord(site.coord);
+    const labelX = x < 790 ? x + 13 : x - 13;
+    const anchor = x < 790 ? 'start' : 'end';
+    return `
+      <g class="site" data-site-index="${index}">
+        <circle class="site-ring" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="18"></circle>
+        <circle class="site-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5"></circle>
+        <text class="site-label" x="${labelX.toFixed(1)}" y="${(y - 10).toFixed(1)}" text-anchor="${anchor}">${site.name}</text>
+      </g>
+    `;
+  }).join('');
+  const routeNodes = activeVector.routes.map(route => `
+    <path class="route" d="${routePath(route)}"></path>
+  `).join('');
+  host.style.color = activeVector.color;
+  host.innerHTML = `
+    <svg viewBox="0 0 1000 560" role="img" aria-label="${activeVector.label} vector sites and transmission routes">
+      <text class="field-label" x="38" y="48">${activeVector.label} vector range</text>
+      <text class="field-label" x="38" y="524">${activeEra.label} · ${activeEra.date}</text>
+      ${routeNodes}
+      ${siteNodes}
+    </svg>
+  `;
+}
+
 function renderControls() {
   const vectorHost = document.getElementById('vectorButtons');
   const eraHost = document.getElementById('eraButtons');
@@ -216,6 +264,7 @@ function updateMap() {
 function updateAtlas() {
   renderControls();
   updatePanel();
+  renderOverlay();
   updateMap();
 }
 
@@ -331,4 +380,5 @@ function initMap() {
 
 renderControls();
 updatePanel();
+renderOverlay();
 initMap();
