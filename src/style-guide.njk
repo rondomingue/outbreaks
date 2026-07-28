@@ -106,18 +106,50 @@ pageCss: /assets/css/style-guide.css
     </div>
   </section>
 
-  <section class="guide-section">
+  <section class="guide-section palette-guide">
     <div class="section-head">
       <span class="eyebrow">Color</span>
       <h2 class="disp">Field palette</h2>
     </div>
-    <div class="swatch-grid">
-      <article class="swatch ink"><i></i><span>#080b0a</span><b>Ink</b><small>primary background</small></article>
-      <article class="swatch bone"><i></i><span>#e9e5d9</span><b>Bone</b><small>editorial text</small></article>
-      <article class="swatch red"><span>#e4572e</span><b>Emergency red</b><small>active outbreak / alarm</small></article>
-      <article class="swatch teal"><span>#33a58a</span><b>Containment teal</b><small>surveillance / live</small></article>
-      <article class="swatch gold"><span>#e3b23c</span><b>Watch gold</b><small>risk and history</small></article>
-      <article class="swatch purple"><span>#7565bd</span><b>Archive violet</b><small>secondary taxonomy</small></article>
+    <div class="palette-system">
+      <article class="palette-lead">
+        <span class="eyebrow">Operating ratio</span>
+        <h3 class="disp">Mostly ink. A little signal. Never a rainbow.</h3>
+        <p>The palette should feel like a dark archive lit by field instruments: black-green atmosphere, warm paper, blue-gray annotations, and small, exact flashes of outbreak color.</p>
+        <div class="palette-ramp" aria-label="Recommended color balance">
+          <span class="ramp-ink"></span>
+          <span class="ramp-paper"></span>
+          <span class="ramp-signal"></span>
+          <span class="ramp-live"></span>
+          <span class="ramp-archive"></span>
+        </div>
+      </article>
+      <div class="tone-grid" aria-label="Palette tones">
+        <article class="tone-card tone-ink"><span class="tone-chip"></span><b>Ink 900</b><code>#080b0a</code><small>page field, map wells, negative space</small></article>
+        <article class="tone-card tone-field"><span class="tone-chip"></span><b>Field 800</b><code>#0e1512</code><small>frosted panels, active nav, dark cards</small></article>
+        <article class="tone-card tone-paper"><span class="tone-chip"></span><b>Bone 100</b><code>#e9e5d9</code><small>headlines, primary text, logo cream</small></article>
+        <article class="tone-card tone-vellum"><span class="tone-chip"></span><b>Vellum 300</b><code>#b9b29d</code><small>body copy, captions, subdued evidence</small></article>
+        <article class="tone-card tone-slate"><span class="tone-chip"></span><b>Specimen blue</b><code>#8997b8</code><small>axes, labels, clinical annotations</small></article>
+        <article class="tone-card tone-red"><span class="tone-chip"></span><b>Signal red</b><code>#e4572e</code><small>acute outbreak, final spike, active alarm</small></article>
+        <article class="tone-card tone-teal"><span class="tone-chip"></span><b>Live teal</b><code>#33a58a</code><small>surveillance, source freshness, contained state</small></article>
+        <article class="tone-card tone-gold"><span class="tone-chip"></span><b>Watch gold</b><code>#e3b23c</code><small>active watch, historical risk, caution</small></article>
+        <article class="tone-card tone-violet"><span class="tone-chip"></span><b>Archive violet</b><code>#7565bd</code><small>taxonomy, secondary clusters, old records</small></article>
+        <article class="tone-card tone-marrow"><span class="tone-chip"></span><b>Marrow</b><code>#2b1a18</code><small>red-shadow interiors, sidebar warmth</small></article>
+        <article class="tone-card tone-glass"><span class="tone-chip"></span><b>Map glass</b><code>#13201d</code><small>green-black overlays, globe atmosphere</small></article>
+        <article class="tone-card tone-ash"><span class="tone-chip"></span><b>Ash line</b><code>#343831</code><small>borders, dividers, inactive structure</small></article>
+      </div>
+      <div class="palette-rules">
+        <div><span class="n">70%</span><span class="k">ink / field</span></div>
+        <div><span class="n">18%</span><span class="k">bone / vellum</span></div>
+        <div><span class="n">8%</span><span class="k">red / teal / gold</span></div>
+        <div><span class="n">4%</span><span class="k">violet / blue-gray</span></div>
+      </div>
+      <div class="recipe-grid" aria-label="Palette recipes">
+        <article><span class="eyebrow">Map field</span><b>Ink + glass + teal pinpoints</b><small>Keep geography dark; let only current locations glow.</small></article>
+        <article><span class="eyebrow">Historical plate</span><b>Ink + marrow + gold rule</b><small>Use warmth for age, provenance, and archival gravity.</small></article>
+        <article><span class="eyebrow">Alert state</span><b>Bone text + red line</b><small>Red should be a knife mark, not a wash over the interface.</small></article>
+        <article><span class="eyebrow">Clinical readout</span><b>Specimen blue + vellum</b><small>Use blue-gray to cool down dense labels and chart scaffolds.</small></article>
+      </div>
     </div>
   </section>
 
