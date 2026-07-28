@@ -19,36 +19,6 @@ pageCss: /assets/css/style-guide.css
         <span>historical gravity</span>
       </div>
     </div>
-    <div class="hero-plate" aria-label="Outbreaks visual sample">
-      <div class="plate-top">
-        <span class="eyebrow">System specimen</span>
-        <span class="mono">LIVE · 90 DAYS</span>
-      </div>
-      <div class="plate-map">
-        <svg viewBox="0 0 520 280" role="img" aria-label="Editorial map and signal sample">
-          <defs>
-            <radialGradient id="heroHot" cx="66%" cy="38%" r="44%"><stop offset="0" stop-color="rgba(228,87,46,.58)"/><stop offset="1" stop-color="rgba(228,87,46,0)"/></radialGradient>
-            <radialGradient id="heroTeal" cx="28%" cy="76%" r="38%"><stop offset="0" stop-color="rgba(51,165,138,.4)"/><stop offset="1" stop-color="rgba(51,165,138,0)"/></radialGradient>
-          </defs>
-          <rect width="520" height="280" fill="rgba(5,8,7,.72)"/>
-          <path class="grid" d="M0 70H520M0 140H520M0 210H520M104 0V280M208 0V280M312 0V280M416 0V280"/>
-          <path class="coast" d="M92 204 C134 124 203 111 245 152 C278 184 317 185 358 139 C403 90 448 91 482 129"/>
-          <path class="route" d="M72 230 C182 150 282 190 362 104 S468 98 492 55"/>
-          <circle cx="362" cy="104" r="92" fill="url(#heroHot)"/>
-          <circle cx="104" cy="222" r="82" fill="url(#heroTeal)"/>
-          <circle class="pt red" cx="362" cy="104" r="8"/>
-          <circle class="pt teal" cx="104" cy="222" r="6"/>
-          <circle class="pt gold" cx="492" cy="55" r="6"/>
-          <text x="380" y="90">ITURI / DRC</text>
-          <text x="88" y="208" text-anchor="end">VECTOR EDGE</text>
-        </svg>
-      </div>
-      <div class="plate-metrics">
-        <div><span class="n">452</span><span class="k">deaths</span></div>
-        <div><span class="n">30.9%</span><span class="k">case fatality</span></div>
-        <div><span class="n">36</span><span class="k">health zones</span></div>
-      </div>
-    </div>
   </section>
 
   <section class="guide-strip" aria-label="Core design principles">
@@ -121,22 +91,24 @@ pageCss: /assets/css/style-guide.css
           <span class="ramp-paper"></span>
           <span class="ramp-signal"></span>
           <span class="ramp-live"></span>
+          <span class="ramp-watch"></span>
           <span class="ramp-archive"></span>
+          <span class="ramp-clinical"></span>
         </div>
       </article>
       <div class="tone-grid" aria-label="Palette tones">
-        <article class="tone-card tone-ink"><span class="tone-chip"></span><b>Ink 900</b><code>#080b0a</code><small>page field, map wells, negative space</small></article>
-        <article class="tone-card tone-field"><span class="tone-chip"></span><b>Field 800</b><code>#0e1512</code><small>frosted panels, active nav, dark cards</small></article>
-        <article class="tone-card tone-paper"><span class="tone-chip"></span><b>Bone 100</b><code>#e9e5d9</code><small>headlines, primary text, logo cream</small></article>
-        <article class="tone-card tone-vellum"><span class="tone-chip"></span><b>Vellum 300</b><code>#b9b29d</code><small>body copy, captions, subdued evidence</small></article>
-        <article class="tone-card tone-slate"><span class="tone-chip"></span><b>Specimen blue</b><code>#8997b8</code><small>axes, labels, clinical annotations</small></article>
-        <article class="tone-card tone-red"><span class="tone-chip"></span><b>Signal red</b><code>#e4572e</code><small>acute outbreak, final spike, active alarm</small></article>
-        <article class="tone-card tone-teal"><span class="tone-chip"></span><b>Live teal</b><code>#33a58a</code><small>surveillance, source freshness, contained state</small></article>
-        <article class="tone-card tone-gold"><span class="tone-chip"></span><b>Watch gold</b><code>#e3b23c</code><small>active watch, historical risk, caution</small></article>
-        <article class="tone-card tone-violet"><span class="tone-chip"></span><b>Archive violet</b><code>#7565bd</code><small>taxonomy, secondary clusters, old records</small></article>
-        <article class="tone-card tone-marrow"><span class="tone-chip"></span><b>Marrow</b><code>#2b1a18</code><small>red-shadow interiors, sidebar warmth</small></article>
-        <article class="tone-card tone-glass"><span class="tone-chip"></span><b>Map glass</b><code>#13201d</code><small>green-black overlays, globe atmosphere</small></article>
-        <article class="tone-card tone-ash"><span class="tone-chip"></span><b>Ash line</b><code>#343831</code><small>borders, dividers, inactive structure</small></article>
+        <article class="tone-card tone-ink"><span class="tone-chip"></span><span class="tone-tier">Ground</span><b>Ink 900</b><code>#080b0a</code><small>page field, map wells, negative space</small></article>
+        <article class="tone-card tone-field"><span class="tone-chip"></span><span class="tone-tier">Ground</span><b>Field 800</b><code>#0e1512</code><small>frosted panels, active nav, dark cards</small></article>
+        <article class="tone-card tone-glass"><span class="tone-chip"></span><span class="tone-tier">Ground</span><b>Map glass</b><code>#13201d</code><small>green-black overlays, globe atmosphere</small></article>
+        <article class="tone-card tone-marrow"><span class="tone-chip"></span><span class="tone-tier">Ground</span><b>Marrow</b><code>#2b1a18</code><small>red-shadow interiors, sidebar warmth</small></article>
+        <article class="tone-card tone-paper"><span class="tone-chip"></span><span class="tone-tier">Neutral</span><b>Bone 100</b><code>#e9e5d9</code><small>headlines, primary text, logo cream</small></article>
+        <article class="tone-card tone-vellum"><span class="tone-chip"></span><span class="tone-tier">Neutral</span><b>Vellum 300</b><code>#b9b29d</code><small>body copy, captions, subdued evidence</small></article>
+        <article class="tone-card tone-slate"><span class="tone-chip"></span><span class="tone-tier">Neutral</span><b>Specimen blue</b><code>#8f9cbe</code><small>axes, labels, clinical annotations</small></article>
+        <article class="tone-card tone-ash"><span class="tone-chip"></span><span class="tone-tier">Neutral</span><b>Ash line</b><code>#343831</code><small>borders, dividers, inactive structure</small></article>
+        <article class="tone-card tone-red"><span class="tone-chip"></span><span class="tone-tier">Signal</span><b>Signal red</b><code>#e4572e</code><small>acute outbreak, final spike, active alarm</small></article>
+        <article class="tone-card tone-teal"><span class="tone-chip"></span><span class="tone-tier">Signal</span><b>Live teal</b><code>#33a58a</code><small>surveillance, source freshness, contained state</small></article>
+        <article class="tone-card tone-gold"><span class="tone-chip"></span><span class="tone-tier">Signal</span><b>Watch gold</b><code>#e3b23c</code><small>active watch, historical risk, caution</small></article>
+        <article class="tone-card tone-violet"><span class="tone-chip"></span><span class="tone-tier">Signal</span><b>Archive violet</b><code>#8a6fc9</code><small>taxonomy, secondary clusters, old records</small></article>
       </div>
       <div class="palette-rules">
         <div><span class="n">70%</span><span class="k">ink / field</span></div>

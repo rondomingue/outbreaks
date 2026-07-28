@@ -146,11 +146,11 @@ function renderTimeline(idA, idB, outbreaks, colFn){
   [idA,idB].forEach((id,col)=>{
     const el=document.getElementById(id); if(!el) return;
     const chunk=col===0?outbreaks.slice(0,mid):outbreaks.slice(mid);
-    el.innerHTML=chunk.map(o=>{
+    el.innerHTML=chunk.map((o,ri)=>{
       const cls=o.cfr>=60?'sev':o.cfr>=35?'watch':'ok';
       const landmark=o.cases>=1000?'landmark':'';
       const c=colFn(o);
-      return `<div class="tl-ev ${cls} ${landmark}" style="--ev-col:${c}">
+      return `<div class="tl-ev ${cls} ${landmark}" style="--ev-col:${c}; --i:${ri*2+col}">
         <div class="yr tnum">${o.year}</div>
         <div class="bar" style="--ev-col:${c}"></div>
         <div class="body">
@@ -171,6 +171,18 @@ function renderTimeline(idA, idB, outbreaks, colFn){
 
 renderTimeline('ebola-tl-a','ebola-tl-b',   ebola.outbreaks,   ebolaColFn);
 renderTimeline('marburg-tl-a','marburg-tl-b',marburg.outbreaks, marburgColFn);
+
+/* Wave reveal: chronology events slide in from the right, one at a time, on scroll */
+(function(){
+  const grids=document.querySelectorAll('.tl-grid');
+  if(!grids.length) return;
+  const reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){ grids.forEach(g=>g.classList.add('revealed')); return; }
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -12% 0px' });
+  grids.forEach(g=>io.observe(g));
+})();
 
 (function(){
   const toggle = document.querySelector('[data-menu-toggle]');
