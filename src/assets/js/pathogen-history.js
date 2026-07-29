@@ -82,18 +82,22 @@ function renderMap(svgId, outbreaks, vectors, colFn, batCaves){
     s+=bezierVec(pa.x,pa.y,pb.x,pb.y,colFn(null));
   });
 
-  // draw glow rings for large outbreaks, then circles
+  // Dots by default; the strength ring + name reveal (and pulse) on hover/tap,
+  // so nothing overlaps until you interrogate a specific event.
   outbreaks.forEach(o=>{
     const r=markerRadius(o.cases), col=colFn(o);
+    const lx=(o.x+Math.max(r,7)+6), ly=o.y+3;
+    s+=`<g class="ob" tabindex="0" role="button" aria-label="${ESC(o.name)}, ${o.year}, ${o.cases.toLocaleString()} cases">`;
+    s+=`<circle class="ob-hit" cx="${o.x}" cy="${o.y}" r="13" fill="transparent"/>`;
     if(o.cases>1000){
-      s+=`<circle cx="${o.x}" cy="${o.y}" r="${(r*1.9).toFixed(1)}" fill="${col}" fill-opacity="0.06" stroke="none"/>`;
+      s+=`<circle class="ob-glow reveal" cx="${o.x}" cy="${o.y}" r="${(r*1.7).toFixed(1)}" fill="${col}" fill-opacity="0.06" stroke="none"/>`;
     }
-    s+=`<circle cx="${o.x}" cy="${o.y}" r="${r.toFixed(1)}" fill="${col}" fill-opacity="0.16" stroke="${col}" stroke-width="1.2"/>`;
-    s+=`<circle cx="${o.x}" cy="${o.y}" r="2.4" fill="${col}"/>`;
-    // label — short version
-    const lx=o.x+r+5, ly=o.y+3;
-    s+=`<text x="${lx}" y="${ly}" font-family="'Space Mono',monospace" font-size="8" letter-spacing="0.5" fill="rgba(233,229,217,.82)">${ESC(o.name)}</text>`;
-    s+=`<text x="${lx}" y="${(ly+11).toFixed(0)}" font-family="'Space Mono',monospace" font-size="7" letter-spacing="0.3" fill="rgba(114,123,116,.8)">${o.year}</text>`;
+    s+=`<circle class="ob-ring reveal" cx="${o.x}" cy="${o.y}" r="${r.toFixed(1)}" fill="${col}" fill-opacity="0.16" stroke="${col}" stroke-width="1.2"/>`;
+    s+=`<circle class="ob-dot" cx="${o.x}" cy="${o.y}" r="3" fill="${col}"/>`;
+    s+=`<g class="ob-label reveal">`;
+    s+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-family="'Space Mono',monospace" font-size="8" letter-spacing="0.5" paint-order="stroke" stroke="rgba(12,15,14,.88)" stroke-width="3" fill="rgba(233,229,217,.92)">${ESC(o.name)}</text>`;
+    s+=`<text x="${lx.toFixed(1)}" y="${(ly+11).toFixed(0)}" font-family="'Space Mono',monospace" font-size="7" letter-spacing="0.3" paint-order="stroke" stroke="rgba(12,15,14,.88)" stroke-width="3" fill="rgba(160,168,150,.95)">${o.year} · ${o.cases.toLocaleString()} cases</text>`;
+    s+=`</g></g>`;
   });
 
   // graticule labels
@@ -115,6 +119,16 @@ const marburgColFn = o => '#c2813a';
 
 renderMap('ebola-map',  ebola.outbreaks,  ebola.vectors,  ebolaColFn,  null);
 renderMap('marburg-map',marburg.outbreaks,marburg.vectors,marburgColFn,marburg.batCaves);
+
+// Tap a region to pin its reveal open (single active at a time); hover still previews.
+['ebola-map','marburg-map'].forEach(id=>{
+  const svg=document.getElementById(id); if(!svg) return;
+  svg.addEventListener('click', e=>{
+    const g=e.target.closest && e.target.closest('.ob');
+    svg.querySelectorAll('.ob.is-active').forEach(el=>{ if(el!==g) el.classList.remove('is-active'); });
+    if(g) g.classList.toggle('is-active');
+  });
+});
 
 /* ── OUTBREAK CARDS ─────────────────────────────────────────────────────── */
 function renderCards(containerId, outbreaks, colFn){

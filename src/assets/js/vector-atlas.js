@@ -323,7 +323,36 @@ function buildGlobe(land) {
     return (Math.PI / 2 - d3.geoDistance(coord, centerCoord())) / (Math.PI / 2);
   }
 
-  // every vector's sites, so the globe reads dense; inactive ones sit dormant.
+  // A corridor that lifts off the sphere in true 3-D: sample the great circle,
+  // raise each point radially by a bell curve, then project with the same
+  // orthographic maths as the globe so it foreshortens and hides behind the limb.
+  function raisedArc(from, to) {
+    const rotate = d3.geoRotation(projection.rotate());
+    const scale = projection.scale();
+    const [tx, ty] = projection.translate();
+    const interp = d3.geoInterpolate(from, to);
+    const dist = d3.geoDistance(from, to);                 // 0..π
+    const h = Math.min(0.34, 0.05 + dist * 0.16);          // arc height as a fraction of R
+    const steps = 52;
+    const RAD = Math.PI / 180;
+    let d = '', pen = false;
+    for (let i = 0; i <= steps; i += 1) {
+      const t = i / steps;
+      const r = rotate(interp(t));                         // [lngDeg, latDeg] after rotation
+      const lng = r[0] * RAD, lat = r[1] * RAD;
+      const cosLat = Math.cos(lat);
+      const Z = cosLat * Math.cos(lng);                    // >0 = front hemisphere
+      if (Z < -0.03) { pen = false; continue; }            // behind the globe → break the stroke
+      const lift = 1 + h * Math.sin(Math.PI * t);
+      const x = tx + scale * cosLat * Math.sin(lng) * lift;
+      const y = ty - scale * Math.sin(lat) * lift;
+      d += (pen ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+      pen = true;
+    }
+    return d;
+  }
+
+  // every vector’s sites, so the globe reads dense; inactive ones sit dormant.
   const ALL_SITES = [];
   VECTORS.forEach(v => v.sites.forEach(s => ALL_SITES.push({ site: s, vector: v })));
 
@@ -337,14 +366,14 @@ function buildGlobe(land) {
 
     const disp = displayVector();
 
-    // corridors for the displayed vector (great-circle, era-gated)
+    // corridors for the displayed vector (raised 3-D flight-arcs, era-gated)
     const routes = disp.routes.slice(0, ERA_ROUTES[eraIndex()]);
     const arcs = gArcs.selectAll('path').data(routes, d => d.name);
     arcs.exit().remove();
     arcs.enter().append('path').attr('class', 'globe-arc')
       .merge(arcs)
       .attr('stroke', disp.color)
-      .attr('d', d => path({ type: 'LineString', coordinates: [d.from, d.to] }));
+      .attr('d', d => raisedArc(d.from, d.to));
 
     // sites — every vector, dormant unless it is the displayed one
     const sel = gSites.selectAll('g.site').data(ALL_SITES, d => d.vector.key + '|' + d.site.name);
@@ -385,7 +414,7 @@ function buildGlobe(land) {
         lbl.style('display', 'none');
       }
     });
-    // displayed vector's sites paint on top of dormant ones
+    // displayed vector’s sites paint on top of dormant ones
     all.sort((a, b) => (a.vector === disp ? 1 : 0) - (b.vector === disp ? 1 : 0));
     all.style('cursor', 'pointer').on('click', (ev, d) => {
       if (d.vector === disp) { activeSite = d.site; updatePanel(); draw(); }

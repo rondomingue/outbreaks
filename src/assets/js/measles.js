@@ -301,3 +301,17 @@ function animateCount(el, target, opts){
     return get(yr-1).then(function(rows2){ var r2=pick(rows2); if(r2 && r2.total>0) render(yr-1,r2); });
   }).catch(function(){ /* leave strip hidden — page keeps its cited static figures */ });
 })();
+
+/* ═══ TIMELINE — wave reveal from the right on scroll ═══ */
+(function(){
+  var tl = document.querySelector('.timeline');
+  if(!tl) return;
+  var items = tl.querySelectorAll('.tl');
+  items.forEach(function(el, i){ el.style.setProperty('--i', i); });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)){ tl.classList.add('revealed'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('revealed'); io.disconnect(); } });
+  }, { threshold:0, rootMargin:'0px 0px -12% 0px' });
+  io.observe(tl);
+})();
