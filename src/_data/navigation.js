@@ -36,6 +36,12 @@ module.exports = [
     deck: "The American resurgence, vaccination gaps, and outbreak pattern."
   },
   {
+    key: "tuberculosis",
+    label: "Tuberculosis",
+    href: "/tuberculosis.html",
+    deck: "The world consumption created — the deadliest infection, and the disease that made us modern."
+  },
+  {
     key: "style-guide",
     label: "Appendix",
     href: "/style-guide.html",

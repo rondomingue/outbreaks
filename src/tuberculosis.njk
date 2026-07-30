@@ -1,0 +1,114 @@
+---
+layout: layouts/base.njk
+title: "Tuberculosis · The world consumption created — Outbreak Intelligence"
+description: "Tuberculosis reshaped our cities, our art, and modern medicine — and is once again the deadliest infectious disease on Earth. A history, a global burden map, and the descent into drug resistance."
+active: tuberculosis
+permalink: /tuberculosis.html
+pageCss: /assets/css/tuberculosis.css
+pageJs: /assets/js/tuberculosis.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="tb">
+  <section class="tb-hero">
+    <span class="eyebrow">The White Plague · <em>Mycobacterium tuberculosis</em></span>
+    <h1 class="disp">The world consumption created.</h1>
+    <p class="lede">Before we called it tuberculosis, we called it <em>consumption</em> — and it consumed everything: our cities, our art, our medicine, our dead. It shaped how we build, breathe, and grieve. Two centuries on, it is once again the deadliest infectious disease on Earth — and we have had a cure since 1943.</p>
+    <div class="tb-hero-stats" aria-label="Tuberculosis at a glance">
+      <div><span class="n">#1</span><span class="k">deadliest infectious disease · reclaimed 2023</span></div>
+      <div><span class="n">~1.25M</span><span class="k">deaths a year · one every ~25 seconds</span></div>
+      <div><span class="n">~10.8M</span><span class="k">new cases a year</span></div>
+      <div><span class="n">1943</span><span class="k">year the first cure arrived</span></div>
+    </div>
+  </section>
+
+  <section class="tb-section tb-map-section" aria-label="Global tuberculosis burden">
+    <div class="section-head">
+      <span class="eyebrow">Where it lives now</span>
+      <h2 class="disp">Eight countries carry two-thirds of it.</h2>
+    </div>
+    <p class="tb-sub">Tuberculosis is not evenly shared. It concentrates where housing is crowded, care is thin, and HIV, diabetes, and malnutrition lower the guard. Circles are scaled to estimated annual cases.</p>
+    <div class="tb-map-shell">
+      <div id="tbMap" aria-label="World map of estimated tuberculosis cases by country"></div>
+      <div id="tbMapFallback" class="tb-map-fallback" hidden>
+        <span class="eyebrow">Burden field</span>
+        <p>The interactive map could not load. The highest-burden countries — India, Indonesia, China, the Philippines, Pakistan, Nigeria, Bangladesh, and the DRC — remain listed below.</p>
+      </div>
+      <div class="tb-map-key">
+        <div class="tb-legend">
+          <span class="tb-lg tb-lg-circle"></span>Estimated annual cases
+          <span class="tb-lg tb-lg-mdr"></span>Drug-resistant hotspot
+        </div>
+        <span class="tb-hint">Hover or tap a country for detail</span>
+      </div>
+    </div>
+    <div class="tb-toplist" id="tbTopList" aria-label="Highest-burden countries"></div>
+  </section>
+
+  <section class="tb-section tb-history">
+    <div class="section-head">
+      <span class="eyebrow">A little history</span>
+      <h2 class="disp">The disease that made us modern.</h2>
+    </div>
+    <div class="tb-history-grid">
+      <article>
+        <h3 class="disp">It was beautiful, once.</h3>
+        <p>For a century, consumption was the fashionable way to die. The Romantics made a virtue of the wasting look — pale skin, bright eyes, a thin frame, a flush of fever. Keats coughed blood at twenty-five and called it his "death-warrant." It took the Brontë sisters, Chopin, Chekhov, Kafka, and Orwell. Poets envied it; corsets imitated it.</p>
+      </article>
+      <article>
+        <h3 class="disp">Then it built the modern world.</h3>
+        <p>The fight against it reshaped everything. Sanatoriums pushed us toward sunlight, fresh air, and ventilation. Fear of the "spit" invented public-health campaigns, sputum tests, and the very idea of the contagious crowd. It helped create the sanitarium, the X-ray clinic, and the notion that the state should manage disease. Consumption, in the end, consumed the old world and set the terms of the new one.</p>
+      </article>
+    </div>
+
+    <div class="tb-timeline" id="tbTimeline" aria-label="Tuberculosis milestones">
+      <div class="tl-ev"><div class="yr">Antiquity</div><div class="body"><b class="disp">Phthisis</b><p>TB scars appear in Egyptian mummies and Neolithic bone. Hippocrates names <em>phthisis</em> — "wasting" — the most common fatal disease of his age.</p></div></div>
+      <div class="tl-ev"><div class="yr">1800s</div><div class="body"><b class="disp">The White Plague</b><p>Industrial cities pack people into tenements; TB kills perhaps one in four Europeans. It is romanticised as the "robber of youth."</p></div></div>
+      <div class="tl-ev"><div class="yr">1882</div><div class="body"><b class="disp">Koch finds the bacillus</b><p>Robert Koch identifies <em>Mycobacterium tuberculosis</em> — proof that the beautiful death is a common germ, spread on the air.</p></div></div>
+      <div class="tl-ev"><div class="yr">1921</div><div class="body"><b class="disp">BCG</b><p>The BCG vaccine debuts — still the only licensed TB vaccine a century later, and only partly protective.</p></div></div>
+      <div class="tl-ev"><div class="yr">1943</div><div class="body"><b class="disp">The first cure</b><p>Streptomycin, discovered in a New Jersey soil sample, becomes the first antibiotic to beat TB. For the first time, consumption is curable.</p></div></div>
+      <div class="tl-ev"><div class="yr">1990s</div><div class="body"><b class="disp">DOTS</b><p>WHO rolls out directly-observed therapy to hold the six-month drug course together — and to keep resistance from breeding.</p></div></div>
+      <div class="tl-ev sev"><div class="yr">2011</div><div class="body"><b class="disp">Mumbai: the drugs stop working</b><p>Clinicians in Mumbai report tuberculosis resistant to every drug they can test — the disease we had beaten, unbeaten again.</p></div></div>
+      <div class="tl-ev ok"><div class="yr">2020s</div><div class="body"><b class="disp">New weapons</b><p>Bedaquiline and the all-oral BPaLM regimen shorten treatment from two years to six months. A new vaccine, M72, enters phase-3 trials — the first candidate in a century.</p></div></div>
+    </div>
+  </section>
+
+  <section class="tb-section tb-ladder-section">
+    <div class="section-head">
+      <span class="eyebrow">The cool diagram</span>
+      <h2 class="disp">The descent into resistance.</h2>
+    </div>
+    <p class="tb-sub">Every dropped dose, every unfinished course, teaches the bacterium another drug. Resistance is a staircase going down — and at each step, fewer medicines remain and the cure gets longer, costlier, and less likely. Hover a step to read it.</p>
+    <div class="tb-ladder" id="tbLadder"></div>
+  </section>
+
+  <section class="tb-section tb-mumbai">
+    <div class="section-head">
+      <span class="eyebrow">Super-tuberculosis · Mumbai, 2011</span>
+      <h2 class="disp">When the staircase runs out.</h2>
+    </div>
+    <div class="tb-mumbai-grid">
+      <article class="tb-mumbai-lead">
+        <p>In late 2011, Dr. Zarir Udwadia and colleagues at Mumbai's Hinduja Hospital described a handful of patients whose tuberculosis was resistant to <b>every drug they could test</b> — first-line, second-line, all of it. The press called it <em>totally drug-resistant TB</em>. The World Health Organization declined to make the label official, in part because no lab tests every drug — but the meaning was plain: in one of the world's densest cities, TB had walked back off the bottom step of the staircase.</p>
+        <p>It was not a freak. It was manufactured — by broken drug supply, unregulated private prescribing, months-long treatments abandoned halfway, and the crowding that lets one cough seed a hundred lungs. Resistance is less a mutation than a mirror.</p>
+      </article>
+      <aside class="tb-mumbai-facts">
+        <div class="tb-fact"><span class="n">~1 in 8</span><span class="k">of the world's TB is in India</span></div>
+        <div class="tb-fact"><span class="n">~410K</span><span class="k">drug-resistant cases a year, worldwide</span></div>
+        <div class="tb-fact"><span class="n">~2 of 5</span><span class="k">drug-resistant cases that ever start treatment</span></div>
+        <div class="tb-fact tb-fact-hope"><span class="n">BPaLM</span><span class="k">new regimen: even XDR, cured in ~6 months</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="tb-section tb-close">
+    <div class="section-head">
+      <span class="eyebrow">The reckoning</span>
+      <h2 class="disp">Curable since 1943. Still number one.</h2>
+    </div>
+    <p class="tb-close-line">A person dies of tuberculosis roughly every twenty-five seconds — of a disease we learned to cure eighty years ago, with drugs that cost pennies. TB is not a mystery of biology anymore. It is a measure of who we decide is worth saving. Consumption created the modern world; whether the modern world finishes it is a choice, not a discovery.</p>
+    <p class="tb-source">Figures are approximate, drawn from WHO Global Tuberculosis Report estimates. Verify against WHO and national programmes before operational use.</p>
+  </section>
+</main>
