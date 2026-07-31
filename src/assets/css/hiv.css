@@ -39,6 +39,8 @@ html, body {
   font-size: clamp(40px, 6.6vw, 92px); font-weight: 400; letter-spacing: -.03em; line-height: .95;
   text-wrap: balance;
 }
+.hiv-hero h1 .light { font-weight: 300; color: var(--bone-dim); }
+.hiv-hero h1 .gold { color: var(--gold); }
 .lede {
   max-width: 66ch; margin: 0; color: var(--bone-dim); font-size: 16px; line-height: 1.62;
 }

@@ -130,7 +130,11 @@ function animateStatGroup(container, sel) {
     cards.forEach((c, j) => c.classList.toggle('is-active', j === i));
     nodes.forEach((n, j) => n.classList.toggle('is-active', j === i));
     const activeNode = nodes[i];
-    if (activeNode) activeNode.scrollIntoView({ block: 'nearest', inline: 'center', behavior: REDUCE ? 'auto' : 'smooth' });
+    // only sync the mini-nav's own scroll — never let this drag the page's vertical
+    // scroll to reveal a section the visitor hasn't scrolled to yet
+    const miniRect = mini.getBoundingClientRect();
+    const onScreen = miniRect.bottom > 0 && miniRect.top < (window.innerHeight || document.documentElement.clientHeight);
+    if (activeNode && onScreen) activeNode.scrollIntoView({ block: 'nearest', inline: 'center', behavior: REDUCE ? 'auto' : 'smooth' });
   }
 
   function closestIndex() {
@@ -233,12 +237,24 @@ function animateStatGroup(container, sel) {
     map = new mapboxgl.Map({
       container: 'tbMap', style: 'mapbox://styles/mapbox/dark-v11',
       center: [64, 16], zoom: 1.35, minZoom: 1, maxZoom: 6,
-      projection: 'mercator', attributionControl: true, cooperativeGestures: true
+      projection: 'mercator', attributionControl: true
     });
   } catch (err) { showFallback(); return; }
 
   map.on('error', () => { if (!document.querySelector('#tbMap canvas')) showFallback(); });
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right');
+
+  // Scroll/drag/pinch stay off until the visitor clicks or taps into the map —
+  // otherwise scrolling the page over it hijacks the gesture to zoom/pan instead.
+  map.scrollZoom.disable();
+  map.dragPan.disable();
+  map.touchZoomRotate.disable();
+  map.doubleClickZoom.disable();
+  const activateMap = () => { map.scrollZoom.enable(); map.dragPan.enable(); map.touchZoomRotate.enable(); map.doubleClickZoom.enable(); };
+  const deactivateMap = () => { map.scrollZoom.disable(); map.dragPan.disable(); map.touchZoomRotate.disable(); map.doubleClickZoom.disable(); };
+  el.addEventListener('click', activateMap);
+  el.addEventListener('touchstart', activateMap, { passive: true });
+  el.addEventListener('mouseleave', deactivateMap);
 
   const features = BURDEN.map(d => ({
     type: 'Feature', geometry: { type: 'Point', coordinates: d.coord },
