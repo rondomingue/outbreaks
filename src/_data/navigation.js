@@ -42,6 +42,12 @@ module.exports = [
     deck: "The world consumption created — the deadliest infection, and the disease that made us modern."
   },
   {
+    key: "hiv",
+    label: "HIV/AIDS",
+    href: "/hiv.html",
+    deck: "The disease they wouldn't name — from a nameless cluster of cases to U=U."
+  },
+  {
     key: "style-guide",
     label: "Appendix",
     href: "/style-guide.html",

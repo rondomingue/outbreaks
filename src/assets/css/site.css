@@ -551,6 +551,15 @@ body.site-menu-open {
     --site-content-clearance: calc(var(--site-sidebar-top) + var(--site-nav-button-height) + 18px);
   }
 
+  .site-header__inner {
+    padding-right: var(--site-sidebar-left);
+  }
+
+  .site-brand {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
   .site-brand__logo {
     height: 26px;
     max-width: 54vw;

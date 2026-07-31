@@ -63,16 +63,30 @@ headScripts:
       </article>
     </div>
 
-    <div class="tb-timeline" id="tbTimeline" aria-label="Tuberculosis milestones">
-      <div class="tl-ev"><div class="yr">Antiquity</div><div class="body"><b class="disp">Phthisis</b><p>TB scars appear in Egyptian mummies and Neolithic bone. Hippocrates names <em>phthisis</em> — "wasting" — the most common fatal disease of his age.</p></div></div>
-      <div class="tl-ev"><div class="yr">1800s</div><div class="body"><b class="disp">The White Plague</b><p>Industrial cities pack people into tenements; TB kills perhaps one in four Europeans. It is romanticised as the "robber of youth."</p></div></div>
-      <div class="tl-ev"><div class="yr">1882</div><div class="body"><b class="disp">Koch finds the bacillus</b><p>Robert Koch identifies <em>Mycobacterium tuberculosis</em> — proof that the beautiful death is a common germ, spread on the air.</p></div></div>
-      <div class="tl-ev"><div class="yr">1921</div><div class="body"><b class="disp">BCG</b><p>The BCG vaccine debuts — still the only licensed TB vaccine a century later, and only partly protective.</p></div></div>
-      <div class="tl-ev"><div class="yr">1943</div><div class="body"><b class="disp">The first cure</b><p>Streptomycin, discovered in a New Jersey soil sample, becomes the first antibiotic to beat TB. For the first time, consumption is curable.</p></div></div>
-      <div class="tl-ev"><div class="yr">1990s</div><div class="body"><b class="disp">DOTS</b><p>WHO rolls out directly-observed therapy to hold the six-month drug course together — and to keep resistance from breeding.</p></div></div>
-      <div class="tl-ev sev"><div class="yr">2011</div><div class="body"><b class="disp">Mumbai: the drugs stop working</b><p>Clinicians in Mumbai report tuberculosis resistant to every drug they can test — the disease we had beaten, unbeaten again.</p></div></div>
-      <div class="tl-ev ok"><div class="yr">2020s</div><div class="body"><b class="disp">New weapons</b><p>Bedaquiline and the all-oral BPaLM regimen shorten treatment from two years to six months. A new vaccine, M72, enters phase-3 trials — the first candidate in a century.</p></div></div>
+    <div class="tb-timeline-outer">
+      <button type="button" class="tl-arrow prev" id="tlPrev" aria-label="Previous milestone">‹</button>
+      <div class="tb-timeline" id="tbTimeline" aria-label="Tuberculosis milestones" tabindex="0">
+        <div class="tl-sp" aria-hidden="true"></div>
+        <div class="tl-ev"><div class="yr">Antiquity</div><div class="body"><b class="disp">Phthisis</b><p>TB scars appear in Egyptian mummies and Neolithic bone. Hippocrates names <em>phthisis</em> — "wasting" — the most common fatal disease of his age.</p></div></div>
+        <div class="tl-ev"><div class="yr">1720</div><div class="body"><b class="disp">"Living creatures"</b><p>English physician Benjamin Marten proposes consumption is caused by minute, invisible creatures passed between people — a germ theory more than a century ahead of proof.</p></div></div>
+        <div class="tl-ev"><div class="yr">1816</div><div class="body"><b class="disp">The stethoscope</b><p>René Laennec, studying the disease that would kill him, invents the stethoscope to hear the lungs and names the tubercle.</p></div></div>
+        <div class="tl-ev"><div class="yr">1800s</div><div class="body"><b class="disp">The White Plague</b><p>Industrial cities pack people into tenements; TB kills perhaps one in four Europeans. It is romanticised as the "robber of youth."</p></div></div>
+        <div class="tl-ev"><div class="yr">1865</div><div class="body"><b class="disp">Proven contagious</b><p>Jean-Antoine Villemin infects rabbits with matter from human TB lesions, proving experimentally what Marten had only guessed: consumption spreads.</p></div></div>
+        <div class="tl-ev"><div class="yr">1882</div><div class="body"><b class="disp">Koch finds the bacillus</b><p>Robert Koch identifies <em>Mycobacterium tuberculosis</em> — proof that the beautiful death is a common germ, spread on the air.</p></div></div>
+        <div class="tl-ev"><div class="yr">1921</div><div class="body"><b class="disp">BCG</b><p>The BCG vaccine debuts — still the only licensed TB vaccine a century later, and only partly protective.</p></div></div>
+        <div class="tl-ev"><div class="yr">1943</div><div class="body"><b class="disp">The first cure</b><p>Streptomycin, discovered in a New Jersey soil sample, becomes the first antibiotic to beat TB. For the first time, consumption is curable.</p></div></div>
+        <div class="tl-ev"><div class="yr">1952</div><div class="body"><b class="disp">Isoniazid</b><p>A cheap, oral drug becomes the backbone of TB treatment worldwide — and, taken alone, the first step toward resistance.</p></div></div>
+        <div class="tl-ev"><div class="yr">1993</div><div class="body"><b class="disp">Global emergency</b><p>WHO declares tuberculosis a global health emergency — the first disease ever given that designation.</p></div></div>
+        <div class="tl-ev"><div class="yr">1990s</div><div class="body"><b class="disp">DOTS</b><p>WHO rolls out directly-observed therapy to hold the six-month drug course together — and to keep resistance from breeding.</p></div></div>
+        <div class="tl-ev"><div class="yr">2010</div><div class="body"><b class="disp">Rapid testing</b><p>GeneXpert molecular testing cuts TB and drug-resistance diagnosis from weeks of culturing to under two hours.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">2011</div><div class="body"><b class="disp">Mumbai: the drugs stop working</b><p>Clinicians in Mumbai report tuberculosis resistant to every drug they can test — the disease we had beaten, unbeaten again.</p></div></div>
+        <div class="tl-ev"><div class="yr">2012</div><div class="body"><b class="disp">Bedaquiline</b><p>The first new TB drug in over forty years is approved, built for the multidrug-resistant strains streptomycin's heirs could no longer touch.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">2020s</div><div class="body"><b class="disp">New weapons</b><p>The all-oral BPaLM regimen shortens treatment from two years to six months. A new vaccine, M72, enters phase-3 trials — the first candidate in a century.</p></div></div>
+        <div class="tl-sp" aria-hidden="true"></div>
+      </div>
+      <button type="button" class="tl-arrow next" id="tlNext" aria-label="Next milestone">›</button>
     </div>
+    <div class="tl-mini" id="tlMini" aria-label="Timeline navigation"></div>
   </section>
 
   <section class="tb-section tb-ladder-section">

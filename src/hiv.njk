@@ -1,0 +1,129 @@
+---
+layout: layouts/base.njk
+title: "HIV/AIDS · The disease they wouldn't name — Outbreak Intelligence"
+description: "HIV reshaped queer politics, drug pricing, and public health itself. A history from a nameless cluster of cases to U=U, a global burden map, and the cascade of care that decides who stops transmitting."
+active: hiv
+permalink: /hiv.html
+pageCss: /assets/css/hiv.css
+pageJs: /assets/js/hiv.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="hiv">
+  <section class="hiv-hero">
+    <span class="eyebrow">GRID to global pandemic · HIV / AIDS</span>
+    <h1 class="disp">The disease they wouldn't name.</h1>
+    <p class="lede">For four years the United States government said almost nothing. The illness killing gay men, hemophiliacs, and people who used drugs had no funding, no urgency, and — until 1982 — no official name. It went on to kill tens of millions, reshape queer politics, drug pricing, and public health itself, and became the first modern pandemic in which patients organized to save their own lives.</p>
+    <div class="hiv-hero-stats" aria-label="HIV/AIDS at a glance">
+      <div><span class="n">~40M</span><span class="k">people living with HIV worldwide · 2023</span></div>
+      <div><span class="n">~630K</span><span class="k">AIDS-related deaths in 2023 · one every ~50 seconds</span></div>
+      <div><span class="n">~1.3M</span><span class="k">new infections in 2023</span></div>
+      <div><span class="n">1996</span><span class="k">year triple therapy proved the virus could be suppressed</span></div>
+    </div>
+  </section>
+
+  <section class="hiv-section hiv-map-section" aria-label="Global HIV burden">
+    <div class="section-head">
+      <span class="eyebrow">Where it lives now</span>
+      <h2 class="disp">Eastern and southern Africa carry over half of it.</h2>
+    </div>
+    <p class="hiv-sub">HIV is not evenly shared either. Sub-Saharan Africa carries the overwhelming majority of the global burden, while new infections are rising fastest in Eastern Europe, Central Asia, Latin America, and parts of the Asia-Pacific. Circles are scaled to estimated people living with HIV.</p>
+    <div class="hiv-map-shell">
+      <div id="hivMap" aria-label="World map of estimated people living with HIV by country"></div>
+      <div id="hivMapFallback" class="hiv-map-fallback" hidden>
+        <span class="eyebrow">Burden field</span>
+        <p>The interactive map could not load. The highest-burden countries — South Africa, India, Mozambique, Nigeria, Tanzania, Kenya, Uganda, and Zambia — remain listed below.</p>
+      </div>
+      <div class="hiv-map-key">
+        <div class="hiv-legend">
+          <span class="hiv-lg hiv-lg-circle"></span>People living with HIV
+          <span class="hiv-lg hiv-lg-rising"></span>Rising new infections
+        </div>
+        <span class="hiv-hint">Hover or tap a country for detail</span>
+      </div>
+    </div>
+    <div class="hiv-toplist" id="hivTopList" aria-label="Highest-burden countries"></div>
+  </section>
+
+  <section class="hiv-section hiv-history">
+    <div class="section-head">
+      <span class="eyebrow">A little history</span>
+      <h2 class="disp">From a cluster with no name to U=U.</h2>
+    </div>
+    <div class="hiv-history-grid">
+      <article>
+        <h3 class="disp">A plague with no name.</h3>
+        <p>The first cases looked like nothing anyone had seen: young, otherwise healthy gay men dying of infections that shouldn't have been able to kill them. The press called it "gay cancer." The CDC called it GRID — Gay-Related Immune Deficiency. Reagan didn't say the word "AIDS" publicly until 1985, four years and roughly 12,000 American deaths into the epidemic.</p>
+      </article>
+      <article>
+        <h3 class="disp">Then it became survivable.</h3>
+        <p>Patients did not wait for institutions to act. ACT UP turned die-ins into policy change; the FDA's drug-approval process was rebuilt under pressure from the people it was failing. Triple-combination therapy arrived in 1996 and turned a death sentence into a chronic condition — for anyone who could reach it. Twenty years later, the science confirmed what activists had insisted for a decade: undetectable equals untransmittable.</p>
+      </article>
+    </div>
+
+    <div class="hiv-timeline-outer">
+      <button type="button" class="tl-arrow prev" id="tlPrev" aria-label="Previous milestone">‹</button>
+      <div class="hiv-timeline" id="hivTimeline" aria-label="HIV/AIDS milestones" tabindex="0">
+        <div class="tl-sp" aria-hidden="true"></div>
+        <div class="tl-ev"><div class="yr">1959</div><div class="body"><b class="disp">Patient zero, unknowingly</b><p>A blood sample drawn in Léopoldville, Belgian Congo, later tests positive for HIV-1 — the earliest confirmed infection, decades before anyone knew to look.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">1981</div><div class="body"><b class="disp">A cluster with no name</b><p>The CDC reports a rare pneumonia in five previously healthy gay men in Los Angeles. Within months, clusters of rare cancers and infections appear in New York and San Francisco.</p></div></div>
+        <div class="tl-ev"><div class="yr">1982</div><div class="body"><b class="disp">Named "AIDS"</b><p>The CDC adopts the term Acquired Immunodeficiency Syndrome, retiring the stigmatizing "GRID." The name doesn't slow the epidemic — or the silence around it.</p></div></div>
+        <div class="tl-ev"><div class="yr">1983</div><div class="body"><b class="disp">The virus isolated</b><p>Françoise Barré-Sinoussi and Luc Montagnier at the Pasteur Institute isolate the virus that causes AIDS — later named HIV. They share the 2008 Nobel Prize for the discovery.</p></div></div>
+        <div class="tl-ev"><div class="yr">1985</div><div class="body"><b class="disp">The first test</b><p>The FDA approves the first HIV antibody test, letting blood banks screen the supply — three years after transfusion-linked cases were first reported.</p></div></div>
+        <div class="tl-ev"><div class="yr">1987</div><div class="body"><b class="disp">AZT and ACT UP</b><p>AZT becomes the first approved antiretroviral, but as monotherapy it buys months, not years. The same year, ACT UP forms in New York, turning grief into direct action for faster drug approval.</p></div></div>
+        <div class="tl-ev"><div class="yr">1994</div><div class="body"><b class="disp">Interrupting transmission</b><p>Trial 076 shows AZT given during pregnancy and delivery cuts mother-to-child transmission by roughly two-thirds — the first proof the epidemic's path could be blocked.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">1995</div><div class="body"><b class="disp">The peak of the crisis</b><p>AIDS becomes the leading cause of death for Americans aged 25–44. Tens of thousands die that year alone, most having lived to see no effective treatment.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1996</div><div class="body"><b class="disp">Triple therapy arrives</b><p>Protease inhibitors combined with existing drugs — HAART — suppress the virus for the first time. U.S. AIDS deaths fall by more than 40% within a year. For those with access, a death sentence becomes a chronic disease.</p></div></div>
+        <div class="tl-ev"><div class="yr">2001</div><div class="body"><b class="disp">The Doha Declaration</b><p>The WTO affirms that public health can override patent protection, opening the door to affordable generic antiretrovirals across the developing world.</p></div></div>
+        <div class="tl-ev"><div class="yr">2003</div><div class="body"><b class="disp">PEPFAR launches</b><p>The U.S. President's Emergency Plan for AIDS Relief becomes the largest global-health initiative ever committed to a single disease, funding treatment across dozens of countries.</p></div></div>
+        <div class="tl-ev"><div class="yr">2008</div><div class="body"><b class="disp">The Berlin Patient</b><p>Timothy Ray Brown becomes the first person cured of HIV, after a stem-cell transplant for leukemia from a donor with a rare HIV-resistant gene mutation.</p></div></div>
+        <div class="tl-ev"><div class="yr">2012</div><div class="body"><b class="disp">PrEP approved</b><p>The FDA approves daily Truvada as pre-exposure prophylaxis — the first pill shown to prevent HIV infection in people who don't yet have it.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">2016</div><div class="body"><b class="disp">U=U confirmed</b><p>Large clinical studies find zero linked transmissions from partners with a sustained undetectable viral load — turning a decade of activist claims into medical consensus.</p></div></div>
+        <div class="tl-ev"><div class="yr">2021</div><div class="body"><b class="disp">Long-acting injectable ART</b><p>Cabenuva is approved — a shot every one to two months replaces a daily pill for viral suppression, easing one of treatment's hardest daily burdens.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">2024</div><div class="body"><b class="disp">Twice-yearly prevention</b><p>Trials of lenacapavir, a prevention injection given just twice a year, report near-total protection — the closest the field has come to a functional vaccine.</p></div></div>
+        <div class="tl-sp" aria-hidden="true"></div>
+      </div>
+      <button type="button" class="tl-arrow next" id="tlNext" aria-label="Next milestone">›</button>
+    </div>
+    <div class="tl-mini" id="tlMini" aria-label="Timeline navigation"></div>
+  </section>
+
+  <section class="hiv-section hiv-cascade-section">
+    <div class="section-head">
+      <span class="eyebrow">The cool diagram</span>
+      <h2 class="disp">The cascade of care.</h2>
+    </div>
+    <p class="hiv-sub">Every person who reaches the next step effectively stops transmitting the virus. Every person who doesn't is where the epidemic still lives. UNAIDS tracks this as "95-95-95" — the world isn't there yet. Hover a step to read it.</p>
+    <div class="hiv-cascade" id="hivCascade"></div>
+  </section>
+
+  <section class="hiv-section hiv-spotlight">
+    <div class="section-head">
+      <span class="eyebrow">Policy as pathogen · South Africa, 2000–2005</span>
+      <h2 class="disp">When denial became policy.</h2>
+    </div>
+    <div class="hiv-spotlight-grid">
+      <article class="hiv-spotlight-lead">
+        <p>For years, President Thabo Mbeki's government publicly questioned whether HIV caused AIDS at all, restricted access to antiretroviral drugs — including nevirapine, which could have halved mother-to-child transmission for the cost of a single dose — and gave a public platform to unproven remedies instead. A 2008 Harvard study estimated the resulting delay caused more than <b>330,000 preventable deaths</b> and left tens of thousands of infants born with HIV who could have been protected.</p>
+        <p>It was not a failure of medicine. Triple therapy already existed, already worked, and was already saving lives elsewhere in the world. It was a failure of the people who decide who gets it — a reminder that a treatable disease can still kill at the scale of an untreatable one, if the people in charge decide it should.</p>
+      </article>
+      <aside class="hiv-spotlight-facts">
+        <div class="hiv-fact"><span class="n">~330K</span><span class="k">preventable deaths, 2000–2005 (Harvard, 2008)</span></div>
+        <div class="hiv-fact"><span class="n">~35K</span><span class="k">infants born with HIV who could have been prevented</span></div>
+        <div class="hiv-fact"><span class="n">~5 yrs</span><span class="k">of policy delay before national rollout began in 2004</span></div>
+        <div class="hiv-fact hiv-fact-hope"><span class="n">~5.5M</span><span class="k">South Africans on treatment today — the world's largest programme</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="hiv-section hiv-close">
+    <div class="section-head">
+      <span class="eyebrow">The reckoning</span>
+      <h2 class="disp">Treatable since 1996. Still spreading.</h2>
+    </div>
+    <p class="hiv-close-line">A person dies of an entirely treatable disease roughly every fifty seconds — not because the drugs don't exist, but because access, stigma, and funding decide who receives them. HIV did not turn itself into a survivable, chronic condition; medicine and the people who refused to wait for it did. Whether it stays that way for everyone is a choice, not a discovery.</p>
+    <p class="hiv-source">Figures are approximate, drawn from UNAIDS Global HIV/AIDS statistics and published epidemiological studies. Verify against UNAIDS and national programmes before operational use.</p>
+  </section>
+</main>
