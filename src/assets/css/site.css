@@ -326,9 +326,9 @@
   position: fixed;
   top: calc(var(--site-sidebar-top) + var(--site-nav-button-height));
   left: var(--site-sidebar-left);
+  right: clamp(18px, 3vw, 34px);
   bottom: auto;
   z-index: 1900;
-  width: var(--site-sidebar-width);
   min-height: 526px;
   max-height: calc(100dvh - var(--site-sidebar-top) - var(--site-nav-button-height) - 18px);
   padding: 16px var(--site-sidebar-inset) 20px;
@@ -364,7 +364,16 @@
 
 .site-nav {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 4px;
+  text-align: center;
+}
+
+@media (min-width: 560px) {
+  .site-nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+  }
 }
 
 .site-nav a {
@@ -569,7 +578,7 @@ body.site-menu-open {
   .site-sidenav {
     top: calc(var(--site-sidebar-top) + var(--site-nav-button-height));
     left: var(--site-sidebar-left);
-    width: var(--site-sidebar-width);
+    right: var(--site-sidebar-left);
     min-height: 560px;
     max-height: calc(100dvh - var(--site-sidebar-top) - var(--site-nav-button-height) - 12px);
     padding: 14px var(--site-sidebar-inset) 18px;
