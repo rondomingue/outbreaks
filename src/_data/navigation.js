@@ -6,12 +6,6 @@ module.exports = [
     deck: "Current outbreak intelligence and surveillance signals."
   },
   {
-    key: "chronicle",
-    label: "Pathogen Chronicle",
-    href: "/pathogen-history.html",
-    deck: "Filoviridae events, geography, taxonomy, and outcomes."
-  },
-  {
     key: "record",
     label: "Epidemic Record",
     href: "/disease-sunburst.html",
@@ -25,9 +19,15 @@ module.exports = [
   },
   {
     key: "histories",
-    label: "Pathogen Histories",
+    label: "Pathogen Chronicles",
     deck: "Single-disease deep dives — origin, timeline, and where each stands today.",
     children: [
+      {
+        key: "chronicle",
+        label: "Hemorrhagic Fevers",
+        href: "/pathogen-history.html",
+        deck: "Filoviridae events, geography, taxonomy, and outcomes."
+      },
       {
         key: "plagues",
         label: "Great Plagues",

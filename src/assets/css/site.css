@@ -677,6 +677,19 @@
   line-height: 1.7;
 }
 
+.site-footer__fine a {
+  color: var(--site-paper-dim);
+  text-decoration: underline;
+  text-decoration-color: rgba(233, 229, 217, .25);
+  text-underline-offset: 2px;
+  transition: color .15s ease, text-decoration-color .15s ease;
+}
+
+.site-footer__fine a:hover {
+  color: var(--site-gold);
+  text-decoration-color: var(--site-gold);
+}
+
 .site-footer__credit {
   color: var(--site-paper-dim);
   font-family: "Space Mono", monospace;
