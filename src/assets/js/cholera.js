@@ -1,31 +1,25 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   TUBERCULOSIS — "The world consumption created"
-   Mapbox burden map · top-burden list · milestone wave-in · resistance ladder
+   CHOLERA — "Curable in hours, never eradicated"
+   Mapbox burden map · top-outbreak list · milestone wave-in · dehydration ladder
    All data animates in on scroll; map bubbles oscillate.
-   Figures are approximate WHO Global TB Report estimates.
+   Figures are approximate, drawn from WHO and GTFCC reporting.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const TB_TOKEN = "pk.eyJ1Ijoicm9uZG9taW5ndWUiLCJhIjoiYTM4ODdRdyJ9.jcyNgQQolgrKfs6SKBXNJw";
+const CHO_TOKEN = "pk.eyJ1Ijoicm9uZG9taW5ndWUiLCJhIjoiYTM4ODdRdyJ9.jcyNgQQolgrKfs6SKBXNJw";
 
 const BURDEN = [
-  { c: 'India',        cases: 2800000, deaths: 315000, coord: [79, 22],  mdr: true },
-  { c: 'Indonesia',    cases: 1090000, deaths: 130000, coord: [113, -1] },
-  { c: 'China',        cases: 740000,  deaths: 27000,  coord: [104, 35] },
-  { c: 'Philippines',  cases: 740000,  deaths: 55000,  coord: [122, 12], mdr: true },
-  { c: 'Pakistan',     cases: 660000,  deaths: 51000,  coord: [69, 30],  mdr: true },
-  { c: 'Nigeria',      cases: 500000,  deaths: 125000, coord: [8, 9] },
-  { c: 'Bangladesh',   cases: 380000,  deaths: 42000,  coord: [90, 24] },
-  { c: 'DR Congo',     cases: 340000,  deaths: 44000,  coord: [23, -3] },
-  { c: 'South Africa', cases: 270000,  deaths: 56000,  coord: [25, -29], mdr: true },
-  { c: 'Myanmar',      cases: 180000,  deaths: 22000,  coord: [96, 21] },
-  { c: 'Vietnam',      cases: 170000,  deaths: 12000,  coord: [106, 16] },
-  { c: 'Brazil',       cases: 100000,  deaths: 6500,   coord: [-51, -10] },
-  { c: 'Russia',       cases: 50000,   deaths: 5500,   coord: [90, 61],  mdr: true },
-  { c: 'Ukraine',      cases: 32000,   deaths: 4000,   coord: [31, 49],  mdr: true }
+  { c: 'Yemen',        cases: 2500000, coord: [48, 15.5], severe: true },
+  { c: 'Haiti',        cases: 820000,  coord: [-72.3, 18.9], severe: true },
+  { c: 'DR Congo',     cases: 340000,  coord: [23, -3] },
+  { c: 'Nigeria',      cases: 220000,  coord: [8, 9] },
+  { c: 'Somalia',      cases: 130000,  coord: [45.3, 5] },
+  { c: 'Mozambique',   cases: 100000,  coord: [35, -18] },
+  { c: 'Malawi',       cases: 59000,   coord: [34, -13.5], severe: true },
+  { c: 'Syria',        cases: 130000,  coord: [38.5, 35] }
 ];
 
 const REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 2).replace(/\.?0+$/, '') + 'M'
+const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1).replace(/\.?0+$/, '') + 'M'
               : n >= 1e3 ? Math.round(n / 1e3) + 'K' : String(n);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -59,7 +53,6 @@ function countUp(el, spec, duration) {
   })(t0);
 }
 
-// Count meaningful magnitudes only (skip trivial 1-of-8 style flips)
 function armCount(el) {
   const raw = el.textContent.trim();
   const spec = parseNum(raw);
@@ -75,28 +68,29 @@ function animateStatGroup(container, sel) {
   inView(container, () => nodes.forEach((n, i) => { if (specs[i]) countUp(n, specs[i]); }));
 }
 
-/* ── Hero + Mumbai stat count-ups ─────────────────────────────────────────── */
+/* ── Hero + spotlight stat count-ups ──────────────────────────────────────── */
 (function () {
-  const hero = document.querySelector('.tb-hero-stats');
+  const hero = document.querySelector('.cho-hero-stats');
   if (hero) animateStatGroup(hero, '.n');
-  const facts = document.querySelector('.tb-mumbai-facts');
+  const facts = document.querySelector('.cho-spotlight-facts');
   if (facts) animateStatGroup(facts, '.n');
 })();
 
-/* ── Highest-burden list: wave in, bars grow, numbers count ───────────────── */
+/* ── Largest recent outbreaks: wave in, bars grow, numbers count ─────────── */
 (function () {
-  const host = document.getElementById('tbTopList');
+  const host = document.getElementById('choTopList');
   if (!host) return;
-  const max = BURDEN[0].cases;
-  host.innerHTML = BURDEN.slice(0, 8).map((d, i) => `
-    <div class="tb-row${d.mdr ? ' is-mdr' : ''}" style="--i:${i}">
-      <span class="tb-row-c">${esc(d.c)}</span>
-      <span class="tb-row-track"><span class="tb-row-fill" data-w="${(d.cases / max * 100).toFixed(1)}"></span></span>
-      <span class="tb-row-n">${fmt(d.cases)}</span>
+  const rows = [...BURDEN].sort((a, b) => b.cases - a.cases);
+  const max = rows[0].cases;
+  host.innerHTML = rows.map((d, i) => `
+    <div class="cho-row${d.severe ? ' is-severe' : ''}" style="--i:${i}">
+      <span class="cho-row-c">${esc(d.c)}</span>
+      <span class="cho-row-track"><span class="cho-row-fill" data-w="${(d.cases / max * 100).toFixed(1)}"></span></span>
+      <span class="cho-row-n">${fmt(d.cases)}</span>
     </div>`).join('');
 
-  const fills = [...host.querySelectorAll('.tb-row-fill')];
-  const nums = [...host.querySelectorAll('.tb-row-n')];
+  const fills = [...host.querySelectorAll('.cho-row-fill')];
+  const nums = [...host.querySelectorAll('.cho-row-n')];
   const specs = nums.map(n => armCount(n));
   if (REDUCE) { fills.forEach(f => f.style.width = f.dataset.w + '%'); }
   inView(host, () => {
@@ -108,7 +102,7 @@ function animateStatGroup(container, sel) {
 
 /* ── Milestone timeline — horizontal coverflow ────────────────────────────── */
 (function () {
-  const tl = document.getElementById('tbTimeline');
+  const tl = document.getElementById('choTimeline');
   const mini = document.getElementById('tlMini');
   const prevBtn = document.getElementById('tlPrev');
   const nextBtn = document.getElementById('tlNext');
@@ -130,8 +124,6 @@ function animateStatGroup(container, sel) {
     cards.forEach((c, j) => c.classList.toggle('is-active', j === i));
     nodes.forEach((n, j) => n.classList.toggle('is-active', j === i));
     const activeNode = nodes[i];
-    // only sync the mini-nav's own scroll — never let this drag the page's vertical
-    // scroll to reveal a section the visitor hasn't scrolled to yet
     const miniRect = mini.getBoundingClientRect();
     const onScreen = miniRect.bottom > 0 && miniRect.top < (window.innerHeight || document.documentElement.clientHeight);
     if (activeNode && onScreen) activeNode.scrollIntoView({ block: 'nearest', inline: 'center', behavior: REDUCE ? 'auto' : 'smooth' });
@@ -185,67 +177,62 @@ function animateStatGroup(container, sel) {
   window.addEventListener('resize', onScroll);
 })();
 
-/* ── The descent into resistance — steps reveal, bars grow, pct count ─────── */
+/* ── The race against dehydration — steps reveal, bars grow, pct count ────── */
 (function () {
-  const host = document.getElementById('tbLadder');
+  const host = document.getElementById('choLadder');
   if (!host) return;
   const STEPS = [
-    { tier: 'Drug-susceptible TB', tag: 'DS-TB', lost: 'Nothing — all four first-line drugs still work.', success: 85, dur: '6 months', c: 'teal' },
-    { tier: 'Isoniazid-resistant', tag: 'Hr-TB', lost: 'Isoniazid, the fastest killer of the four.', success: 78, dur: '6–9 months', c: 'teal' },
-    { tier: 'Multidrug-resistant', tag: 'MDR-TB', lost: 'Isoniazid + rifampicin — the two best drugs.', success: 63, dur: '9–20 months', c: 'gold' },
-    { tier: 'Pre-extensively resistant', tag: 'Pre-XDR', lost: '…and the fluoroquinolones.', success: 52, dur: '18+ months', c: 'gold' },
-    { tier: 'Extensively resistant', tag: 'XDR-TB', lost: '…and bedaquiline or linezolid, the last good options.', success: 40, dur: '18–24 months', c: 'red' },
-    { tier: '“Totally drug-resistant”', tag: 'Mumbai · 2011', lost: 'Every drug on the shelf.', success: 14, dur: 'no reliable cure*', c: 'severe' }
+    { tier: 'Mild dehydration', tag: '<5% fluid loss', note: 'Thirst and restlessness — oral rehydration alone is enough.', fatal: 1, dur: 'early hours', c: 'teal' },
+    { tier: 'Moderate dehydration', tag: '5–9% fluid loss', note: 'Sunken eyes, low blood pressure, rapid pulse — still reversible with ORS or IV fluids.', fatal: 10, dur: 'within a day', c: 'gold' },
+    { tier: 'Severe dehydration', tag: '≥10% fluid loss', note: 'Hypovolemic shock begins; without rapid IV fluids, organs start failing.', fatal: 50, dur: 'hours, untreated', c: 'red' },
+    { tier: 'Untreated, historically', tag: 'no care reached', note: 'In outbreaks with no access to care at all, roughly half of severe cases have died.', fatal: 70, dur: 'if no care at all', c: 'severe' },
+    { tier: 'With oral rehydration therapy', tag: 'any stage, treated in time', note: 'Clean water, sugar, and salt — costing pennies — collapse that same fatality rate below 1%.', fatal: 1, dur: 'if treated in time', c: 'teal' }
   ];
   host.innerHTML = STEPS.map((s, i) => `
-    <div class="tb-step tb-step-${s.c}" style="--i:${i};--indent:${i}" tabindex="0">
-      <div class="tb-step-head">
-        <span class="tb-step-tag">${esc(s.tag)}</span>
-        <b class="tb-step-tier disp">${esc(s.tier)}</b>
+    <div class="cho-step cho-step-${s.c}" style="--i:${i};--indent:${i < 4 ? i : 0}" tabindex="0">
+      <div class="cho-step-head">
+        <span class="cho-step-tag">${esc(s.tag)}</span>
+        <b class="cho-step-tier disp">${esc(s.tier)}</b>
       </div>
-      <div class="tb-step-bar"><span class="tb-step-fill" data-w="${s.success}"></span><span class="tb-step-pct" data-pct="${s.success}">${i === STEPS.length - 1 ? '0*' : '0'}%</span></div>
-      <div class="tb-step-meta"><span class="tb-step-lost">Lost: ${esc(s.lost)}</span><span class="tb-step-dur">${esc(s.dur)}</span></div>
+      <div class="cho-step-bar"><span class="cho-step-fill" data-w="${s.fatal}"></span><span class="cho-step-pct" data-pct="${s.fatal}">0%</span></div>
+      <div class="cho-step-meta"><span class="cho-step-lost">${esc(s.note)}</span><span class="cho-step-dur">${esc(s.dur)}</span></div>
     </div>`).join('') +
-    `<p class="tb-ladder-foot">Cure rates are historical and approximate; the last step reflects outcomes <em>before</em> the bedaquiline-based BPaLM regimen, which now cures many once-untreatable cases in six months.</p>`;
+    `<p class="cho-ladder-foot">Fatality figures are illustrative, drawn from historical outbreak literature on untreated vs. treated cholera — actual rates vary by outbreak, age, and underlying health.</p>`;
 
-  const steps = [...host.querySelectorAll('.tb-step')];
-  const fills = [...host.querySelectorAll('.tb-step-fill')];
-  const pcts = [...host.querySelectorAll('.tb-step-pct')];
-  if (REDUCE) { fills.forEach(f => f.style.width = f.dataset.w + '%'); pcts.forEach(p => p.textContent = p.dataset.pct + (p.textContent.includes('*') ? '%*' : '%')); }
+  const fills = [...host.querySelectorAll('.cho-step-fill')];
+  const pcts = [...host.querySelectorAll('.cho-step-pct')];
+  if (REDUCE) { fills.forEach(f => f.style.width = f.dataset.w + '%'); pcts.forEach(p => p.textContent = p.dataset.pct + '%'); }
   inView(host, () => {
     host.classList.add('revealed');
     fills.forEach((f, i) => setTimeout(() => { f.style.width = f.dataset.w + '%'; }, 140 + i * 90));
     pcts.forEach((p, i) => {
-      const star = p.textContent.includes('*');
       const target = +p.dataset.pct;
-      setTimeout(() => countUp(p, { prefix: '', suffix: '%' + (star ? '*' : ''), target, decimals: 0 }, 850), 140 + i * 90);
+      setTimeout(() => countUp(p, { prefix: '', suffix: '%', target, decimals: 0 }, 850), 140 + i * 90);
     });
   });
 })();
 
 /* ── Mapbox burden map (bubbles oscillate) ────────────────────────────────── */
 (function () {
-  const el = document.getElementById('tbMap');
-  const fallback = document.getElementById('tbMapFallback');
+  const el = document.getElementById('choMap');
+  const fallback = document.getElementById('choMapFallback');
   if (!el) return;
   function showFallback() { if (fallback) fallback.hidden = false; el.style.display = 'none'; }
   if (!window.mapboxgl) { showFallback(); return; }
 
   let map;
   try {
-    mapboxgl.accessToken = TB_TOKEN;
+    mapboxgl.accessToken = CHO_TOKEN;
     map = new mapboxgl.Map({
-      container: 'tbMap', style: 'mapbox://styles/mapbox/dark-v11',
-      center: [64, 16], zoom: 1.35, minZoom: 1, maxZoom: 6,
+      container: 'choMap', style: 'mapbox://styles/mapbox/dark-v11',
+      center: [30, 10], zoom: 1.35, minZoom: 1, maxZoom: 6,
       projection: 'mercator', attributionControl: true
     });
   } catch (err) { showFallback(); return; }
 
-  map.on('error', () => { if (!document.querySelector('#tbMap canvas')) showFallback(); });
+  map.on('error', () => { if (!document.querySelector('#choMap canvas')) showFallback(); });
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right');
 
-  // Scroll/drag/pinch stay off until the visitor clicks or taps into the map —
-  // otherwise scrolling the page over it hijacks the gesture to zoom/pan instead.
   map.scrollZoom.disable();
   map.dragPan.disable();
   map.touchZoomRotate.disable();
@@ -258,51 +245,49 @@ function animateStatGroup(container, sel) {
 
   const features = BURDEN.map(d => ({
     type: 'Feature', geometry: { type: 'Point', coordinates: d.coord },
-    properties: { c: d.c, cases: d.cases, deaths: d.deaths, mdr: d.mdr ? 1 : 0 }
+    properties: { c: d.c, cases: d.cases, severe: d.severe ? 1 : 0 }
   }));
-  const glowR = k => ['interpolate', ['linear'], ['sqrt', ['get', 'cases']], 0, 6 * k, 1673, 62 * k];
-  const dotR = k => ['interpolate', ['linear'], ['sqrt', ['get', 'cases']], 0, 3 * k, 1673, 30 * k];
+  const glowR = k => ['interpolate', ['linear'], ['sqrt', ['get', 'cases']], 0, 6 * k, 1581, 62 * k];
+  const dotR = k => ['interpolate', ['linear'], ['sqrt', ['get', 'cases']], 0, 3 * k, 1581, 30 * k];
 
   map.on('load', () => {
-    map.addSource('tb', { type: 'geojson', data: { type: 'FeatureCollection', features } });
-    map.addLayer({ id: 'tb-glow', type: 'circle', source: 'tb',
-      paint: { 'circle-radius': glowR(1), 'circle-color': '#e96a2f', 'circle-opacity': 0.10, 'circle-blur': 1 } });
-    map.addLayer({ id: 'tb-dot', type: 'circle', source: 'tb',
+    map.addSource('cho', { type: 'geojson', data: { type: 'FeatureCollection', features } });
+    map.addLayer({ id: 'cho-glow', type: 'circle', source: 'cho',
+      paint: { 'circle-radius': glowR(1), 'circle-color': '#2b8f96', 'circle-opacity': 0.12, 'circle-blur': 1 } });
+    map.addLayer({ id: 'cho-dot', type: 'circle', source: 'cho',
       paint: {
         'circle-radius': dotR(1),
-        'circle-color': ['case', ['==', ['get', 'mdr'], 1], '#edbb2e', '#e96a2f'],
-        'circle-opacity': 0.30,
-        'circle-stroke-color': ['case', ['==', ['get', 'mdr'], 1], '#edbb2e', '#e96a2f'],
+        'circle-color': ['case', ['==', ['get', 'severe'], 1], '#c84038', '#2b8f96'],
+        'circle-opacity': 0.32,
+        'circle-stroke-color': ['case', ['==', ['get', 'severe'], 1], '#c84038', '#2b8f96'],
         'circle-stroke-width': 1.4, 'circle-stroke-opacity': 0.9
       } });
-    map.addLayer({ id: 'tb-label', type: 'symbol', source: 'tb',
-      filter: ['>', ['get', 'cases'], 320000],
+    map.addLayer({ id: 'cho-label', type: 'symbol', source: 'cho',
+      filter: ['>', ['get', 'cases'], 90000],
       layout: { 'text-field': ['get', 'c'], 'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
         'text-size': 11, 'text-offset': [0, 1.5], 'text-anchor': 'top', 'text-allow-overlap': false },
       paint: { 'text-color': 'rgba(233,229,217,.82)', 'text-halo-color': 'rgba(6,9,8,.9)', 'text-halo-width': 1.4 } });
 
-    const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 10, className: 'tb-popup' });
+    const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 10, className: 'cho-popup' });
     const enter = e => {
       map.getCanvas().style.cursor = 'pointer';
       const p = e.features[0].properties;
-      const cfr = Math.round(p.deaths / p.cases * 100);
       popup.setLngLat(e.features[0].geometry.coordinates)
-        .setHTML(`<span class="tb-pop-c">${esc(p.c)}</span><b class="tb-pop-n">${fmt(p.cases)}</b><span class="tb-pop-k">estimated cases / year</span><span class="tb-pop-d">~${fmt(p.deaths)} deaths · ${cfr}% ${p.mdr ? '· drug-resistant hotspot' : ''}</span>`)
+        .setHTML(`<span class="cho-pop-c">${esc(p.c)}</span><b class="cho-pop-n">${fmt(p.cases)}</b><span class="cho-pop-k">estimated cases, recent major outbreak</span>${p.severe ? '<span class="cho-pop-d">among the largest on record</span>' : ''}`)
         .addTo(map);
     };
     const leave = () => { map.getCanvas().style.cursor = ''; popup.remove(); };
-    ['tb-dot', 'tb-glow'].forEach(id => { map.on('mouseenter', id, enter); map.on('mouseleave', id, leave); });
+    ['cho-dot', 'cho-glow'].forEach(id => { map.on('mouseenter', id, enter); map.on('mouseleave', id, leave); });
 
-    // gentle oscillation — the burden "breathes"
     if (!REDUCE) {
       const t0 = performance.now();
       (function pulse(now) {
         const phase = (now - t0) / 1600;
         const gk = 1 + 0.16 * Math.sin(phase);
         const dk = 1 + 0.06 * Math.sin(phase);
-        map.setPaintProperty('tb-glow', 'circle-radius', glowR(gk));
-        map.setPaintProperty('tb-glow', 'circle-opacity', 0.08 + 0.07 * (0.5 + 0.5 * Math.sin(phase)));
-        map.setPaintProperty('tb-dot', 'circle-radius', dotR(dk));
+        map.setPaintProperty('cho-glow', 'circle-radius', glowR(gk));
+        map.setPaintProperty('cho-glow', 'circle-opacity', 0.09 + 0.07 * (0.5 + 0.5 * Math.sin(phase)));
+        map.setPaintProperty('cho-dot', 'circle-radius', dotR(dk));
         requestAnimationFrame(pulse);
       })(t0);
     }

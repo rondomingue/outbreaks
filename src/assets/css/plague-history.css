@@ -2,9 +2,9 @@
     --ink:#080b0a; --ink-1:#0d1110; --ink-2:#111815;
     --bone:#e9e5d9; --bone-dim:#b9b29d; --muted:#746f61; --faint:#4a534d;
     --line:rgba(233,229,217,.10); --line-2:rgba(233,229,217,.06);
-    --gold:#e3b23c; --gold-dim:#a07c28; --gold-soft:rgba(227,178,60,.12);
-    --red:#e4572e;  --red-soft:rgba(228,87,46,.12);
-    --teal:#33a58a; --teal-soft:rgba(51,165,138,.12);
+    --gold:#edbb2e; --gold-dim:#a07c28; --gold-soft:rgba(237, 187, 46,.12);
+    --red:#e96a2f;  --red-soft:rgba(233, 106, 47,.12);
+    --teal:#2b8f96; --teal-soft:rgba(43, 143, 150,.12);
     --maxw:1360px;
     --number-serif:'Libre Baskerville',Georgia,serif;
   }
@@ -14,8 +14,8 @@
     font-family:'Archivo',system-ui,sans-serif;font-weight:400;font-size:15px;line-height:1.55;
     letter-spacing:.005em;-webkit-font-smoothing:antialiased;
     background-image:
-      radial-gradient(900px 540px at 82% 2%, rgba(51,165,138,.06), transparent 62%),
-      radial-gradient(860px 500px at 14% 94%, rgba(228,87,46,.05), transparent 60%);
+      radial-gradient(900px 540px at 82% 2%, rgba(43, 143, 150,.06), transparent 62%),
+      radial-gradient(860px 500px at 14% 94%, rgba(233, 106, 47,.05), transparent 60%);
     background-attachment:fixed;
   }
   .mono{font-family:'Space Mono',ui-monospace,monospace}
@@ -111,7 +111,7 @@
   .bt-ev .spine::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:1px;height:calc(100% + 28px);background:var(--line)}
   .bt-ev .spine::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;margin-left:-5px;border:2px solid var(--muted);background:var(--ink)}
   .bt-ev.plague .spine::after{border-color:var(--gold);background:var(--gold-soft)}
-  .bt-ev.plague.major .spine::after{width:14px;height:14px;margin-left:-7px;border-color:var(--gold);background:rgba(227,178,60,.3)}
+  .bt-ev.plague.major .spine::after{width:14px;height:14px;margin-left:-7px;border-color:var(--gold);background:rgba(237, 187, 46,.3)}
   .bt-ev.other .spine::after{border-color:var(--faint)}
   .bt-ev.bio .spine::after{border-color:var(--teal);background:var(--teal-soft)}
   .bt-ev .content{}

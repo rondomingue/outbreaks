@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
     {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+    <link rel="icon" href="/assets/img/favicon.ico?v={{ assetVersion }}" sizes="32x32">
+    <link rel="icon" href="/assets/img/favicon-192.png?v={{ assetVersion }}" type="image/png" sizes="192x192">
+    <link rel="icon" href="/assets/img/favicon-512.png?v={{ assetVersion }}" type="image/png" sizes="512x512">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v={{ assetVersion }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Libre+Baskerville:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -32,7 +36,21 @@
           <span class="site-topnav__ind" data-site-topnav-ind aria-hidden="true"></span>
           {% for item in navigation %}
             {% if item.key != 'dashboard' %}
-              <a href="{{ item.href }}"{% if active == item.key %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>
+              {% if item.children %}
+                <div class="site-topnav-group{% if activeGroup == item.key %} is-active{% endif %}">
+                  <button type="button" class="site-topnav-group-trigger" aria-haspopup="true" aria-expanded="false">{{ item.label }}<svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+                  <div class="site-topnav-dropdown">
+                    {% for child in item.children %}
+                      <a href="{{ child.href }}"{% if active == child.key %} class="is-active" aria-current="page"{% endif %}>
+                        <span class="site-topnav-dropdown-label">{{ child.label }}</span>
+                        <span class="site-topnav-dropdown-deck">{{ child.deck }}</span>
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <a href="{{ item.href }}"{% if active == item.key %} class="is-active" aria-current="page"{% endif %}>{{ item.label }}</a>
+              {% endif %}
             {% endif %}
           {% endfor %}
         </nav>
@@ -51,10 +69,20 @@
     <aside class="site-sidenav" id="site-sidenav" data-site-sidenav aria-hidden="true">
       <nav class="site-nav" aria-label="Primary navigation">
         {% for item in navigation %}
-          <a href="{{ item.href }}" class="{% if active == item.key %}is-active{% endif %}">
-            <span>{{ item.label }}</span>
-            <small>{{ item.deck }}</small>
-          </a>
+          {% if item.children %}
+            <span class="site-nav-group-label">{{ item.label }}</span>
+            {% for child in item.children %}
+              <a href="{{ child.href }}" class="{% if active == child.key %}is-active{% endif %}">
+                <span>{{ child.label }}</span>
+                <small>{{ child.deck }}</small>
+              </a>
+            {% endfor %}
+          {% else %}
+            <a href="{{ item.href }}" class="{% if active == item.key %}is-active{% endif %}">
+              <span>{{ item.label }}</span>
+              <small>{{ item.deck }}</small>
+            </a>
+          {% endif %}
         {% endfor %}
       </nav>
     </aside>

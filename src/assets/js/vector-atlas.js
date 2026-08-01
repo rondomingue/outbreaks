@@ -22,7 +22,7 @@ const ERA_ROUTES = [1, 1, 2, 3, 3];
 
 const VECTORS = [
   {
-    key: 'mosquito', label: 'Mosquito', color: '#e4572e',
+    key: 'mosquito', label: 'Mosquito', color: '#e96a2f',
     title: 'Mosquito Empire',
     deck: 'Warm-water urbanization, ports, rainfall, and peri-domestic breeding carry malaria, yellow fever, dengue, chikungunya, and Zika.',
     diseases: 'Malaria · Yellow fever · Dengue · Zika · Chikungunya',
@@ -47,7 +47,7 @@ const VECTORS = [
     ]
   },
   {
-    key: 'flea', label: 'Flea', color: '#e3b23c',
+    key: 'flea', label: 'Flea', color: '#edbb2e',
     title: 'Rodent & Flea',
     deck: 'Rodent-flea-plague systems move through grain storage, caravan corridors, ports, and disturbed rodent ecologies.',
     diseases: 'Plague (Yersinia pestis)',
@@ -96,7 +96,7 @@ const VECTORS = [
     ]
   },
   {
-    key: 'rodent', label: 'Rodent', color: '#33a58a',
+    key: 'rodent', label: 'Rodent', color: '#2b8f96',
     title: 'Rodent Reservoir',
     deck: 'Rodent-borne infections follow food storage, housing quality, field labor, rainfall pulses, and occupational exposure.',
     diseases: 'Lassa · Hantavirus · Arenaviruses',
@@ -293,9 +293,9 @@ function buildGlobe(land) {
   shade.append('stop').attr('offset', '52%').attr('stop-color', '#0b1210');
   shade.append('stop').attr('offset', '100%').attr('stop-color', '#040706');
   const atmo = defs.append('radialGradient').attr('id', 'atmo').attr('cx', '50%').attr('cy', '50%').attr('r', '50%');
-  atmo.append('stop').attr('offset', '78%').attr('stop-color', 'rgba(51,165,138,0)');
-  atmo.append('stop').attr('offset', '93%').attr('stop-color', 'rgba(51,165,138,.10)');
-  atmo.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(51,165,138,0)');
+  atmo.append('stop').attr('offset', '78%').attr('stop-color', 'rgba(43, 143, 150,0)');
+  atmo.append('stop').attr('offset', '93%').attr('stop-color', 'rgba(43, 143, 150,.10)');
+  atmo.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(43, 143, 150,0)');
 
   const gAtmo = svg.append('circle').attr('class', 'globe-atmo');
   const gOcean = svg.append('path').attr('class', 'globe-ocean');

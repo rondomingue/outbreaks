@@ -1,0 +1,129 @@
+---
+layout: layouts/base.njk
+title: "Smallpox · The one disease we ever beat — Outbreak Intelligence"
+description: "Smallpox is the only human disease ever eradicated. A history from variolation to Jenner's vaccine, the ring-vaccination strategy that beat it, and the one way it could still come back."
+active: smallpox
+activeGroup: histories
+permalink: /smallpox.html
+pageCss: /assets/css/smallpox.css
+pageJs: /assets/js/smallpox.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="sp">
+  <section class="sp-hero">
+    <span class="eyebrow"><em>Variola major</em> · the only human disease ever eradicated</span>
+    <h1 class="disp">The <span class="light">one disease</span><br><span class="gold">we ever beat.</span></h1>
+    <p class="lede">Smallpox killed on a scale almost nothing else has — roughly a third of everyone it infected, and more people in the 20th century than every war of that century combined. Then, for the only time in human history, a coordinated global campaign made a disease disappear. It did not happen by accident, and it did not stay finished quite as cleanly as the record likes to say.</p>
+    <div class="sp-hero-stats" aria-label="Smallpox at a glance">
+      <div><span class="n">1980</span><span class="k">WHO certifies global eradication — the only human disease ever eliminated</span></div>
+      <div><span class="n">~30%</span><span class="k">historical case-fatality rate of <em>Variola major</em></span></div>
+      <div><span class="n">300–500M</span><span class="k">deaths in the 20th century alone</span></div>
+      <div><span class="n">1796</span><span class="k">year Edward Jenner made the first vaccine, against any disease</span></div>
+    </div>
+  </section>
+
+  <section class="sp-section sp-map-section" aria-label="Where smallpox made its last stand">
+    <div class="section-head">
+      <span class="eyebrow">Where it went last</span>
+      <h2 class="disp">The map that shrank, region by region.</h2>
+    </div>
+    <p class="sp-sub">Every other page on this site shows a disease spreading. This one runs in reverse: a decade-long retreat, continent by continent, that ended with a single unluckier footnote after the campaign had already succeeded. Circles mark the last confirmed case in each region and when it happened.</p>
+    <div class="sp-map-shell">
+      <div id="spMap" aria-label="World map of smallpox's last cases by region and year"></div>
+      <div id="spMapFallback" class="sp-map-fallback" hidden>
+        <span class="eyebrow">Retreat map</span>
+        <p>The interactive map could not load. The last-case milestones — Brazil (1971), India and Bangladesh (1975), Ethiopia (1976), Somalia (1977), and Birmingham, UK (1978) — remain listed below.</p>
+      </div>
+      <div class="sp-map-key">
+        <div class="sp-legend">
+          <span class="sp-lg sp-lg-natural"></span>Last natural case in region
+          <span class="sp-lg sp-lg-lab"></span>Laboratory-acquired, not natural
+        </div>
+        <span class="sp-hint">Hover or tap a point for detail</span>
+      </div>
+    </div>
+    <div class="sp-toplist" id="spTopList" aria-label="Smallpox's last stands, in order"></div>
+  </section>
+
+  <section class="sp-section sp-history">
+    <div class="section-head">
+      <span class="eyebrow">A little history</span>
+      <h2 class="disp">The one time we finished the job.</h2>
+    </div>
+    <div class="sp-history-grid">
+      <article>
+        <h3 class="disp">An old defense, badly aimed.</h3>
+        <p>Centuries before Jenner, healers across China, India, and the Ottoman Empire practiced <em>variolation</em> — deliberately infecting a healthy person with matter from a mild smallpox case to trigger immunity. It worked, most of the time. It also killed roughly 1–2% of the people it was meant to protect, and could still spread the disease to others. Lady Mary Wortley Montagu, who had survived smallpox and lost a brother to it, brought the practice to England in 1721.</p>
+      </article>
+      <article>
+        <h3 class="disp">Then a milkmaid's disease pointed the way out.</h3>
+        <p>In 1796, Edward Jenner noticed that milkmaids who'd caught cowpox — a mild relative of smallpox — never seemed to catch the real thing. He deliberately infected an eight-year-old boy with cowpox, then exposed him to smallpox itself. The boy stayed healthy. It was reckless by any modern standard, and it was also the first vaccine ever made against any disease — <em>vaccina</em>, Latin for "of the cow," gave the practice its name.</p>
+      </article>
+    </div>
+
+    <div class="sp-timeline-outer">
+      <button type="button" class="tl-arrow prev" id="tlPrev" aria-label="Previous milestone">‹</button>
+      <div class="sp-timeline" id="spTimeline" aria-label="Smallpox milestones" tabindex="0">
+        <div class="tl-sp" aria-hidden="true"></div>
+        <div class="tl-ev"><div class="yr">Antiquity</div><div class="body"><b class="disp">The pharaoh's scars</b><p>Pustular lesions consistent with smallpox are found on the mummified skin of Ramesses V, who died around 1145 BCE — the earliest physical evidence of the disease.</p></div></div>
+        <div class="tl-ev"><div class="yr">1000s CE</div><div class="body"><b class="disp">Variolation begins</b><p>Physicians in China and India are already deliberately exposing patients to matter from mild cases, trading a small, controlled risk for immunity.</p></div></div>
+        <div class="tl-ev"><div class="yr">1721</div><div class="body"><b class="disp">Lady Montagu's import</b><p>Having survived smallpox and lost her brother to it, Lady Mary Wortley Montagu brings variolation from the Ottoman Empire to England.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1796</div><div class="body"><b class="disp">Jenner's cowpox gambit</b><p>Edward Jenner tests his cowpox theory on eight-year-old James Phipps, creating the first vaccine against any disease.</p></div></div>
+        <div class="tl-ev"><div class="yr">1853</div><div class="body"><b class="disp">Made compulsory</b><p>Britain's Vaccination Act mandates smallpox vaccination for infants — one of the first national vaccine mandates anywhere.</p></div></div>
+        <div class="tl-ev"><div class="yr">1950s</div><div class="body"><b class="disp">Gone from the rich world</b><p>Routine vaccination clears smallpox from North America and most of Europe, even as it still kills millions a year elsewhere.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">1959</div><div class="body"><b class="disp">A resolution with no teeth</b><p>The World Health Assembly calls for global eradication, but funding and commitment are thin. The disease barely notices.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1966</div><div class="body"><b class="disp">Foege's ring</b><p>In Nigeria, CDC epidemiologist William Foege runs short of vaccine and abandons mass campaigns for surveillance-and-containment instead — ring vaccination works better than the original plan ever did.</p></div></div>
+        <div class="tl-ev"><div class="yr">1967</div><div class="body"><b class="disp">The Intensified Eradication Programme</b><p>WHO relaunches the campaign with real funding, D.A. Henderson leading a coordinated global push, and ring vaccination as doctrine.</p></div></div>
+        <div class="tl-ev"><div class="yr">1971</div><div class="body"><b class="disp">Gone from South America</b><p>Brazil records the last case anywhere in the Americas.</p></div></div>
+        <div class="tl-ev"><div class="yr">1975</div><div class="body"><b class="disp">Gone from Asia</b><p>Rahima Banu, age two, in Bangladesh, becomes the last person infected with <em>Variola major</em> — the deadlier of the two smallpox strains — anywhere on Earth.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1977</div><div class="body"><b class="disp">The last natural case</b><p>Ali Maow Maalin, a hospital cook in Merca, Somalia, becomes the last person ever infected with smallpox outside a laboratory.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">1978</div><div class="body"><b class="disp">The last death</b><p>Janet Parker dies in Birmingham after a laboratory containment failure — the disease's final victim, a year after its natural extinction.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1980</div><div class="body"><b class="disp">Certified gone</b><p>The World Health Assembly formally certifies the global eradication of smallpox — the only time humanity has erased a human disease from the wild.</p></div></div>
+        <div class="tl-ev"><div class="yr">2022</div><div class="body"><b class="disp">The gap it left</b><p>Mpox, a viral cousin, spreads globally for the first time — moving into some of the immunity gap left by decades without routine smallpox vaccination.</p></div></div>
+        <div class="tl-sp" aria-hidden="true"></div>
+      </div>
+      <button type="button" class="tl-arrow next" id="tlNext" aria-label="Next milestone">›</button>
+    </div>
+    <div class="tl-mini" id="tlMini" aria-label="Timeline navigation"></div>
+  </section>
+
+  <section class="sp-section sp-ring-section">
+    <div class="section-head">
+      <span class="eyebrow">The cool diagram</span>
+      <h2 class="disp">The ring that beat a pandemic.</h2>
+    </div>
+    <p class="sp-sub">Every other diagram on this site shows something declining. This one climbs: instead of racing to vaccinate everyone, teams found each case, then vaccinated only the ring of people around it — fast enough to break the chain before it spread further. It beat mass vaccination to zero using a fraction of the doses. Hover a step to read it.</p>
+    <div class="sp-ring" id="spRing"></div>
+  </section>
+
+  <section class="sp-section sp-spotlight">
+    <div class="section-head">
+      <span class="eyebrow">When "eradicated" wasn't quite true · Birmingham, 1978</span>
+      <h2 class="disp">The last person smallpox ever killed.</h2>
+    </div>
+    <div class="sp-spotlight-grid">
+      <article class="sp-spotlight-lead">
+        <p>By August 1978, the world's last natural case was already a year in the past. Janet Parker, a medical photographer at Birmingham Medical School, worked one floor above a research laboratory that still studied live smallpox virus. Investigators traced her infection to a fault in a shared service duct that let virus drift upward from the lab into her workspace — a decade of fieldwork undone by a few feet of ductwork.</p>
+        <p>She died on September 11, 1978, eleven months after the disease's last natural case. Her mother caught it from her and survived; the lab's director, Professor Henry Bedson, died by suicide during the investigation that followed. The lab was closed for good, and the case forced a permanent rewrite of the rules: after 1978, live smallpox virus would legally exist in only two places on Earth.</p>
+      </article>
+      <aside class="sp-spotlight-facts">
+        <div class="sp-fact"><span class="n">1978</span><span class="k">the year smallpox killed for the last time — a year <em>after</em> eradication, not before</span></div>
+        <div class="sp-fact"><span class="n">1</span><span class="k">shared ventilation duct — the containment failure that undid it</span></div>
+        <div class="sp-fact"><span class="n">2</span><span class="k">labs on Earth still legally permitted to hold the live virus, CDC (USA) and VECTOR (Russia)</span></div>
+        <div class="sp-fact sp-fact-hope"><span class="n">0</span><span class="k">confirmed human smallpox deaths since 1978 — the record still holds</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="sp-section sp-close">
+    <div class="section-head">
+      <span class="eyebrow">The reckoning</span>
+      <h2 class="disp">Beaten once. Never fully gone.</h2>
+    </div>
+    <p class="sp-close-line">Smallpox is the only disease human beings have ever erased from the wild — proof that a funded, coordinated, unglamorous public-health campaign can finish what it starts. But it's also the only disease that could come back by <b>decision</b> rather than chance: two declared stockpiles still exist, a 2017 study proved a related virus could be built from mail-order DNA, and routine vaccination ended decades ago, leaving most of the world with no immunity to the family of viruses it belongs to — a gap mpox is already finding its way into. We know exactly how to win this fight. Whether we do it again is a choice, not a rerun.</p>
+    <p class="sp-source">Figures are approximate, drawn from WHO smallpox eradication records and published historical accounts. Verify against WHO and CDC references before operational use.</p>
+  </section>
+</main>

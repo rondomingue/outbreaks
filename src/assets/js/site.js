@@ -118,8 +118,8 @@
   const topnav = document.querySelector("[data-site-topnav]");
   const indicator = topnav && topnav.querySelector("[data-site-topnav-ind]");
   if (topnav && indicator) {
-    const links = Array.from(topnav.querySelectorAll("a"));
-    const activeLink = topnav.querySelector("a.is-active");
+    const links = Array.from(topnav.querySelectorAll(":scope > a"));
+    const activeLink = topnav.querySelector(":scope > a.is-active");
 
     function moveTo(link) {
       if (!link) { topnav.classList.remove("is-ready"); return; }

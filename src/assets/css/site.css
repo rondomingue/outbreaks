@@ -5,9 +5,9 @@
   --site-muted: #756f61;
   --site-line: rgba(238, 232, 215, .14);
   --site-line-soft: rgba(238, 232, 215, .08);
-  --site-gold: #e6b43f;
-  --site-red: #d24d38;
-  --site-teal: #2f9479;
+  --site-gold: #eebb35;
+  --site-red: #d6602f;
+  --site-teal: #2c8792;
   --site-header-height: 64px;
   --site-content-max: var(--maxw, 1360px);
   --site-content-pad: 34px;
@@ -65,7 +65,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: var(--site-sidebar-top) clamp(18px, 3vw, 34px) 0 var(--site-sidebar-left);
+  padding: var(--site-sidebar-top) var(--site-sidebar-left) 0;
 }
 
 .site-header__inner > * {
@@ -247,6 +247,137 @@
     color: var(--site-red);
   }
 
+  /* Grouped nav entry — a dropdown trigger that doesn't ride the sliding
+     indicator, so it gets its own hover affordance instead. */
+  .site-topnav-group {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Bridges the gap between the trigger and the dropdown below it — without
+     this, moving the mouse from one to the other crosses dead space, the
+     hover chain breaks, and the dropdown closes before you can reach it. */
+  .site-topnav-group::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    height: 12px;
+  }
+
+  .site-topnav-group-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 11px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--site-paper-dim);
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color .2s ease, background .2s ease;
+  }
+
+  .site-topnav-group-trigger .caret {
+    width: 8px;
+    height: 5px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .2s ease;
+  }
+
+  .site-topnav-group:hover .site-topnav-group-trigger,
+  .site-topnav-group:focus-within .site-topnav-group-trigger {
+    color: var(--site-paper);
+    background: rgba(238, 232, 215, .08);
+  }
+
+  .site-topnav-group:hover .site-topnav-group-trigger .caret,
+  .site-topnav-group:focus-within .site-topnav-group-trigger .caret {
+    transform: rotate(180deg);
+  }
+
+  .site-topnav-group.is-active .site-topnav-group-trigger {
+    color: var(--site-red);
+  }
+
+  .site-topnav-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    transform: translateY(-6px);
+    z-index: 2000;
+    width: 300px;
+    padding: 8px;
+    display: grid;
+    gap: 2px;
+    background: rgb(8, 11, 13);
+    border: 1px solid rgba(238, 232, 215, .16);
+    border-radius: 12px;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, .38);
+    backdrop-filter: blur(24px) saturate(1.25);
+    -webkit-backdrop-filter: blur(24px) saturate(1.25);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .16s ease, transform .16s ease, visibility .16s;
+  }
+
+  .site-topnav-group:hover .site-topnav-dropdown,
+  .site-topnav-group:focus-within .site-topnav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .site-topnav-dropdown a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 8px;
+    color: var(--site-paper-dim);
+    text-decoration: none;
+    white-space: normal;
+    transition: background .15s ease, color .15s ease;
+  }
+
+  .site-topnav-dropdown a:hover,
+  .site-topnav-dropdown a.is-active {
+    background: rgba(238, 232, 215, .08);
+    color: var(--site-paper);
+  }
+
+  .site-topnav-dropdown-label {
+    display: block;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 14px;
+    line-height: 1.1;
+  }
+
+  .site-topnav-dropdown a.is-active .site-topnav-dropdown-label {
+    color: var(--site-red);
+  }
+
+  .site-topnav-dropdown-deck {
+    display: block;
+    margin-top: 4px;
+    color: var(--site-muted);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 10.5px;
+    line-height: 1.35;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
   /* Desktop: the logo steps out of the button — a bare, slightly larger mark
      seated on a soft dark radial halo so it stays legible over any page. */
   .site-brand {
@@ -256,7 +387,7 @@
     padding: 5px 26px 5px 10px;
     border: 0;
     border-radius: 40px;
-    background: radial-gradient(72% 135% at 34% 50%, rgba(5, 8, 7, .78) 0%, rgba(5, 8, 7, .40) 46%, rgba(5, 8, 7, 0) 76%);
+    background: radial-gradient(72% 135% at 34% 50%, rgba(5, 8, 7, .48) 0%, rgba(5, 8, 7, .24) 46%, rgba(5, 8, 7, 0) 76%);
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -265,7 +396,7 @@
   .site-brand:hover {
     border: 0;
     box-shadow: none;
-    background: radial-gradient(72% 135% at 34% 50%, rgba(5, 8, 7, .85) 0%, rgba(5, 8, 7, .46) 46%, rgba(5, 8, 7, 0) 76%);
+    background: radial-gradient(72% 135% at 34% 50%, rgba(5, 8, 7, .56) 0%, rgba(5, 8, 7, .28) 46%, rgba(5, 8, 7, 0) 76%);
   }
 
   .site-brand__logo {
@@ -327,7 +458,7 @@
   position: fixed;
   top: calc(var(--site-sidebar-top) + var(--site-nav-button-height));
   left: var(--site-sidebar-left);
-  right: clamp(18px, 3vw, 34px);
+  right: var(--site-sidebar-left);
   bottom: auto;
   z-index: 1900;
   max-height: calc(100dvh - var(--site-sidebar-top) - var(--site-nav-button-height) - 18px);
@@ -360,6 +491,8 @@
   border-color: rgba(238, 232, 215, .16);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .site-nav {
@@ -383,6 +516,24 @@
   border: 1px solid transparent;
   border-radius: 8px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .55);
+}
+
+.site-nav-group-label {
+  grid-column: 1 / -1;
+  margin: 14px 0 6px;
+  padding: 14px 12px 0;
+  border-top: 1px solid var(--site-line);
+  color: var(--site-muted);
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.site-nav-group-label:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .site-nav a span {
@@ -559,10 +710,6 @@ body.site-menu-open {
     --site-content-clearance: calc(var(--site-sidebar-top) + var(--site-nav-button-height) + 18px);
   }
 
-  .site-header__inner {
-    padding-right: var(--site-sidebar-left);
-  }
-
   .site-brand__logo {
     height: 26px;
     max-width: 54vw;
@@ -571,8 +718,6 @@ body.site-menu-open {
 
   .site-sidenav {
     top: calc(var(--site-sidebar-top) + var(--site-nav-button-height));
-    left: var(--site-sidebar-left);
-    right: var(--site-sidebar-left);
     max-height: calc(100dvh - var(--site-sidebar-top) - var(--site-nav-button-height) - 12px);
     padding: 14px var(--site-sidebar-inset) 18px;
   }

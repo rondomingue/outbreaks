@@ -6,9 +6,9 @@
   --muted: #746f61;
   --line: rgba(233, 229, 217, .10);
   --line-2: rgba(233, 229, 217, .06);
-  --red: #e4572e;
-  --teal: #33a58a;
-  --gold: #e3b23c;
+  --red: #e96a2f;
+  --teal: #2b8f96;
+  --gold: #edbb2e;
   --severe: #c84038;
   --number-serif: 'Libre Baskerville', Georgia, serif;
   --maxw: 1360px;
@@ -16,8 +16,8 @@
 
 html, body {
   background:
-    radial-gradient(900px 540px at 82% 2%, rgba(51, 165, 138, .06), transparent 62%),
-    radial-gradient(860px 500px at 14% 94%, rgba(228, 87, 46, .05), transparent 60%),
+    radial-gradient(900px 540px at 82% 2%, rgba(43, 143, 150, .06), transparent 62%),
+    radial-gradient(860px 500px at 14% 94%, rgba(233, 106, 47, .05), transparent 60%),
     var(--ink);
   background-attachment: fixed;
   color: var(--bone);
@@ -95,8 +95,8 @@ html, body {
 .tb-legend { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .tb-lg { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-left: 12px; }
 .tb-lg:first-child { margin-left: 0; }
-.tb-lg-circle { border: 1.4px solid var(--red); background: rgba(228, 87, 46, .3); }
-.tb-lg-mdr { border: 1.4px solid var(--gold); background: rgba(227, 178, 60, .3); }
+.tb-lg-circle { border: 1.4px solid var(--red); background: rgba(233, 106, 47, .3); }
+.tb-lg-mdr { border: 1.4px solid var(--gold); background: rgba(237, 187, 46, .3); }
 
 .tb-popup .mapboxgl-popup-content {
   background: rgba(8, 11, 10, .96) !important; border: 1px solid var(--line) !important;

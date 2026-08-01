@@ -1,0 +1,128 @@
+---
+layout: layouts/base.njk
+title: "Cholera · Curable in hours, never eradicated — Outbreak Intelligence"
+description: "Cholera can kill within hours of symptoms starting and has been curable since the 1970s for pennies a patient. A history from John Snow's map to the ongoing seventh pandemic, a current burden map, and the Haiti outbreak the UN denied for years."
+active: cholera
+activeGroup: histories
+permalink: /cholera.html
+pageCss: /assets/css/cholera.css
+pageJs: /assets/js/cholera.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="cho">
+  <section class="cho-hero">
+    <span class="eyebrow"><em>Vibrio cholerae</em> · seven pandemics since 1817</span>
+    <h1 class="disp">Curable in hours.<br><span class="gold">Never eradicated.</span></h1>
+    <p class="lede">Cholera can kill a healthy adult in under half a day through dehydration alone — and has been reliably curable since the 1970s with a solution of clean water, sugar, and salt that costs pennies. It's also the disease that founded modern epidemiology, decades before anyone knew what caused it. We are currently living through its seventh pandemic, which began in 1961 and has never officially ended.</p>
+    <div class="cho-hero-stats" aria-label="Cholera at a glance">
+      <div><span class="n">7</span><span class="k">pandemics since 1817 — the seventh has run since 1961</span></div>
+      <div><span class="n">~4M</span><span class="k">estimated cases worldwide every year</span></div>
+      <div><span class="n">21K–143K</span><span class="k">deaths a year, mostly preventable</span></div>
+      <div><span class="n">&lt;12 hrs</span><span class="k">time untreated severe cholera can kill</span></div>
+    </div>
+  </section>
+
+  <section class="cho-section cho-map-section" aria-label="Where cholera is active now">
+    <div class="section-head">
+      <span class="eyebrow">Where it's active now</span>
+      <h2 class="disp">Still circulating, wherever water systems fail.</h2>
+    </div>
+    <p class="cho-sub">Cholera doesn't strike at random — it follows broken sanitation, conflict, and disaster. Circles are scaled to estimated cases in recent major outbreaks; every one of these could be interrupted with clean water and functioning sewage.</p>
+    <div class="cho-map-shell">
+      <div id="choMap" aria-label="World map of major recent cholera outbreaks"></div>
+      <div id="choMapFallback" class="cho-map-fallback" hidden>
+        <span class="eyebrow">Burden field</span>
+        <p>The interactive map could not load. The active outbreak zones — Yemen, Haiti, the DRC, Nigeria, Somalia, Mozambique, Malawi, and Syria — remain listed below.</p>
+      </div>
+      <div class="cho-map-key">
+        <div class="cho-legend">
+          <span class="cho-lg cho-lg-circle"></span>Estimated cases, recent major outbreak
+          <span class="cho-lg cho-lg-severe"></span>Among the largest on record
+        </div>
+        <span class="cho-hint">Hover or tap a point for detail</span>
+      </div>
+    </div>
+    <div class="cho-toplist" id="choTopList" aria-label="Largest recent outbreaks"></div>
+  </section>
+
+  <section class="cho-section cho-history">
+    <div class="section-head">
+      <span class="eyebrow">A little history</span>
+      <h2 class="disp">The map that broke a pandemic — and a bad idea.</h2>
+    </div>
+    <div class="cho-history-grid">
+      <article>
+        <h3 class="disp">The miasma theory, disproven by a map.</h3>
+        <p>In 1854, most doctors believed cholera spread through "bad air." John Snow didn't. During a lethal outbreak in London's Soho district, he interviewed residents and mapped every death by address, tracing the cluster to a single water pump on Broad Street. He had the pump handle removed; the outbreak was already fading, but his map — dots of death clustered tightly around a well — became one of the founding acts of modern epidemiology, decades before germ theory was widely accepted.</p>
+      </article>
+      <article>
+        <h3 class="disp">The germ, found twice.</h3>
+        <p>Italian anatomist Filippo Pacini identified the cholera bacterium under a microscope that same year, 1854 — and was ignored for decades. Robert Koch is far more commonly credited with discovering it, in 1883, during an outbreak in Egypt. The bacterium wasn't formally renamed to credit Pacini's overlooked work until 1965, more than a century after he first saw it.</p>
+      </article>
+    </div>
+
+    <div class="cho-timeline-outer">
+      <button type="button" class="tl-arrow prev" id="tlPrev" aria-label="Previous milestone">‹</button>
+      <div class="cho-timeline" id="choTimeline" aria-label="Cholera milestones" tabindex="0">
+        <div class="tl-sp" aria-hidden="true"></div>
+        <div class="tl-ev"><div class="yr">1817</div><div class="body"><b class="disp">The first pandemic</b><p>Originating in the Ganges Delta, cholera spreads beyond South Asia for the first time along trade and military routes.</p></div></div>
+        <div class="tl-ev"><div class="yr">1829–51</div><div class="body"><b class="disp">Crossing oceans</b><p>The second pandemic reaches Britain, then crosses the Atlantic to the Americas.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1854</div><div class="body"><b class="disp">Snow's map</b><p>John Snow traces a Soho outbreak to the Broad Street pump, founding modern epidemiology.</p></div></div>
+        <div class="tl-ev"><div class="yr">1854</div><div class="body"><b class="disp">Pacini sees it first</b><p>Filippo Pacini identifies <em>Vibrio cholerae</em> under a microscope the same year — and is ignored for decades.</p></div></div>
+        <div class="tl-ev"><div class="yr">1883</div><div class="body"><b class="disp">Koch's rediscovery</b><p>Robert Koch isolates the cholera bacterium in Egypt, receiving the credit that outlives Pacini's earlier, overlooked work.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">1961</div><div class="body"><b class="disp">The seventh pandemic begins</b><p>A new strain, El Tor, emerges in Indonesia and spreads globally — the pandemic that, unlike the six before it, has never ended.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1965</div><div class="body"><b class="disp">Pacini's name restored</b><p>The bacterium is formally renamed <em>Vibrio cholerae</em> Pacini 1854, honoring the scientist ignored for over a century.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1971</div><div class="body"><b class="disp">Oral rehydration therapy</b><p>Researchers in Bangladesh and India prove a simple sugar-salt-water solution can replace intravenous fluids for most patients — cutting treatment cost by orders of magnitude.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">2010</div><div class="body"><b class="disp">Haiti</b><p>A country free of cholera for a century sees an outbreak begin near a UN peacekeeping base, ten months after a devastating earthquake.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">2016–21</div><div class="body"><b class="disp">Yemen's outbreak</b><p>A war-shattered water and health system produces the largest cholera outbreak in modern history — an estimated 2.5 million suspected cases.</p></div></div>
+        <div class="tl-ev"><div class="yr">2017</div><div class="body"><b class="disp">A roadmap to zero</b><p>The Global Task Force on Cholera Control sets a goal to cut deaths 90% by 2030 through surveillance, vaccination, and water infrastructure.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">2022</div><div class="body"><b class="disp">Malawi's deadliest outbreak</b><p>The country records its worst cholera outbreak in two decades, worsened by cyclone flooding and a global vaccine shortage.</p></div></div>
+        <div class="tl-ev"><div class="yr">2023</div><div class="body"><b class="disp">The vaccine runs short</b><p>Global demand for oral cholera vaccine outstrips supply so badly that the standard two-dose regimen is temporarily cut to one dose worldwide.</p></div></div>
+        <div class="tl-ev"><div class="yr">Ongoing</div><div class="body"><b class="disp">Pandemic seven, still counting</b><p>More than sixty years on, the seventh pandemic has never been declared over.</p></div></div>
+        <div class="tl-sp" aria-hidden="true"></div>
+      </div>
+      <button type="button" class="tl-arrow next" id="tlNext" aria-label="Next milestone">›</button>
+    </div>
+    <div class="tl-mini" id="tlMini" aria-label="Timeline navigation"></div>
+  </section>
+
+  <section class="cho-section cho-ladder-section">
+    <div class="section-head">
+      <span class="eyebrow">The cool diagram</span>
+      <h2 class="disp">The race against dehydration.</h2>
+    </div>
+    <p class="cho-sub">Cholera doesn't damage the body directly so much as drain it — a patient can lose more than a tenth of their body weight in fluid within hours. Left untreated, that climb in fluid loss tracks almost exactly with a climb in fatality. Treated in time, that same climb barely matters. Hover a step to read it.</p>
+    <div class="cho-ladder" id="choLadder"></div>
+  </section>
+
+  <section class="cho-section cho-spotlight">
+    <div class="section-head">
+      <span class="eyebrow">Introduced, not inherited · Haiti, 2010</span>
+      <h2 class="disp">The outbreak a country didn't have until peacekeepers arrived.</h2>
+    </div>
+    <div class="cho-spotlight-grid">
+      <article class="cho-spotlight-lead">
+        <p>Haiti had been cholera-free for over a century before October 2010 — ten months after a devastating earthquake had already killed more than 200,000 people and left much of the country's infrastructure in ruins. A cluster of severe diarrheal illness appeared along the Artibonite River, near a base housing UN peacekeepers newly arrived from Nepal, where a cholera outbreak was active at the time. Genetic testing later matched the strain to a South Asian lineage nearly identical to Nepal's.</p>
+        <p>Untreated sewage from the base had been discharged into a tributary that hundreds of thousands of Haitians used for drinking, bathing, and washing. The outbreak went on to infect roughly 820,000 people and kill nearly 10,000 over the following decade — a toll layered on top of the earthquake's own. The United Nations denied legal responsibility for years, citing diplomatic immunity, before its then Secretary-General issued a formal apology in 2016 — without an accompanying compensation fund for victims.</p>
+      </article>
+      <aside class="cho-spotlight-facts">
+        <div class="cho-fact"><span class="n">~820,000</span><span class="k">Haitians infected in the decade following the outbreak's start</span></div>
+        <div class="cho-fact"><span class="n">~10,000</span><span class="k">deaths, in a country that had recorded no cholera in living memory</span></div>
+        <div class="cho-fact"><span class="n">6 yrs</span><span class="k">between the outbreak's start and the UN's formal apology, in 2016</span></div>
+        <div class="cho-fact cho-fact-hope"><span class="n">2016</span><span class="k">Haiti finally receives a dedicated UN cholera response and elimination plan</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="cho-section cho-close">
+    <div class="section-head">
+      <span class="eyebrow">The reckoning</span>
+      <h2 class="disp">Two centuries old. Cured for pennies. Never gone.</h2>
+    </div>
+    <p class="cho-close-line">Cholera isn't a mystery of science — it's been reliably curable since the 1970s with little more than clean water, sugar, and salt. What keeps it in its seventh pandemic isn't the bacterium; it's every collapsed sewage system, every under-supplied vaccine stockpile, and every government that treats clean water as optional. The map that founded epidemiology also proved the fix was never medical. It was <b>plumbing</b>.</p>
+    <p class="cho-source">Figures are approximate, drawn from WHO cholera fact sheets, GTFCC reports, and published epidemiological research. Verify against WHO and CDC references before operational use.</p>
+  </section>
+</main>

@@ -30,22 +30,47 @@ module.exports = [
     deck: "Disease carriers, ecological ranges, and corridors of transmission."
   },
   {
-    key: "measles",
-    label: "Measles",
-    href: "/measles.html",
-    deck: "The American resurgence, vaccination gaps, and outbreak pattern."
-  },
-  {
-    key: "tuberculosis",
-    label: "Tuberculosis",
-    href: "/tuberculosis.html",
-    deck: "The world consumption created — the deadliest infection, and the disease that made us modern."
-  },
-  {
-    key: "hiv",
-    label: "HIV/AIDS",
-    href: "/hiv.html",
-    deck: "The disease they wouldn't name — from a nameless cluster of cases to U=U."
+    key: "histories",
+    label: "Pathogen Histories",
+    deck: "Single-disease deep dives — origin, timeline, and where each stands today.",
+    children: [
+      {
+        key: "measles",
+        label: "Measles",
+        href: "/measles.html",
+        deck: "The American resurgence, vaccination gaps, and outbreak pattern."
+      },
+      {
+        key: "tuberculosis",
+        label: "Tuberculosis",
+        href: "/tuberculosis.html",
+        deck: "The world consumption created — the deadliest infection, and the disease that made us modern."
+      },
+      {
+        key: "hiv",
+        label: "HIV/AIDS",
+        href: "/hiv.html",
+        deck: "The disease they wouldn't name — from a nameless cluster of cases to U=U."
+      },
+      {
+        key: "smallpox",
+        label: "Smallpox",
+        href: "/smallpox.html",
+        deck: "The only disease we ever eradicated — and the one way it could come back."
+      },
+      {
+        key: "spanish-flu",
+        label: "Spanish Flu",
+        href: "/spanish-flu.html",
+        deck: "1918 — the deadliest pandemic in modern history, and the two cities that proved intervention works."
+      },
+      {
+        key: "cholera",
+        label: "Cholera",
+        href: "/cholera.html",
+        deck: "The disease that invented epidemiology — still on its seventh pandemic, and still curable for pennies."
+      }
+    ]
   },
   {
     key: "style-guide",

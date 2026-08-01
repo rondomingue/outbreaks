@@ -6,9 +6,9 @@
   --muted: #746f61;
   --line: rgba(233, 229, 217, .10);
   --line-2: rgba(233, 229, 217, .06);
-  --red: #e4572e;
-  --teal: #33a58a;
-  --gold: #e3b23c;
+  --red: #e96a2f;
+  --teal: #2b8f96;
+  --gold: #edbb2e;
   --purple: #8a6fc9;
   --number-serif: 'Libre Baskerville', Georgia, serif;
   --maxw: 1360px;
@@ -17,8 +17,8 @@
 html,
 body {
   background:
-    radial-gradient(900px 540px at 82% 2%, rgba(51, 165, 138, .06), transparent 62%),
-    radial-gradient(860px 500px at 14% 94%, rgba(228, 87, 46, .05), transparent 60%),
+    radial-gradient(900px 540px at 82% 2%, rgba(43, 143, 150, .06), transparent 62%),
+    radial-gradient(860px 500px at 14% 94%, rgba(233, 106, 47, .05), transparent 60%),
     var(--ink);
   background-attachment: fixed;
   color: var(--bone);
@@ -230,7 +230,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 62% 34%, rgba(51, 165, 138, .05), transparent 60%),
+    radial-gradient(circle at 62% 34%, rgba(43, 143, 150, .05), transparent 60%),
     rgba(6, 9, 8, .55);
 }
 
@@ -467,7 +467,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 22% 62%, rgba(51, 165, 138, .18), transparent 20%),
+    radial-gradient(circle at 22% 62%, rgba(43, 143, 150, .18), transparent 20%),
     radial-gradient(circle at 68% 34%, rgba(240, 82, 43, .16), transparent 21%),
     repeating-linear-gradient(23deg, transparent 0 44px, rgba(229, 225, 210, .045) 45px 46px),
     rgba(8, 11, 10, .82);

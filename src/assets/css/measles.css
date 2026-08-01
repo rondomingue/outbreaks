@@ -4,10 +4,10 @@
   --ink: #e9e5d9;
   --dim: #746f61;
   --dim2: #b9b29d;
-  --red: #e4572e;
-  --red-bright: #e4572e;
-  --amber: #e3b23c;
-  --teal: #33a58a;
+  --red: #e96a2f;
+  --red-bright: #e96a2f;
+  --amber: #edbb2e;
+  --teal: #2b8f96;
   --line: rgba(233,229,217,.10);
   --panel: rgba(13,17,16,.74);
   --maxw: 1360px;
@@ -19,8 +19,8 @@ html, body { width: 100%; background: var(--bg); color: var(--ink); font-family:
 body {
   min-height: 100%;
   background:
-    radial-gradient(900px 540px at 82% 2%, rgba(51,165,138,.06), transparent 62%),
-    radial-gradient(860px 500px at 14% 94%, rgba(228,87,46,.05), transparent 60%),
+    radial-gradient(900px 540px at 82% 2%, rgba(43, 143, 150,.06), transparent 62%),
+    radial-gradient(860px 500px at 14% 94%, rgba(233, 106, 47,.05), transparent 60%),
     var(--bg);
   background-attachment: fixed;
 }
@@ -52,12 +52,12 @@ section:first-of-type { border-top: 0; }
   font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: .26em;
   text-transform: uppercase; color: var(--dim); display: flex; align-items: center; gap: 10px;
 }
-.eyebrow::before { content: ''; width: 22px; height: 1px; background: rgba(228,87,46,.5); display: inline-block; }
+.eyebrow::before { content: ''; width: 22px; height: 1px; background: rgba(233, 106, 47,.5); display: inline-block; }
 h2.sec-title {
   font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(24px, 3.4vw, 40px);
   line-height: 1.06; letter-spacing: -.02em; margin: 14px 0 10px; color: rgba(233,229,217,.94);
 }
-h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(228,87,46,.9); }
+h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(233, 106, 47,.9); }
 .lede { max-width: 74ch; font-size: 15px; line-height: 1.62; color: #b9b29d; font-weight: 300; }
 .lede strong { color: var(--ink); font-weight: 500; }
 
@@ -67,7 +67,7 @@ h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(228,87,46,.9
   font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(38px, 6vw, 84px);
   line-height: .95; letter-spacing: -.032em; margin: 16px 0 8px; color: rgba(233,229,217,.96);
 }
-.hero h1 em { font-style: italic; color: rgba(228,87,46,.92); }
+.hero h1 em { font-style: italic; color: rgba(233, 106, 47,.92); }
 .hero .kicker {
   font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em;
   text-transform: uppercase; color: var(--dim2);
@@ -82,10 +82,10 @@ h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(228,87,46,.9
 .stat { background: rgba(8,11,10,.85); padding: 20px 18px 18px; position: relative; }
 .stat .val { font-family: var(--number-serif); font-weight: 700; font-size: clamp(29px, 3.35vw, 42px); line-height: 1; letter-spacing: -.04em; color: var(--ink); }
 .stat .val.red { color: var(--red-bright); }
-.stat .val.amber { color: #e3b23c; }
+.stat .val.amber { color: #edbb2e; }
 .stat .unit { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim2); margin-left: 3px; }
 .stat .lab { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-top: 10px; line-height: 1.5; }
-.stat::after { content: ''; position: absolute; top: 0; left: 0; width: 22px; height: 2px; background: rgba(228,87,46,.55); }
+.stat::after { content: ''; position: absolute; top: 0; left: 0; width: 22px; height: 2px; background: rgba(233, 106, 47,.55); }
 
 /* ═══ CHART CARD ═══════════════════════════════════════════════════════════ */
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; margin-top: 26px; overflow: hidden; }
@@ -111,7 +111,7 @@ h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(228,87,46,.9
 .leg-sw { width: 16px; height: 16px; border-radius: 3px; flex: 0 0 auto; }
 .leg-tx { font-size: 12px; color: #b9b29d; font-weight: 300; }
 .leg-tx b { color: var(--ink); font-weight: 500; }
-#tip { position: fixed; pointer-events: none; z-index: 300; opacity: 0; transform: translate(-50%, -120%); background: rgba(8,11,10,.96); border: 1px solid rgba(228,87,46,.35); border-radius: 4px; padding: 8px 11px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--ink); letter-spacing: .04em; white-space: nowrap; transition: opacity .1s; box-shadow: 0 8px 30px rgba(0,0,0,.6); }
+#tip { position: fixed; pointer-events: none; z-index: 300; opacity: 0; transform: translate(-50%, -120%); background: rgba(8,11,10,.96); border: 1px solid rgba(233, 106, 47,.35); border-radius: 4px; padding: 8px 11px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--ink); letter-spacing: .04em; white-space: nowrap; transition: opacity .1s; box-shadow: 0 8px 30px rgba(0,0,0,.6); }
 #tip .tip-t { color: var(--dim); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
 
 /* ═══ VACCINATION GAP ══════════════════════════════════════════════════════ */
@@ -120,7 +120,7 @@ h2.sec-title em { font-style: italic; font-weight: 300; color: rgba(228,87,46,.9
 .mini { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
 .mini .mv { font-family: var(--number-serif); font-weight: 700; font-size: 35px; line-height: 1; letter-spacing: -.04em; color: var(--ink); }
 .mini .mv.red { color: var(--red-bright); }
-.mini .mv.amber { color: #e3b23c; }
+.mini .mv.amber { color: #edbb2e; }
 .mini .ml { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 10px; line-height: 1.55; }
 .callout { margin-top: 30px; border-left: 2px solid var(--red); padding: 6px 0 6px 22px; }
 .callout p { font-family: 'Fraunces', serif; font-weight: 300; font-style: italic; font-size: clamp(18px, 2.4vw, 26px); line-height: 1.4; color: rgba(233,229,217,.9); max-width: 60ch; }

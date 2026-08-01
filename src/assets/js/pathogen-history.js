@@ -58,12 +58,12 @@ function renderMap(svgId, outbreaks, vectors, colFn, batCaves){
   s+=`<g fill="none" stroke-linecap="round" stroke-linejoin="round">`;
   MAP_DETAIL_LINES.forEach((coords,i)=>{
     const isCoast=i>4;
-    s+=`<path d="${lineFromCoords(coords)}" stroke="${isCoast?'rgba(233,229,217,.13)':'rgba(51,165,138,.13)'}" stroke-width="${isCoast?'1.05':'.72'}" stroke-dasharray="${isCoast?'':'3 5'}"/>`;
+    s+=`<path d="${lineFromCoords(coords)}" stroke="${isCoast?'rgba(233,229,217,.13)':'rgba(43, 143, 150,.13)'}" stroke-width="${isCoast?'1.05':'.72'}" stroke-dasharray="${isCoast?'':'3 5'}"/>`;
   });
   s+=`</g>`;
   MAP_LABELS.forEach(({t,lon,lat,cls})=>{
     const p=projectPoint(lon,lat);
-    const fill=cls==='water'?'rgba(51,165,138,.22)':'rgba(233,229,217,.19)';
+    const fill=cls==='water'?'rgba(43, 143, 150,.22)':'rgba(233,229,217,.19)';
     s+=`<text x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}" font-family="'Space Mono',monospace" font-size="8" letter-spacing="1.4" text-anchor="middle" fill="${fill}">${ESC(t.toUpperCase())}</text>`;
   });
 
@@ -110,10 +110,10 @@ function renderMap(svgId, outbreaks, vectors, colFn, batCaves){
 
 // Species color for Ebola (by species field)
 const ebolaColFn = o=>{
-  if(!o) return 'rgba(228,87,46,.4)';
-  if(o.species==='SUDV') return '#e3b23c';
-  if(o.species==='BDBV') return '#33a58a';
-  return '#e4572e';
+  if(!o) return 'rgba(233, 106, 47,.4)';
+  if(o.species==='SUDV') return '#edbb2e';
+  if(o.species==='BDBV') return '#2b8f96';
+  return '#e96a2f';
 };
 const marburgColFn = o => '#c2813a';
 

@@ -1,0 +1,150 @@
+---
+layout: layouts/base.njk
+title: "Spanish Flu · The pandemic that outkilled the war — Outbreak Intelligence"
+description: "The 1918 influenza pandemic killed more people than World War I. A history of its three waves, the St. Louis vs. Philadelphia natural experiment, and the Alaskan village whose loss let scientists rebuild the virus decades later."
+active: spanish-flu
+activeGroup: histories
+permalink: /spanish-flu.html
+pageCss: /assets/css/spanish-flu.css
+pageJs: /assets/js/spanish-flu.js
+headLinks:
+  - "<link href=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css\" rel=\"stylesheet\">"
+headScripts:
+  - "<script src=\"https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js\"></script>"
+---
+<main class="flu">
+  <section class="flu-hero">
+    <span class="eyebrow">H1N1 influenza · the deadliest pandemic in modern history</span>
+    <h1 class="disp">The pandemic <span class="light">that outkilled</span><br><span class="gold">the war.</span></h1>
+    <p class="lede">It arrived in the last year of World War I and killed more people than the war did — in about a third of the time, with no vaccine, no antiviral, and no idea yet that viruses even existed. It got its name from the one country honest enough to report it.</p>
+    <div class="flu-hero-stats" aria-label="1918 influenza pandemic at a glance">
+      <div><span class="n">50–100M</span><span class="k">deaths worldwide — more than WWI's battlefield deaths</span></div>
+      <div><span class="n">~500M</span><span class="k">people infected — roughly a third of the world's population</span></div>
+      <div><span class="n">~2.5%</span><span class="k">case-fatality rate — twenty-five times a typical flu</span></div>
+      <div><span class="n">1918</span><span class="k">year its deadliest wave began, mid-war</span></div>
+    </div>
+  </section>
+
+  <section class="flu-section flu-map-section" aria-label="Where the 1918 pandemic hit hardest">
+    <div class="section-head">
+      <span class="eyebrow">Where it hit hardest</span>
+      <h2 class="disp">A pandemic that touched almost everywhere at once.</h2>
+    </div>
+    <p class="flu-sub">Unlike a slow-building outbreak, the fall 1918 wave circled the globe in months, riding troop ships and rail lines built for a war. Circles are scaled to estimated deaths; the deadliest tolls, by percentage of population, were often in places furthest from any hospital.</p>
+    <div class="flu-map-shell">
+      <div id="fluMap" aria-label="World map of estimated 1918 influenza deaths by region"></div>
+      <div id="fluMapFallback" class="flu-map-fallback" hidden>
+        <span class="eyebrow">Burden field</span>
+        <p>The interactive map could not load. The hardest-hit places — India, China, the Dutch East Indies, the United States, Persia, and Western Samoa — remain listed below.</p>
+      </div>
+      <div class="flu-map-key">
+        <div class="flu-legend">
+          <span class="flu-lg flu-lg-circle"></span>Estimated deaths
+          <span class="flu-lg flu-lg-severe"></span>Highest death rate per capita
+        </div>
+        <span class="flu-hint">Hover or tap a point for detail</span>
+      </div>
+    </div>
+    <div class="flu-toplist" id="fluTopList" aria-label="Highest-toll regions"></div>
+  </section>
+
+  <section class="flu-section flu-history">
+    <div class="section-head">
+      <span class="eyebrow">A little history</span>
+      <h2 class="disp">The pandemic hiding behind a war.</h2>
+    </div>
+    <div class="flu-history-grid">
+      <article>
+        <h3 class="disp">A war-time secret.</h3>
+        <p>The leading theory places the first major outbreak at Camp Funston, an army base in Haskell County, Kansas, in March 1918 — though China and northern France have also been proposed. What's certain is that wartime troop movements spread it fast, and wartime censorship in the US, UK, France, and Germany kept it quiet to protect morale. Spain, neutral in the war, reported freely — including its own king's illness — and gave the pandemic a name it never really earned.</p>
+      </article>
+      <article>
+        <h3 class="disp">Then it came back for blood.</h3>
+        <p>A mild spring wave gave little warning of what followed. By fall, the virus had mutated into something far deadlier, killing in three waves through the winter of 1919. It broke the usual pattern, too — striking healthy adults in their twenties and thirties hardest, possibly because their stronger immune systems overreacted, turning the body's own defense into the danger.</p>
+      </article>
+    </div>
+
+    <div class="flu-timeline-outer">
+      <button type="button" class="tl-arrow prev" id="tlPrev" aria-label="Previous milestone">‹</button>
+      <div class="flu-timeline" id="fluTimeline" aria-label="1918 influenza milestones" tabindex="0">
+        <div class="tl-sp" aria-hidden="true"></div>
+        <div class="tl-ev"><div class="yr">Mar 1918</div><div class="body"><b class="disp">Camp Funston</b><p>An army cook reports to the infirmary with flu-like symptoms; by lunch, over a hundred soldiers have followed him.</p></div></div>
+        <div class="tl-ev"><div class="yr">Spring 1918</div><div class="body"><b class="disp">The mild wave</b><p>The virus spreads with troop movements across the U.S. and Europe, largely unnoticed amid war news, with relatively low fatality.</p></div></div>
+        <div class="tl-ev"><div class="yr">Summer 1918</div><div class="body"><b class="disp">Named by accident</b><p>Spain's uncensored press freely reports the outbreak, including the king's illness — and the world starts calling it the "Spanish flu."</p></div></div>
+        <div class="tl-ev sev"><div class="yr">Aug 1918</div><div class="body"><b class="disp">It mutates</b><p>Nearly simultaneous outbreaks in Freetown, Brest, and Boston mark the start of a far deadlier second wave.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">28 Sept 1918</div><div class="body"><b class="disp">Philadelphia's parade</b><p>The city holds a 200,000-person Liberty Loan parade against doctors' advice. The flu explodes within days.</p></div></div>
+        <div class="tl-ev sev"><div class="yr">Oct 1918</div><div class="body"><b class="disp">The deadliest month</b><p>Roughly 195,000 Americans die in October alone — the worst single month in U.S. history, for any cause.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">Oct 1918</div><div class="body"><b class="disp">St. Louis's gamble</b><p>Acting within two days of its first cases, the city closes schools, theaters, and gatherings — and records a peak death rate less than half Philadelphia's.</p></div></div>
+        <div class="tl-ev"><div class="yr">11 Nov 1918</div><div class="body"><b class="disp">The war ends, the dying continues</b><p>Armistice Day crowds worldwide add fresh fuel to the pandemic even as World War I ends.</p></div></div>
+        <div class="tl-ev"><div class="yr">Winter 1919</div><div class="body"><b class="disp">The third wave</b><p>A smaller resurgence hits into spring, then fades as population immunity builds.</p></div></div>
+        <div class="tl-ev"><div class="yr">1919</div><div class="body"><b class="disp">Wilson falls ill</b><p>U.S. President Woodrow Wilson is struck by the flu during the Paris peace talks; some historians argue it affected his judgment on the Treaty of Versailles.</p></div></div>
+        <div class="tl-ev"><div class="yr">1920</div><div class="body"><b class="disp">It disappears</b><p>The pandemic ends abruptly — not through medicine, since no vaccine or antiviral existed, but through herd immunity and the virus itself drifting toward milder seasonal strains.</p></div></div>
+        <div class="tl-ev"><div class="yr">1933</div><div class="body"><b class="disp">The virus, isolated</b><p>Influenza A is isolated in a lab for the first time — more than a decade after the pandemic that made its study urgent.</p></div></div>
+        <div class="tl-ev ok"><div class="yr">1997–2005</div><div class="body"><b class="disp">Resurrected from permafrost</b><p>Scientists recover fragments of the 1918 virus from a victim preserved in Alaskan permafrost and fully reconstruct its genome by 2005 — the first pandemic pathogen ever rebuilt from history.</p></div></div>
+        <div class="tl-ev"><div class="yr">2009</div><div class="body"><b class="disp">A descendant returns</b><p>The 2009 "swine flu" pandemic is caused by a descendant of the same viral lineage — far milder, thanks to partial population immunity.</p></div></div>
+        <div class="tl-sp" aria-hidden="true"></div>
+      </div>
+      <button type="button" class="tl-arrow next" id="tlNext" aria-label="Next milestone">›</button>
+    </div>
+    <div class="tl-mini" id="tlMini" aria-label="Timeline navigation"></div>
+  </section>
+
+  <section class="flu-section flu-compare-section">
+    <div class="section-head">
+      <span class="eyebrow">The cool diagram</span>
+      <h2 class="disp">The fourteen-day gap.</h2>
+    </div>
+    <p class="flu-sub">Same virus, same country, same autumn. Philadelphia and St. Louis recorded their first cases within three weeks of each other in the fall of 1918. The only real variable between them was how many days each city waited to act — and it shows up directly in the death toll.</p>
+    <div class="flu-compare-grid" id="fluCompare">
+      <article class="flu-compare-card flu-compare-bad">
+        <span class="eyebrow">Waited</span>
+        <h3 class="disp">Philadelphia</h3>
+        <ul class="flu-compare-log">
+          <li><b>Sept 18</b> — first cases confirmed among sailors at the Navy Yard.</li>
+          <li><b>Sept 28</b> — a 200,000-person Liberty Loan parade proceeds as planned.</li>
+          <li><b>Oct 3</b> — schools, churches, and theaters finally ordered closed, five days after the parade, with hospitals already overwhelmed.</li>
+        </ul>
+        <div class="flu-compare-stat"><span class="n">748</span><span class="k">excess deaths per 100,000 — among the highest of any U.S. city</span></div>
+      </article>
+      <article class="flu-compare-card flu-compare-good">
+        <span class="eyebrow">Acted</span>
+        <h3 class="disp">St. Louis</h3>
+        <ul class="flu-compare-log">
+          <li><b>Oct 5</b> — first cases confirmed in the city.</li>
+          <li><b>Oct 7</b> — schools, theaters, and public gatherings banned, two days later.</li>
+          <li><b>Result</b> — the epidemic curve stayed flat enough that hospitals never ran out of beds.</li>
+        </ul>
+        <div class="flu-compare-stat"><span class="n">358</span><span class="k">excess deaths per 100,000 — less than half Philadelphia's</span></div>
+      </article>
+    </div>
+    <p class="flu-ring-foot">Excess-death figures are historical estimates from public-health research comparing 1918 U.S. cities' interventions and outcomes.</p>
+  </section>
+
+  <section class="flu-section flu-spotlight">
+    <div class="section-head">
+      <span class="eyebrow">Exhumed twice · Brevig Mission, Alaska</span>
+      <h2 class="disp">A village's tragedy, exhumed twice.</h2>
+    </div>
+    <div class="flu-spotlight-grid">
+      <article class="flu-spotlight-lead">
+        <p>In November 1918, the flu reached the small Alaska Native village of Brevig Mission by mail sled. Within five days, roughly 90% of its adult population was dead — about 72 of its 80 or so residents — leaving a generation of orphaned children. The dead were buried together in permafrost, in a mass grave that would, decades later, hold the key to understanding what had killed them.</p>
+        <p>In 1951, pathologist Johan Hultin traveled to the site hoping to recover the virus from frozen tissue; the samples failed. In 1997, with the village council's permission, he returned and succeeded, sending preserved lung tissue to Jeffery Taubenberger's team at the Armed Forces Institute of Pathology. By 2005, they had fully reconstructed the 1918 virus's genome — the first time scientists had ever rebuilt an extinct pandemic pathogen, and a moment that immediately raised its own questions about who should be allowed to do that.</p>
+      </article>
+      <aside class="flu-spotlight-facts">
+        <div class="flu-fact"><span class="n">~90%</span><span class="k">of Brevig Mission's adult population died within five days, November 1918</span></div>
+        <div class="flu-fact"><span class="n">1951</span><span class="k">Hultin's first, failed attempt to recover the virus from the permafrost</span></div>
+        <div class="flu-fact"><span class="n">1997</span><span class="k">his second attempt succeeds, with the village council's permission</span></div>
+        <div class="flu-fact flu-fact-hope"><span class="n">2005</span><span class="k">the 1918 virus's genome is fully reconstructed — a scientific first</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="flu-section flu-close">
+    <div class="section-head">
+      <span class="eyebrow">The reckoning</span>
+      <h2 class="disp">The deadliest pandemic in modern history. No vaccine. No cure.</h2>
+    </div>
+    <p class="flu-close-line">The 1918 pandemic killed more people than the war it rode in on, using nothing but distance, closed doors, and time — because no vaccine or antiviral existed yet. Philadelphia and St. Louis had access to exactly the same tools; the only difference was <b>speed</b>. That lesson is still the cheapest one in public health, and still the hardest to act on before it looks necessary.</p>
+    <p class="flu-source">Figures are approximate, drawn from CDC and published historical epidemiological estimates. Verify against CDC and peer-reviewed literature before operational use.</p>
+  </section>
+</main>

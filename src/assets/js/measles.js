@@ -81,7 +81,7 @@ function animateCount(el, target, opts){
     animationDurationUpdate:1050,
     animationEasingUpdate:'cubicOut',
     grid:{ left:56, right:24, top:28, bottom:46 },
-    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(228,87,46,.35)', borderWidth:1,
+    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(233, 106, 47,.35)', borderWidth:1,
       textStyle:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:11 },
       formatter:function(p){ var d=p[0]; return '<span style="color:#746f61;font-size:9px;letter-spacing:1px">YEAR '+d.name+'</span><br><b style="font-size:15px">'+d.value.toLocaleString()+'</b> confirmed cases'; } },
     xAxis:{ type:'category', data:years, boundaryGap:false,
@@ -93,17 +93,17 @@ function animateCount(el, target, opts){
       splitLine:gridSplit },
     series:[{
       type:'line', data:seriesData, smooth:false, symbol:'circle', symbolSize:5,
-      itemStyle:{ color:'#e4572e' },
-      lineStyle:{ color:'#e4572e', width:2, shadowColor:'rgba(228,87,46,.5)', shadowBlur:12 },
-      areaStyle:{ color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(228,87,46,.42)'},{offset:1,color:'rgba(228,87,46,0)'}]) },
+      itemStyle:{ color:'#e96a2f' },
+      lineStyle:{ color:'#e96a2f', width:2, shadowColor:'rgba(233, 106, 47,.5)', shadowBlur:12 },
+      areaStyle:{ color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(233, 106, 47,.42)'},{offset:1,color:'rgba(233, 106, 47,0)'}]) },
       markLine:{ silent:true, symbol:'none', label:{ show:false },
-        lineStyle:{ color:'rgba(51,165,138,.5)', type:'dashed', width:1 },
-        data:[{ xAxis:'2000', label:{ show:true, formatter:'ELIMINATED 2000', color:'#33a58a', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:1 } }] },
+        lineStyle:{ color:'rgba(43, 143, 150,.5)', type:'dashed', width:1 },
+        data:[{ xAxis:'2000', label:{ show:true, formatter:'ELIMINATED 2000', color:'#2b8f96', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:1 } }] },
       markPoint:{ symbol:'pin', symbolSize:0, label:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:9, fontWeight:700 },
         data:showLabels ? [
           { coord:['2014',667], value:'667', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
           { coord:['2019',1274], value:'1,274', itemStyle:{color:'transparent'}, label:{ position:'top', offset:[0,-2] } },
-          { coord:['2025',2289], value:'2,289', itemStyle:{color:'transparent'}, label:{ position:'top', color:'#e4572e', offset:[0,-2] } }
+          { coord:['2025',2289], value:'2,289', itemStyle:{color:'transparent'}, label:{ position:'top', color:'#e96a2f', offset:[0,-2] } }
         ] : [] }
     }]
     };
@@ -144,7 +144,7 @@ function animateCount(el, target, opts){
   chart.setOption({
     animation:false,
     grid:{ left:44, right:20, top:34, bottom:40 },
-    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(228,87,46,.35)', borderWidth:1,
+    tooltip:{ trigger:'axis', backgroundColor:'rgba(8,11,10,.96)', borderColor:'rgba(233, 106, 47,.35)', borderWidth:1,
       textStyle:{ color:'#e9e5d9', fontFamily:AX.font, fontSize:11 },
       formatter:function(p){ var d=p[0]; return '<span style="color:#746f61;font-size:9px">'+d.name+'</span><br><b style="font-size:15px">'+d.value+'%</b> MMR coverage'; } },
     xAxis:{ type:'category', data:yrs, axisLine:{ lineStyle:{ color:'rgba(233,229,217,.14)' } }, axisTick:{ show:false },
@@ -153,10 +153,10 @@ function animateCount(el, target, opts){
       axisLabel:{ color:AX.color, fontFamily:AX.font, fontSize:9, formatter:'{value}%' }, splitLine:gridSplit },
     series:[{
       type:'bar', data:cov.map(function(){ return 90; }), barWidth:'46%',
-      itemStyle:{ color:function(p){ return p.value>=95 ? '#33a58a' : (p.value>=93 ? '#e3b23c' : '#e4572e'); }, borderRadius:[2,2,0,0] },
+      itemStyle:{ color:function(p){ return p.value>=95 ? '#2b8f96' : (p.value>=93 ? '#edbb2e' : '#e96a2f'); }, borderRadius:[2,2,0,0] },
       markLine:{ silent:true, symbol:'none',
-        lineStyle:{ color:'#33a58a', type:'dashed', width:1.2 },
-        label:{ show:true, formatter:'95% HERD-IMMUNITY TARGET', color:'#33a58a', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:.5 },
+        lineStyle:{ color:'#2b8f96', type:'dashed', width:1.2 },
+        label:{ show:true, formatter:'95% HERD-IMMUNITY TARGET', color:'#2b8f96', fontFamily:AX.font, fontSize:8, position:'insideEndTop', letterSpacing:.5 },
         data:[{ yAxis:95 }] }
     }]
   });
@@ -192,7 +192,7 @@ function animateCount(el, target, opts){
     TX:[3,7,'epi'], FL:[8,7,'rep']
   };
   var NAMES = { AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'District of Columbia',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming' };
-  var FILL = { epi:'#e4572e', out:'#e4572e', rep:'#7a3a24', none:'#111815' };
+  var FILL = { epi:'#e96a2f', out:'#e96a2f', rep:'#7a3a24', none:'#111815' };
   var TIERLBL = { epi:'Epicenter — largest 2025 outbreak', out:'Active outbreak cluster', rep:'Cases reported in 2025', none:'No reported outbreak' };
   var CELL=48, GAP=5, PAD=4;
   var cols=11, rows=8;
@@ -200,7 +200,7 @@ function animateCount(el, target, opts){
   var svg = '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img">';
   Object.keys(S).forEach(function(ab){
     var d=S[ab], x=PAD+d[0]*CELL, y=PAD+d[1]*CELL, tier=d[2], f=FILL[tier];
-    var glow = tier==='epi' ? ' filter="drop-shadow(0 0 8px rgba(228,87,46,.85))"' : '';
+    var glow = tier==='epi' ? ' filter="drop-shadow(0 0 8px rgba(233, 106, 47,.85))"' : '';
     var stroke = tier==='none' ? 'rgba(233,229,217,.1)' : 'rgba(0,0,0,.35)';
     var tx = tier==='none' ? 'rgba(233,229,217,.35)' : 'rgba(233,229,217,.9)';
     svg += '<g class="tile" data-ab="'+ab+'" data-tier="'+tier+'" tabindex="0">'
