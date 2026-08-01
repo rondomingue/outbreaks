@@ -36,14 +36,14 @@
             {% endif %}
           {% endfor %}
         </nav>
-        <div class="site-header__tools">
-          {% if pageActions == "recordModes" %}
+        {% if pageActions == "recordModes" %}
+          <div class="site-header__tools">
             <div class="site-mode-toggle" aria-label="Record display mode">
               <button class="mode-btn active" id="btn-proportional" title="Area proportional to estimated deaths">Scaled</button>
               <button class="mode-btn" id="btn-equal" title="Equal area for each disease">Equal</button>
             </div>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
       </div>
     </header>
 

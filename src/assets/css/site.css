@@ -575,7 +575,6 @@ body.site-menu-open {
     right: var(--site-sidebar-left);
     max-height: calc(100dvh - var(--site-sidebar-top) - var(--site-nav-button-height) - 12px);
     padding: 14px var(--site-sidebar-inset) 18px;
-    border-radius: 0 0 14px 14px;
   }
 
   .site-mode-toggle .mode-btn {
