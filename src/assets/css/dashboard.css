@@ -52,6 +52,16 @@
     text-transform:uppercase; color:var(--muted); margin:0;
   }
   #quote-attr em{font-style:italic; color:var(--bone-dim)}
+  #quote-skip{
+    display:inline-flex; align-items:center; gap:8px; margin-top:28px;
+    padding:9px 20px; border:1px solid rgba(233,229,217,.22); border-radius:999px;
+    background:rgba(233,229,217,.06); color:var(--bone-dim);
+    font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    cursor:pointer; transition:color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  #quote-skip:hover, #quote-skip:focus-visible{
+    color:var(--bone); border-color:rgba(233,229,217,.4); background:rgba(233,229,217,.1);
+  }
 
   /* ── Masthead ─────────────────────────────── */
   .masthead{padding:22px 0 0}
