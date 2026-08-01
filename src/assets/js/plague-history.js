@@ -3,56 +3,113 @@ const GEO={"W":1000,"H":640,"landPath":"M722.32,452.394L722.52,452.245L722.872,4
 const {W,H,landPath,gratPath,cities,waves,pandemics,otherPlagues}=GEO;
 const ESC=s=>String(s).replace(/&/g,'&amp;');
 
-/* ── MAP ─────────────────────────────────────────────────────────────── */
+/* ── MAP — real, pannable/zoomable basemap instead of a flat illustration ── */
 (function(){
-  const svg=document.getElementById('plague-map'); if(!svg) return;
-  let s=`<rect width="${W}" height="${H}" fill="#090a08"/>`;
-  s+=`<path d="${gratPath}" fill="none" stroke="rgba(233,228,212,.045)" stroke-width="0.5"/>`;
-  s+=`<path d="${landPath}" fill="#0e100d" stroke="rgba(233,228,212,.16)" stroke-width="0.8"/>`;
+  const el=document.getElementById('plagueMap'); const fallback=document.getElementById('plagueMapFallback');
+  if(!el) return;
+  function showFallback(){ if(fallback) fallback.hidden=false; el.style.display='none'; }
+  if(!window.mapboxgl){ showFallback(); return; }
 
-  // draw spread waves (oldest first, smallest opacity)
-  const waveColors=[
-    'rgba(237, 187, 46,.22)','rgba(200,72,50,.20)','rgba(200,72,50,.17)',
-    'rgba(200,72,50,.14)','rgba(200,72,50,.10)','rgba(200,72,50,.07)'
-  ];
-  const waveStrokes=[
-    'rgba(237, 187, 46,.55)','rgba(200,72,50,.50)','rgba(200,72,50,.40)',
-    'rgba(200,72,50,.32)','rgba(200,72,50,.24)','rgba(200,72,50,.16)'
-  ];
-  waves.forEach((w,i)=>{
-    s+=`<polygon points="${w.poly}" fill="${waveColors[i]}" stroke="${waveStrokes[i]}" stroke-width="1.2"/>`;
-    // Year label at the centroid
+  // The old illustration's cities carry x/y baked from an SVG projection;
+  // waves only have SVG polygon points. Both invert back to lon/lat with
+  // the same linear fit so nothing needed re-deriving by hand.
+  const toLngLat=(x,y)=>[ (x-283.5329)/6.1852, (860.9138-y)/9.6376 ];
+
+  const PL_TOKEN="pk.eyJ1Ijoicm9uZG9taW5ndWUiLCJhIjoiYTM4ODdRdyJ9.jcyNgQQolgrKfs6SKBXNJw";
+  let map;
+  try{
+    mapboxgl.accessToken=PL_TOKEN;
+    map=new mapboxgl.Map({
+      container:'plagueMap', style:'mapbox://styles/mapbox/dark-v11',
+      center:[30,48], zoom:2.3, minZoom:1.6, maxZoom:7,
+      projection:'mercator', attributionControl:true
+    });
+  }catch(err){ showFallback(); return; }
+
+  map.on('error', ()=>{ if(!document.querySelector('#plagueMap canvas')) showFallback(); });
+  map.addControl(new mapboxgl.NavigationControl({showCompass:false}),'bottom-right');
+
+  map.scrollZoom.disable(); map.dragPan.disable(); map.touchZoomRotate.disable(); map.doubleClickZoom.disable();
+  const activateMap=()=>{ map.scrollZoom.enable(); map.dragPan.enable(); map.touchZoomRotate.enable(); map.doubleClickZoom.enable(); };
+  const deactivateMap=()=>{ map.scrollZoom.disable(); map.dragPan.disable(); map.touchZoomRotate.disable(); map.doubleClickZoom.disable(); };
+  el.addEventListener('click',activateMap);
+  el.addEventListener('touchstart',activateMap,{passive:true});
+  el.addEventListener('mouseleave',deactivateMap);
+
+  const waveColors=['#edbb2e','#c84832','#c84832','#c84832','#c84832','#c84832'];
+  const waveFillOpacity=[.22,.20,.17,.14,.10,.07];
+  const waveStrokeOpacity=[.55,.50,.40,.32,.24,.16];
+
+  const waveFeatures=waves.map((w,i)=>{
+    const ring=w.poly.split(' ').map(p=>{ const [x,y]=p.split(',').map(Number); return toLngLat(x,y); });
+    ring.push(ring[0]);
+    return {type:'Feature',geometry:{type:'Polygon',coordinates:[ring]},
+      properties:{label:w.label,color:waveColors[i],fillOpacity:waveFillOpacity[i],strokeOpacity:waveStrokeOpacity[i]}};
+  });
+  const waveLabelFeatures=waves.map((w,i)=>{
     const pts=w.poly.split(' ').map(p=>p.split(',').map(Number));
-    const cx=(pts.reduce((a,p)=>a+p[0],0)/pts.length).toFixed(0);
-    const cy=(pts.reduce((a,p)=>a+p[1],0)/pts.length).toFixed(0);
-    s+=`<text x="${cx}" y="${cy}" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="0.5" fill="${waveStrokes[i]}" font-weight="bold">${w.label}</text>`;
+    const cx=pts.reduce((a,p)=>a+p[0],0)/pts.length, cy=pts.reduce((a,p)=>a+p[1],0)/pts.length;
+    return {type:'Feature',geometry:{type:'Point',coordinates:toLngLat(cx,cy)},
+      properties:{label:w.label,color:waveColors[i]}};
   });
 
-  // cities
-  cities.forEach(c=>{
-    const isOrigin=c.role==='origin', isGateway=c.role==='gateway';
-    const col=isOrigin?'#edbb2e':'#c84832';
-    const r=isOrigin?7:isGateway?5:3.5;
-    const opacity=isOrigin?0.9:isGateway?0.8:0.65;
-    if(isOrigin){
-      s+=`<circle cx="${c.x}" cy="${c.y}" r="${r+8}" fill="rgba(237, 187, 46,.1)" stroke="rgba(237, 187, 46,.35)" stroke-width="1" stroke-dasharray="3 3"/>`;
-    }
-    s+=`<circle cx="${c.x}" cy="${c.y}" r="${r}" fill="${col}" fill-opacity="${opacity}" stroke="${col}" stroke-opacity="${opacity}" stroke-width="1.2"/>`;
-    s+=`<circle cx="${c.x}" cy="${c.y}" r="2" fill="${col}"/>`;
-    const tx=c.x+(c.role==='origin'||c.x>700?-r-4:r+4);
-    const anchor=c.x>700?'end':'start';
-    s+=`<text x="${tx}" y="${c.y-1}" text-anchor="${anchor}" font-family="'Space Mono',monospace" font-size="8" letter-spacing="0.3" fill="${col}">${ESC(c.name)}</text>`;
-  });
+  const cityFeatures=cities.map(c=>({
+    type:'Feature',geometry:{type:'Point',coordinates:[c.lon,c.lat]},
+    properties:{name:c.name,note:c.note||'',role:c.role||'major'}
+  }));
 
-  // Silk Road route: Kyrgyzstan → Caffa
   const origin=cities.find(c=>c.id==='c0'), caffa=cities.find(c=>c.id==='c1');
-  if(origin&&caffa){
-    const cx=(origin.x+caffa.x)/2, cy=(origin.y+caffa.y)/2-30;
-    s+=`<path d="M${origin.x},${origin.y} Q${cx.toFixed(1)},${cy.toFixed(1)} ${caffa.x},${caffa.y}" fill="none" stroke="rgba(237, 187, 46,.28)" stroke-width="1.2" stroke-dasharray="5 5"/>`;
-    s+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" letter-spacing="0.5" fill="rgba(237, 187, 46,.4)">SILK ROAD</text>`;
-  }
+  const silkRoadFeature=(origin&&caffa)?{type:'Feature',geometry:{type:'LineString',
+    coordinates:[[origin.lon,origin.lat],[(origin.lon+caffa.lon)/2,Math.max(origin.lat,caffa.lat)+6],[caffa.lon,caffa.lat]]}}:null;
 
-  svg.innerHTML=s;
+  map.on('load',()=>{
+    map.addSource('pl-waves',{type:'geojson',data:{type:'FeatureCollection',features:waveFeatures}});
+    map.addLayer({id:'pl-waves-fill',type:'fill',source:'pl-waves',
+      paint:{'fill-color':['get','color'],'fill-opacity':['get','fillOpacity']}});
+    map.addLayer({id:'pl-waves-line',type:'line',source:'pl-waves',
+      paint:{'line-color':['get','color'],'line-opacity':['get','strokeOpacity'],'line-width':1.2}});
+
+    map.addSource('pl-wave-labels',{type:'geojson',data:{type:'FeatureCollection',features:waveLabelFeatures}});
+    map.addLayer({id:'pl-wave-label',type:'symbol',source:'pl-wave-labels',
+      layout:{'text-field':['get','label'],'text-font':['DIN Pro Bold','Arial Unicode MS Bold'],'text-size':10,'text-allow-overlap':true},
+      paint:{'text-color':['get','color'],'text-opacity':.85,'text-halo-color':'rgba(6,9,8,.85)','text-halo-width':1.2}});
+
+    if(silkRoadFeature){
+      map.addSource('pl-silkroad',{type:'geojson',data:silkRoadFeature});
+      map.addLayer({id:'pl-silkroad-line',type:'line',source:'pl-silkroad',
+        layout:{'line-cap':'round'},
+        paint:{'line-color':'#edbb2e','line-opacity':.5,'line-width':1.4,'line-dasharray':[2,2]}});
+    }
+
+    map.addSource('pl-cities',{type:'geojson',data:{type:'FeatureCollection',features:cityFeatures}});
+    map.addLayer({id:'pl-city-glow',type:'circle',source:'pl-cities',
+      filter:['!=',['get','role'],'major'],
+      paint:{'circle-radius':['match',['get','role'],'origin',16,'gateway',11,7],
+        'circle-color':['match',['get','role'],'origin','#edbb2e','#c84832'],
+        'circle-opacity':.12,'circle-blur':1}});
+    map.addLayer({id:'pl-city-dot',type:'circle',source:'pl-cities',
+      paint:{'circle-radius':['match',['get','role'],'origin',8,'gateway',5.5,3.4],
+        'circle-color':['match',['get','role'],'origin','#edbb2e','#c84832'],
+        'circle-opacity':['match',['get','role'],'origin',.9,'gateway',.8,.65],
+        'circle-stroke-color':['match',['get','role'],'origin','#edbb2e','#c84832'],
+        'circle-stroke-width':1.1,'circle-stroke-opacity':.9}});
+    map.addLayer({id:'pl-city-label',type:'symbol',source:'pl-cities',
+      layout:{'text-field':['get','name'],'text-font':['DIN Pro Medium','Arial Unicode MS Regular'],
+        'text-size':10.5,'text-offset':[0.85,0],'text-anchor':'left','text-allow-overlap':false,'text-optional':true},
+      paint:{'text-color':['match',['get','role'],'origin','#edbb2e','#e4a394'],
+        'text-halo-color':'rgba(6,9,8,.9)','text-halo-width':1.3}});
+
+    const popup=new mapboxgl.Popup({closeButton:false,closeOnClick:false,offset:10,className:'pl-popup'});
+    const enter=e=>{
+      map.getCanvas().style.cursor='pointer';
+      const p=e.features[0].properties;
+      popup.setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(`<span class="pl-pop-c">${p.role==='origin'?'Origin':p.role==='gateway'?'Gateway':'City'}</span><b class="pl-pop-n">${ESC(p.name)}</b>${p.note?`<span class="pl-pop-k">${ESC(p.note)}</span>`:''}`)
+        .addTo(map);
+    };
+    const leave=()=>{ map.getCanvas().style.cursor=''; popup.remove(); };
+    ['pl-city-dot','pl-city-glow'].forEach(id=>{ map.on('mouseenter',id,enter); map.on('mouseleave',id,leave); });
+  });
 })();
 
 /* ── THREE PANDEMICS ─────────────────────────────────────────────────── */

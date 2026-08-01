@@ -67,10 +67,23 @@
 
   /* ── SPREAD MAP ───────────────────────── */
   .mapwrap{position:relative;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:#090a08}
-  .mapwrap svg{display:block;width:100%;height:auto}
+  #plagueMap{width:100%;aspect-ratio:16/8;min-height:380px;max-height:620px;background:var(--ink-1)}
+  .pl-map-fallback{position:absolute;inset:0;display:grid;place-content:center;gap:10px;padding:24px;text-align:center;background:rgba(8,11,10,.86)}
+  .pl-map-fallback[hidden]{display:none}
+  .pl-map-fallback p{max-width:52ch;margin:0 auto;color:var(--bone-dim);font-size:13px;line-height:1.55}
+  .map-hint{margin:10px 0 0;color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
   .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;align-items:center}
   .leg-item{display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   .leg-swatch{width:22px;height:8px;border-radius:1px;border:1px solid}
+
+  .pl-popup .mapboxgl-popup-content{background:rgba(8,11,10,.96)!important;border:1px solid var(--line)!important;border-radius:4px!important;padding:11px 13px!important;box-shadow:0 18px 44px rgba(0,0,0,.5)!important}
+  .pl-popup .mapboxgl-popup-tip{border-top-color:rgba(8,11,10,.96)!important}
+  .pl-pop-c{display:block;color:var(--muted);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase}
+  .pl-pop-n{display:block;margin:2px 0 0;font-family:var(--number-serif);font-size:15px;color:var(--bone);line-height:1.3}
+  .pl-pop-k{display:block;margin-top:5px;color:var(--bone-dim);font-size:11px;line-height:1.4}
+  .mapboxgl-ctrl-group{background:rgba(13,17,16,.92)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+  .mapboxgl-ctrl button .mapboxgl-ctrl-icon{filter:invert(1) opacity(.55)}
+  .mapboxgl-ctrl-logo{opacity:.5}
 
   /* ── THREE PANDEMICS ──────────────────── */
   .pandemic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;overflow:hidden}
