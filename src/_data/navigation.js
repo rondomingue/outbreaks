@@ -12,12 +12,6 @@ module.exports = [
     deck: "Filoviridae events, geography, taxonomy, and outcomes."
   },
   {
-    key: "plagues",
-    label: "Great Plagues",
-    href: "/plague-history.html",
-    deck: "The long arc of plague from antiquity to modern surveillance."
-  },
-  {
     key: "record",
     label: "Epidemic Record",
     href: "/disease-sunburst.html",
@@ -34,6 +28,12 @@ module.exports = [
     label: "Pathogen Histories",
     deck: "Single-disease deep dives — origin, timeline, and where each stands today.",
     children: [
+      {
+        key: "plagues",
+        label: "Great Plagues",
+        href: "/plague-history.html",
+        deck: "The long arc of plague from antiquity to modern surveillance."
+      },
       {
         key: "measles",
         label: "Measles",
