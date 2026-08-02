@@ -71,11 +71,5 @@ module.exports = [
         deck: "The disease that invented epidemiology — still on its seventh pandemic, and still curable for pennies."
       }
     ]
-  },
-  {
-    key: "style-guide",
-    label: "Appendix",
-    href: "/style-guide.html",
-    deck: "Visual system, interface rules, typography, color, motion, and sound."
   }
 ];

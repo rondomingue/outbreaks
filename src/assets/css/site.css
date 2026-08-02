@@ -690,6 +690,13 @@
   text-decoration-color: var(--site-gold);
 }
 
+.site-footer__links {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .site-footer__credit {
   color: var(--site-paper-dim);
   font-family: "Space Mono", monospace;
